@@ -55,9 +55,14 @@ class StrategyAnalysisDialog(QDialog):
             self.analysis_data = data
             # Rebuild UI on main thread
             self._init_ui()
-        except Exception:
-            # avoid raising UI exceptions from the slot
-            pass
+        except Exception as e:
+            # Log full traceback so errors aren't silently swallowed
+            try:
+                import logging
+                logging.exception("Exception in StrategyAnalysisDialog._on_analysis_update: %s", e)
+            except Exception:
+                import traceback
+                traceback.print_exc()
     
     def _init_ui(self):
         # If there's an existing layout (e.g. when updating), clear it
