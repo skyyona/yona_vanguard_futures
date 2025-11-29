@@ -90,6 +90,17 @@ class StrategyAnalysisDialog(QDialog):
         header.setFont(header_font)
         header.setStyleSheet("color: #FFC107;")
         layout.addWidget(header)
+        # Simulation assumptions (explicitly shown)
+        try:
+            SIM_LEV_MIN = 1
+            SIM_LEV_MAX = 50
+            SIM_KRW = 100000
+            SIM_USDT = 70.25
+            sim_label = QLabel(f"시뮬레이션 가정 — 레버리지: {SIM_LEV_MIN}–{SIM_LEV_MAX}배 (시뮬레이션 전용), 투입자금: {SIM_KRW}원 (≈{SIM_USDT} USDT)")
+            sim_label.setStyleSheet('color: #BBBBBB; font-size: 11px;')
+            layout.addWidget(sim_label)
+        except Exception:
+            pass
         # --- 신규상장 배너 및 신뢰도 표시 ---
         try:
             engine_results = self.analysis_data.get("engine_results", {}) or {}
@@ -251,10 +262,20 @@ class StrategyAnalysisDialog(QDialog):
         action_layout.setSpacing(10)
         action_layout.setContentsMargins(0, 10, 0, 0)
 
-        # Apply risk overrides checkbox
-        self.risk_override_checkbox = QCheckBox("Apply risk overrides (권장)")
+        # Apply risk overrides checkbox (stop-loss & trailing-stop only)
+        self.risk_override_checkbox = QCheckBox("Apply recommended stop-loss & trailing-stop (권장)")
         self.risk_override_checkbox.setChecked(True if self.apply_risk_overrides else False)
         action_layout.addWidget(self.risk_override_checkbox)
+
+        # Explicit opt-in for leverage override (default off)
+        self.leverage_override_checkbox = QCheckBox("Allow suggested leverage change (explicit opt-in)")
+        self.leverage_override_checkbox.setChecked(False)
+        # smaller visual weight
+        try:
+            self.leverage_override_checkbox.setStyleSheet('font-size: 9px; color: #CCCCCC;')
+        except Exception:
+            pass
+        action_layout.addWidget(self.leverage_override_checkbox)
 
         action_layout.addStretch()
 
@@ -410,13 +431,20 @@ class StrategyAnalysisDialog(QDialog):
     
     def _preview_and_assign(self, engine_name: str):
         """Show preview modal with final params and emit assign_payload on confirmation."""
-        # Start from unified executable_parameters
+        # Start from unified executable_parameters and overlay engine-specific parameters
         base_params = self.analysis_data.get('executable_parameters', {}) or {}
+        # engine keys in analysis_data are lowercase (e.g., 'alpha')
+        engine_key = engine_name.lower()
+        engine_results = self.analysis_data.get('engine_results', {}) or {}
+        engine_params = (engine_results.get(engine_key, {}) or {}).get('executable_parameters', {}) or {}
         final_params = dict(base_params)  # shallow copy
+        # overlay engine-specific executable parameters (do not auto-apply force_leverage here)
+        for k, v in engine_params.items():
+            final_params.setdefault(k, v)
 
         applied_overrides = {}
+        # Only apply stop-loss and trailing-stop from risk_management by default
         if getattr(self, 'risk_override_checkbox', None) and self.risk_override_checkbox.isChecked():
-            # Apply risk management suggestions (if present) into final params
             rm = self.analysis_data.get('risk_management', {}) or {}
             if not isinstance(rm, dict):
                 try:
@@ -425,17 +453,42 @@ class StrategyAnalysisDialog(QDialog):
                 except Exception:
                     pass
                 rm = {}
-            # map known keys
+            # apply only safe keys
             if 'stop_loss' in rm:
                 final_params['stop_loss_pct'] = float(rm.get('stop_loss'))
                 applied_overrides['stop_loss_pct'] = final_params['stop_loss_pct']
             if 'trailing_stop' in rm:
                 final_params['trailing_stop_pct'] = float(rm.get('trailing_stop'))
                 applied_overrides['trailing_stop_pct'] = final_params['trailing_stop_pct']
-            # if backend marks new listing, we may suggest lower leverage via risk_management or presets
-            if self.analysis_data.get('is_new_listing') and 'force_leverage' in rm:
-                final_params['leverage'] = int(rm.get('force_leverage'))
-                applied_overrides['force_leverage'] = final_params['leverage']
+        # Leverage is simulation-only by default; allow explicit opt-in
+        if getattr(self, 'leverage_override_checkbox', None) and self.leverage_override_checkbox.isChecked():
+            rm = self.analysis_data.get('risk_management', {}) or {}
+            if not isinstance(rm, dict):
+                rm = {}
+            if 'force_leverage' in rm:
+                # require explicit confirm modal before applying leverage
+                try:
+                    confirm = QMessageBox(self)
+                    confirm.setWindowTitle('Confirm Leverage Override')
+                    confirm.setText('권고된 레버리지를 자동으로 적용하시겠습니까?\n레버리지는 손실을 확대합니다. 신중히 결정하세요.')
+                    confirm.setInformativeText(f"Suggested leverage: {rm.get('force_leverage')}")
+                    confirm.setStandardButtons(QMessageBox.Cancel | QMessageBox.Ok)
+                    confirm.setDefaultButton(QMessageBox.Cancel)
+                    if getattr(self, '_test_auto_confirm', False):
+                        ret = QMessageBox.Ok
+                    else:
+                        ret = confirm.exec()
+                    if ret == QMessageBox.Ok:
+                        final_params['leverage'] = int(rm.get('force_leverage'))
+                        applied_overrides['leverage'] = final_params['leverage']
+                        # record explicit confirmation
+                        assign_payload_leverage_meta = True
+                    else:
+                        assign_payload_leverage_meta = False
+                except Exception:
+                    assign_payload_leverage_meta = False
+        else:
+            assign_payload_leverage_meta = False
 
         # Build assign payload
         assign_payload = {
@@ -450,6 +503,12 @@ class StrategyAnalysisDialog(QDialog):
                 'source': 'strategy_analysis_dialog_v2'
             }
         }
+        # annotate leverage confirmation flag in ui_meta if applicable
+        try:
+            if assign_payload_leverage_meta:
+                assign_payload['ui_meta']['leverage_user_confirmed'] = True
+        except Exception:
+            pass
 
         # Prepare preview text
         def param_line(k, v):
@@ -477,7 +536,10 @@ class StrategyAnalysisDialog(QDialog):
         msg.setDetailedText(preview_text)
         msg.setStandardButtons(QMessageBox.Cancel | QMessageBox.Ok)
         msg.setDefaultButton(QMessageBox.Ok)
-        ret = msg.exec()
+        if getattr(self, '_test_auto_confirm', False):
+            ret = QMessageBox.Ok
+        else:
+            ret = msg.exec()
         if ret == QMessageBox.Ok:
             assign_payload['ui_meta']['confirmed_by_user'] = True
             assign_payload['ui_meta']['confirmed_at'] = datetime.utcnow().isoformat() + 'Z'

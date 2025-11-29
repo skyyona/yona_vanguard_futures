@@ -11,6 +11,7 @@ if ROOT not in sys.path:
 
 from gui.widgets.strategy_analysis_dialog import StrategyAnalysisDialog
 from gui.widgets.footer_engines_widget import TradingEngineWidget
+import time
 
 
 def fetch_analysis(symbol='SQDUSDT'):
@@ -43,7 +44,7 @@ def main():
             'best_engine': 'Alpha',
             'volatility': 12.3,
             'max_target_profit': {'alpha': 3.5, 'beta': 4.2, 'gamma': 6.0},
-            'risk_management': {'stop_loss': 0.2, 'trailing_stop': 0.1},
+            'risk_management': {'stop_loss': 0.2, 'trailing_stop': 0.1, 'force_leverage': 3},
             'is_new_listing': True,
             'data_missing': False,
             'confidence': 0.78,
@@ -86,6 +87,10 @@ def main():
 
     # Update dialog with real data via signal (mimic worker)
     dialog.analysis_update.emit(data)
+    # process Qt events so the queued analysis_update slot runs and updates UI
+    for _ in range(20):
+        app.processEvents()
+        time.sleep(0.01)
 
     # Check rendered content by inspecting dialog.analysis_data
     print('[TEST] dialog.analysis_data keys:', list(dialog.analysis_data.keys()))
@@ -98,30 +103,40 @@ def main():
             # Pretty print some fields
             print('  sample:', {k: execp.get(k) for k in ('fast_ema_period','slow_ema_period','stop_loss_pct','leverage','position_size')})
 
-    # Simulate clicking Assign for Alpha by emitting a headless-friendly payload
-    print('[TEST] Simulating Assign (Alpha) via simulated payload')
-    simulated_payload = {
-        'symbol': data.get('symbol','SQDUSDT'),
-        'engine_name': 'Alpha',
-        'analysis_data': data,
-        'executable_parameters': data.get('engine_results', {}).get('alpha', {}).get('executable_parameters', {}),
-        'applied_risk_overrides': {},
-        'ui_meta': {'confirmed_by_user': True, 'confirmed_at': None, 'source': 'tests/gui_assign_test'}
-    }
-    dialog.engine_assigned.emit('Alpha', simulated_payload)
+    # Simulate clicking Assign for Alpha by invoking _preview_and_assign in headless mode
+    print('[TEST] Simulating Assign (Alpha) via _preview_and_assign (headless)')
+    # enable test auto-confirm so dialogs auto-accept in headless tests
+    dialog._test_auto_confirm = True
 
-    print('[TEST] Assigned payload:', assigned.keys())
+    # Ensure leverage opt-in is FALSE by default and call preview
+    dialog.leverage_override_checkbox.setChecked(False)
+    dialog._preview_and_assign('Alpha')
+
+    print('[TEST] Assigned payload after default (no leverage opt-in):', assigned.keys())
     if assigned:
-        sd = assigned.get('strategy_data',{})
-        ad = sd.get('analysis_data',{})
-        alpha_exec = ad.get('engine_results',{}).get('alpha',{}).get('executable_parameters')
-        print('[TEST] extracted alpha executable:', alpha_exec)
+        sd = assigned.get('strategy_data', {})
+        exec_params_assigned = sd.get('executable_parameters', {})
+        print('[TEST] extracted assigned executable params (default):', exec_params_assigned)
+
+    # Now test leverage opt-in path
+    assigned.clear()
+    dialog.leverage_override_checkbox.setChecked(True)
+    dialog._preview_and_assign('Alpha')
+    print('[TEST] Assigned payload after leverage opt-in:', assigned.keys())
+    if assigned:
+        sd = assigned.get('strategy_data', {})
+        exec_params_assigned = sd.get('executable_parameters', {})
+        ui_meta = sd.get('ui_meta', {})
+        print('[TEST] extracted assigned executable params (opt-in):', exec_params_assigned)
+        print('[TEST] ui_meta:', ui_meta)
 
     # Create engine widget and apply params
     engine_widget = TradingEngineWidget('Alpha','#4CAF50')
     print('[TEST] Before apply - leverage slider value:', engine_widget.leverage_slider.value(), engine_widget.leverage_value_label.text())
     print('[TEST] Before apply - funds slider value:', engine_widget.funds_slider.value(), engine_widget.funds_value_label.text())
 
+    # Use engine result executable params (if present) for applying to widget
+    alpha_exec = data.get('engine_results', {}).get('alpha', {}).get('executable_parameters')
     if alpha_exec:
         engine_widget.update_strategy_from_analysis(data.get('symbol','SQDUSDT'), data.get('max_target_profit',{}).get('alpha',0), data.get('risk_management',{}), alpha_exec)
         print('[TEST] After apply - leverage slider value:', engine_widget.leverage_slider.value(), engine_widget.leverage_value_label.text())
