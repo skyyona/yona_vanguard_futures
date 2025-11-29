@@ -39,6 +39,14 @@ class StrategyAnalysisDialog(QDialog):
             }
         """)
         
+        # create a stable base layout on the dialog and a replaceable content widget
+        # this avoids repeatedly calling setLayout on the dialog itself which can
+        # trigger QLayout warnings when updating from worker threads.
+        self._base_layout = QVBoxLayout(self)
+        self._base_layout.setContentsMargins(0, 0, 0, 0)
+        self._base_layout.setSpacing(0)
+        self._content_widget = None
+
         # build initial UI (on main thread)
         self._init_ui()
         # connect update signal to slot to safely update UI from worker threads
@@ -65,16 +73,12 @@ class StrategyAnalysisDialog(QDialog):
                 traceback.print_exc()
     
     def _init_ui(self):
-        # If there's an existing layout (e.g. when updating), clear it
-        old_layout = self.layout()
-        if old_layout is not None:
-            try:
-                self._clear_layout(old_layout)
-            except Exception:
-                # best-effort: ignore UI cleanup errors
-                pass
-
-        layout = QVBoxLayout(self)
+        # Build the new content widget and its layout off-widget, then swap
+        # it into the dialog's persistent base layout. This is atomic from
+        # the perspective of the dialog's widget tree and avoids QLayout
+        # warnings about setting multiple layouts on the same widget.
+        content_widget = QWidget()
+        layout = QVBoxLayout(content_widget)
         layout.setSpacing(10)
         layout.setContentsMargins(15, 15, 15, 15)
         
@@ -294,6 +298,9 @@ class StrategyAnalysisDialog(QDialog):
 
         layout.addWidget(action_container)
 
+        # Atomically replace the dialog's content widget
+        self._replace_content_widget(content_widget)
+
     def _clear_layout(self, layout):
         """Recursively clear and delete a QLayout and its child widgets/layouts.
 
@@ -329,6 +336,33 @@ class StrategyAnalysisDialog(QDialog):
             layout.deleteLater()
         except Exception:
             pass
+
+    def _replace_content_widget(self, new_widget: QWidget):
+        """Replace the current content widget with `new_widget` atomically.
+
+        Removes and schedules deletion of the previous content widget and
+        inserts the new one into the persistent base layout. This avoids
+        calling setLayout on the dialog repeatedly.
+        """
+        try:
+            old = getattr(self, '_content_widget', None)
+            if old is not None:
+                try:
+                    # remove from layout and allow it to be deleted later
+                    self._base_layout.removeWidget(old)
+                    old.setParent(None)
+                    old.deleteLater()
+                except Exception:
+                    pass
+            # add the new widget into the base layout
+            self._base_layout.addWidget(new_widget)
+            self._content_widget = new_widget
+        except Exception:
+            try:
+                import logging
+                logging.exception('Failed to replace content widget')
+            except Exception:
+                pass
     
     def _create_section(self, title: str, content: str) -> QWidget:
         """섹션 위젯 생성"""
@@ -415,9 +449,7 @@ class StrategyAnalysisDialog(QDialog):
                 'confirmed_at': None,
                 'source': 'strategy_analysis_dialog_v2'
             }
-
         }
-
 
         # Prepare preview text
         def param_line(k, v):
