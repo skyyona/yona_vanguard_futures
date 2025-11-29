@@ -88,7 +88,14 @@ class StrategyAnalysisDialog(QDialog):
         layout.addWidget(header)
         # --- 신규상장 배너 및 신뢰도 표시 ---
         try:
-            engine_results = self.analysis_data.get("engine_results", {})
+            engine_results = self.analysis_data.get("engine_results", {}) or {}
+            if not isinstance(engine_results, dict):
+                try:
+                    import logging
+                    logging.warning("StrategyAnalysisDialog: engine_results is not a dict; coercing to {}. value=%r", engine_results)
+                except Exception:
+                    pass
+                engine_results = {}
             # is_new_listing / data_missing 판단: top-level 우선, 없으면 엔진별 OR
             is_new = bool(self.analysis_data.get("is_new_listing") or any(
                 (engine.get("is_new_listing") is True) for engine in engine_results.values()
@@ -185,6 +192,13 @@ class StrategyAnalysisDialog(QDialog):
 
         # 4-2. 파라미터 개요 (human-friendly)
         exec_params = self.analysis_data.get('executable_parameters', {}) or {}
+        if not isinstance(exec_params, dict):
+            try:
+                import logging
+                logging.warning("StrategyAnalysisDialog: executable_parameters is not a dict; coercing to {}. value=%r", exec_params)
+            except Exception:
+                pass
+            exec_params = {}
         overview_lines = []
         lev = exec_params.get('leverage')
         ps = exec_params.get('position_size')
@@ -370,6 +384,13 @@ class StrategyAnalysisDialog(QDialog):
         if getattr(self, 'risk_override_checkbox', None) and self.risk_override_checkbox.isChecked():
             # Apply risk management suggestions (if present) into final params
             rm = self.analysis_data.get('risk_management', {}) or {}
+            if not isinstance(rm, dict):
+                try:
+                    import logging
+                    logging.warning("StrategyAnalysisDialog: risk_management is not a dict; coercing to {}. value=%r", rm)
+                except Exception:
+                    pass
+                rm = {}
             # map known keys
             if 'stop_loss' in rm:
                 final_params['stop_loss_pct'] = float(rm.get('stop_loss'))
