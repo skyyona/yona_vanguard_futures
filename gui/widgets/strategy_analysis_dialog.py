@@ -55,21 +55,39 @@ class StrategyAnalysisDialog(QDialog):
             self.analysis_data = data
             # Rebuild UI on main thread
             self._init_ui()
-        except Exception:
-            # avoid raising UI exceptions from the slot
-            pass
+        except Exception as e:
+            # Log full traceback so errors aren't silently swallowed
+            try:
+                import logging
+                logging.exception("Exception in StrategyAnalysisDialog._on_analysis_update: %s", e)
+            except Exception:
+                # last-resort: print traceback
+                import traceback
+                traceback.print_exc()
     
     def _init_ui(self):
-        # If there's an existing layout (e.g. when updating), clear it
+        # If there's an existing layout (e.g. when updating), detach it first
+        # to avoid Qt warnings about adding a QLayout to a widget that already has one.
         old_layout = self.layout()
         if old_layout is not None:
             try:
-                self._clear_layout(old_layout)
+                # Detach immediately so we can safely set a new layout later
+                self.setLayout(None)
+                # Clear child widgets/layouts from the old layout
+                try:
+                    self._clear_layout(old_layout)
+                except Exception:
+                    pass
+                # schedule old layout for deletion
+                try:
+                    old_layout.deleteLater()
+                except Exception:
+                    pass
             except Exception:
-                # best-effort: ignore UI cleanup errors
                 pass
 
-        layout = QVBoxLayout(self)
+        # Build new layout off-widget and attach at the end (atomic swap)
+        layout = QVBoxLayout()
         layout.setSpacing(10)
         layout.setContentsMargins(15, 15, 15, 15)
         
@@ -274,6 +292,24 @@ class StrategyAnalysisDialog(QDialog):
         action_layout.addWidget(cancel_btn)
 
         layout.addWidget(action_container)
+
+        # Atomically attach the new layout to the dialog to avoid QLayout warnings
+        try:
+            # If any old layout is still attached (defensive), detach it
+            try:
+                old = self.layout()
+                if old is not None:
+                    self.setLayout(None)
+            except Exception:
+                pass
+            # Set the newly-built layout on this dialog
+            self.setLayout(layout)
+        except Exception:
+            try:
+                import logging
+                logging.exception("Failed to set StrategyAnalysisDialog layout")
+            except Exception:
+                pass
 
     def _clear_layout(self, layout):
         """Recursively clear and delete a QLayout and its child widgets/layouts.
