@@ -138,7 +138,14 @@ def main():
     # Use engine result executable params (if present) for applying to widget
     alpha_exec = data.get('engine_results', {}).get('alpha', {}).get('executable_parameters')
     if alpha_exec:
-        engine_widget.update_strategy_from_analysis(data.get('symbol','SQDUSDT'), data.get('max_target_profit',{}).get('alpha',0), data.get('risk_management',{}), alpha_exec)
+        # For this direct-apply test, simulate that user confirmed leverage application
+        engine_widget.update_strategy_from_analysis(
+            data.get('symbol','SQDUSDT'),
+            data.get('max_target_profit',{}).get('alpha',0),
+            data.get('risk_management',{}),
+            alpha_exec,
+            {'leverage_user_confirmed': True}
+        )
         print('[TEST] After apply - leverage slider value:', engine_widget.leverage_slider.value(), engine_widget.leverage_value_label.text())
         print('[TEST] After apply - funds slider value:', engine_widget.funds_slider.value(), engine_widget.funds_value_label.text())
 

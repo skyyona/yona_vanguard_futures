@@ -1103,17 +1103,17 @@ class YONAMainWindow(QMainWindow):
         # 하단 푸터의 해당 엔진에 전달 (exec_params 포함)
         if engine_name == "Alpha":
             self.middle_session_widget.alpha_engine.update_strategy_from_analysis(
-                symbol, max_profit, risk_mgmt, exec_params
+                symbol, max_profit, risk_mgmt, exec_params, strategy_data.get('ui_meta')
             )
             self._focus_engine_tab("Alpha")
         elif engine_name == "Beta":
             self.middle_session_widget.beta_engine.update_strategy_from_analysis(
-                symbol, max_profit, risk_mgmt, exec_params
+                symbol, max_profit, risk_mgmt, exec_params, strategy_data.get('ui_meta')
             )
             self._focus_engine_tab("Beta")
         elif engine_name == "Gamma":
             self.middle_session_widget.gamma_engine.update_strategy_from_analysis(
-                symbol, max_profit, risk_mgmt, exec_params
+                symbol, max_profit, risk_mgmt, exec_params, strategy_data.get('ui_meta')
             )
             self._focus_engine_tab("Gamma")
 

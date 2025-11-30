@@ -77,6 +77,20 @@ class StrategyAnalysisDialog(QDialog):
         # it into the dialog's persistent base layout. This is atomic from
         # the perspective of the dialog's widget tree and avoids QLayout
         # warnings about setting multiple layouts on the same widget.
+        # Defensive: ensure analysis_data is a dict so UI code can assume
+        # a mapping-like object (helps avoid AttributeError during builds).
+        if not isinstance(self.analysis_data, dict):
+            try:
+                import logging
+                logging.warning("StrategyAnalysisDialog: analysis_data not dict; coercing. value=%r", self.analysis_data)
+            except Exception:
+                pass
+            # safe coercion: if None -> {}, otherwise try shallow copy
+            try:
+                self.analysis_data = {} if self.analysis_data is None else dict(self.analysis_data)
+            except Exception:
+                self.analysis_data = {}
+
         content_widget = QWidget()
         layout = QVBoxLayout(content_widget)
         layout.setSpacing(10)
@@ -194,18 +208,8 @@ class StrategyAnalysisDialog(QDialog):
         
         
         
-        # 4-1. 통합 전략 요약: metrics + single executable_parameters
-        metrics = self.analysis_data.get("metrics", {})
-        metrics_text = (
-            f"총 수익률: {metrics.get('total_return_pct', 0):.2f}%\n"
-            f"승률: {metrics.get('win_rate', 0):.2f}%\n"
-            f"최대 낙폭: {metrics.get('max_drawdown_pct', 0):.2f}%\n"
-            f"변동성: {metrics.get('volatility_pct', 0):.2f}%"
-        )
-        metrics_section = self._create_section("📈 전략 요약", metrics_text)
-        scroll_layout.addWidget(metrics_section)
-
-        # 4-2. 파라미터 개요 (human-friendly)
+        # 4-1 ~ 4-3: Reformat into boxed, collapsible sections to match requested design
+        metrics = self.analysis_data.get("metrics", {}) or {}
         exec_params = self.analysis_data.get('executable_parameters', {}) or {}
         if not isinstance(exec_params, dict):
             try:
@@ -214,41 +218,48 @@ class StrategyAnalysisDialog(QDialog):
             except Exception:
                 pass
             exec_params = {}
-        overview_lines = []
-        lev = exec_params.get('leverage')
-        ps = exec_params.get('position_size')
-        sl = exec_params.get('stop_loss_pct')
-        no_comp = exec_params.get('no_compounding')
-        overview_lines.append(f"권장 레버리지: {int(lev) if lev is not None else 'N/A'}x")
-        if isinstance(ps, float) and ps <= 1:
-            overview_lines.append(f"거래당 자본 비중: {ps*100:.2f}%")
-        else:
-            overview_lines.append(f"거래당 자본 비중: {ps if ps is not None else 'N/A'}")
-        overview_lines.append(f"전략 권장 손절: {float(sl)*100:.2f}%" if sl is not None else "전략 권장 손절: N/A")
-        overview_lines.append(f"복리: {'활성(전략 기본)' if no_comp is not True else '비활성(복리 사용하지 않음)'}")
-        overview_section = self._create_section("🧾 파라미터 개요", "\n".join(overview_lines))
-        scroll_layout.addWidget(overview_section)
 
-        # 4-3. 상세 파라미터 테이블 (simple label list)
+        # Strategy Simulation Results
+        sim_lines = []
+        # Estimated trade count (fall back to metrics or N/A)
+        sim_lines.append(f"- 예상 거래 횟수: {self.analysis_data.get('estimated_trade_count', metrics.get('estimated_trade_count', 'N/A'))}")
+        # Optimal target profit
         try:
-            params_widget = QWidget()
-            params_layout = QVBoxLayout(params_widget)
-            params_layout.setContentsMargins(0,0,0,0)
-            params_layout.setSpacing(4)
-            if exec_params:
-                for k, v in exec_params.items():
-                    display_val = v
-                    if k.endswith('_pct') and isinstance(v, float):
-                        display_val = f"{v*100:.2f}%"
-                    elif k == 'position_size' and isinstance(v, float) and v <= 1:
-                        display_val = f"{v*100:.2f}%"
-                    params_layout.addWidget(QLabel(f"{k}: {display_val}"))
-            else:
-                params_layout.addWidget(QLabel("파라미터 없음"))
-            scroll_layout.addWidget(self._create_section("🔧 상세 파라미터", ""))
-            scroll_layout.addWidget(params_widget)
+            engine_key = (self.analysis_data.get('best_engine') or 'alpha').lower()
+            optimal = self.analysis_data.get('max_target_profit', {}).get(engine_key, metrics.get('expected_profit', 'N/A'))
         except Exception:
-            pass
+            optimal = metrics.get('expected_profit', 'N/A')
+        sim_lines.append(f"- 최적 목표 수익률(엔진 권장): {optimal if optimal is not None else 'N/A'}")
+        sim_lines.append(f"- 총 예상 수익률: {metrics.get('total_return_pct', 'N/A')}")
+        # take profit / stop loss / liquidation prevention
+        tp = exec_params.get('take_profit_pct')
+        sl = exec_params.get('stop_loss_pct')
+        sim_lines.append(f"- 익절 권장: {f'{tp*100:.2f}%' if isinstance(tp, float) else (tp if tp is not None else 'N/A')}")
+        sim_lines.append(f"- 손절 권장: {f'{sl*100:.2f}%' if isinstance(sl, float) else (sl if sl is not None else 'N/A')}")
+        sim_lines.append(f"- 청산 방지 관련: {self.analysis_data.get('liquidation_prevention', 'N/A')}")
+        scroll_layout.addWidget(self._create_box_section("Strategy Simulation Results", sim_lines, collapsible=True, initial_open=True))
+
+        # Risk Management box
+        rm = self.analysis_data.get('risk_management', {}) or {}
+        rm_lines = []
+        rm_lines.append(f"- 손절 정책: {rm.get('stop_loss', 'N/A')}")
+        rm_lines.append(f"- 트레일링 스톱 정책: {rm.get('trailing_stop', 'N/A')}")
+        rm_lines.append(f"- 오늘의 예상 총 수익률: {metrics.get('total_return_pct', 'N/A')}")
+        scroll_layout.addWidget(self._create_box_section("Risk Management for the Coin Symbol", rm_lines, collapsible=True, initial_open=False))
+
+        # Detailed Parameters box
+        det_lines = []
+        if exec_params:
+            for k, v in exec_params.items():
+                display_val = v
+                if k.endswith('_pct') and isinstance(v, float):
+                    display_val = f"{v*100:.2f}%"
+                elif k == 'position_size' and isinstance(v, float) and v <= 1:
+                    display_val = f"{v*100:.2f}%"
+                det_lines.append(f"- {k}: {display_val}")
+        else:
+            det_lines.append("- 상세 파라미터 없음")
+        scroll_layout.addWidget(self._create_box_section("Detailed Parameters", det_lines, collapsible=True, initial_open=False))
 
         scroll_layout.addStretch()
         scroll_area.setWidget(scroll_widget)
@@ -263,7 +274,8 @@ class StrategyAnalysisDialog(QDialog):
         action_layout.setContentsMargins(0, 10, 0, 0)
 
         # Apply risk overrides checkbox (stop-loss & trailing-stop only)
-        self.risk_override_checkbox = QCheckBox("Apply recommended stop-loss & trailing-stop (권장)")
+        # Make label explicit that leverage/position_size are NOT included
+        self.risk_override_checkbox = QCheckBox("Apply recommended stop-loss & trailing-stop (권장, 레버리지/투입자금 제외)")
         self.risk_override_checkbox.setChecked(True if self.apply_risk_overrides else False)
         action_layout.addWidget(self.risk_override_checkbox)
 
@@ -276,6 +288,17 @@ class StrategyAnalysisDialog(QDialog):
         except Exception:
             pass
         action_layout.addWidget(self.leverage_override_checkbox)
+
+        # Informational subtext clarifying that leverage amplifies losses and
+        # that leverage/position size are user-controlled and require explicit confirmation.
+        try:
+            lev_note = QLabel("※ 레버리지는 손실을 확대합니다. 레버리지 및 투입자금은 자동 적용되지 않으며, 체크 후 Confirm을 통해서만 적용됩니다.")
+            lev_note.setStyleSheet('font-size: 10px; color: #FFD54F;')
+            lev_note.setWordWrap(True)
+            # place the note visually close to the leverage checkbox
+            action_layout.addWidget(lev_note)
+        except Exception:
+            pass
 
         action_layout.addStretch()
 
@@ -319,8 +342,33 @@ class StrategyAnalysisDialog(QDialog):
 
         layout.addWidget(action_container)
 
-        # Atomically replace the dialog's content widget
-        self._replace_content_widget(content_widget)
+        # Atomically replace the dialog's content widget. If replacement
+        # fails for any reason, fall back to a minimal error widget so the
+        # dialog never appears blank and logs contain the traceback.
+        try:
+            self._replace_content_widget(content_widget)
+        except Exception:
+            try:
+                import logging
+                logging.exception("StrategyAnalysisDialog: exception while replacing content widget")
+            except Exception:
+                pass
+            fallback = QWidget()
+            fl = QVBoxLayout(fallback)
+            fl.setContentsMargins(12, 12, 12, 12)
+            err_label = QLabel("Failed to build analysis UI. See application log for details.")
+            err_label.setStyleSheet('color: #FFCDD2; font-weight: bold;')
+            err_label.setWordWrap(True)
+            fl.addWidget(err_label)
+            try:
+                self._replace_content_widget(fallback)
+            except Exception:
+                # Last resort: give up silently to avoid crash; log if possible
+                try:
+                    import logging
+                    logging.exception("StrategyAnalysisDialog: also failed to set fallback widget")
+                except Exception:
+                    pass
 
     def _clear_layout(self, layout):
         """Recursively clear and delete a QLayout and its child widgets/layouts.
@@ -402,6 +450,73 @@ class StrategyAnalysisDialog(QDialog):
         layout.addWidget(content_label)
         
         return widget
+
+    def _create_box_section(self, title: str, lines: list, collapsible: bool = True, initial_open: bool = False) -> QWidget:
+        """Create a boxed section with optional collapsible content.
+
+        - title: section title string
+        - lines: list of strings to display inside the box
+        - collapsible: whether the content can be toggled
+        - initial_open: whether content is initially visible
+        """
+        from PySide6.QtWidgets import QToolButton, QFrame
+
+        container = QFrame()
+        container.setStyleSheet("background-color: #2b2b2b; border-radius: 4px;")
+        box_layout = QVBoxLayout(container)
+        box_layout.setContentsMargins(8, 8, 8, 8)
+        box_layout.setSpacing(6)
+
+        # header
+        header = QWidget()
+        header_layout = QHBoxLayout(header)
+        header_layout.setContentsMargins(0, 0, 0, 0)
+        header_layout.setSpacing(6)
+
+        if collapsible:
+            toggle = QToolButton()
+            toggle.setArrowType(Qt.DownArrow if initial_open else Qt.RightArrow)
+            toggle.setToolButtonStyle(Qt.ToolButtonIconOnly)
+            toggle.setStyleSheet('color: #FFFFFF;')
+            header_layout.addWidget(toggle)
+        else:
+            toggle = None
+
+        title_lbl = QLabel(title)
+        title_lbl.setStyleSheet('color: #FFC107; font-weight: bold;')
+        header_layout.addWidget(title_lbl)
+        header_layout.addStretch()
+
+        box_layout.addWidget(header)
+
+        # content
+        content_widget = QWidget()
+        content_layout = QVBoxLayout(content_widget)
+        content_layout.setContentsMargins(6, 6, 6, 6)
+        content_layout.setSpacing(4)
+        for line in lines:
+            lbl = QLabel(line)
+            lbl.setStyleSheet('color: #CCCCCC; font-size: 11px;')
+            lbl.setWordWrap(True)
+            content_layout.addWidget(lbl)
+
+        box_layout.addWidget(content_widget)
+
+        # initial visibility
+        if collapsible:
+            content_widget.setVisible(initial_open)
+
+            def _toggle():
+                vis = not content_widget.isVisible()
+                content_widget.setVisible(vis)
+                try:
+                    toggle.setArrowType(Qt.DownArrow if vis else Qt.RightArrow)
+                except Exception:
+                    pass
+
+            toggle.clicked.connect(_toggle)
+
+        return container
     
     def _create_engine_section(self, engine_name: str, engine_data: dict) -> QWidget:
         """레거시: 엔진별 상세 섹션 생성기 (제거됨).
@@ -438,8 +553,12 @@ class StrategyAnalysisDialog(QDialog):
         engine_results = self.analysis_data.get('engine_results', {}) or {}
         engine_params = (engine_results.get(engine_key, {}) or {}).get('executable_parameters', {}) or {}
         final_params = dict(base_params)  # shallow copy
-        # overlay engine-specific executable parameters (do not auto-apply force_leverage here)
+        # overlay engine-specific executable parameters but DO NOT include
+        # leverage or position_size by default (these are user-controlled)
+        skip_keys = {'leverage', 'position_size'}
         for k, v in engine_params.items():
+            if k in skip_keys:
+                continue
             final_params.setdefault(k, v)
 
         applied_overrides = {}
