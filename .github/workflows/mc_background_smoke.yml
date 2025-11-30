@@ -1,0 +1,58 @@
+name: MC Background Smoke Test
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [ main ]
+
+jobs:
+  mc-background-smoke:
+    name: Run MC background helper (smoke)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Make helper executable
+        run: |
+          chmod +x scripts/run_mc_background.sh || true
+          chmod +x scripts/mc_test_runner.py || true
+
+      - name: Start background MC job
+        id: start
+        run: |
+          mkdir -p results
+          # Start the helper; it will detach and produce timestamped logs in results/
+          # Use a small number of Monte-Carlo iterations to keep CI short.
+          ./scripts/run_mc_background.sh --script scripts/mc_robustness.py --name mc_robustness_ci --extra-args "--symbol PIPPINUSDT --interval 5m --start 2025-11-18 --end 2025-11-24 --mc-iter 10 --workers 1"
+          echo "Started helper"
+
+      - name: Wait for logs
+        run: |
+          # wait up to 20s for logs to appear
+          for i in {1..20}; do
+            ls results || true
+            sleep 1
+          done
+
+      - name: Show results directory
+        run: |
+          echo '=== results listing ==='
+          ls -la results || true
+          echo '=== stdout snippets ==='
+          for f in results/*_stdout.log 2>/dev/null; do
+            echo "--- $f ---"; head -n 50 "$f" || true; echo; done
+          echo '=== stderr snippets ==='
+          for f in results/*_stderr.log 2>/dev/null; do
+            echo "--- $f ---"; head -n 50 "$f" || true; echo; done
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: mc-background-logs
+          path: results/*_stdout.log,results/*_stderr.log,results/*.csv || results || .
