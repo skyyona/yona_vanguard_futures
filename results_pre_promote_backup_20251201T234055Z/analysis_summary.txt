@@ -1,0 +1,19 @@
+Total cases: 216
+Cases with trades: 137 (63.4%)
+Mean profit: 0.061307
+Median profit: 0.000000
+Positive profit %: 47.2%
+
+Top 5 parameter combos by mean profit:
+ spike_factor=1.6 avg_period=20.0 prox=0.005 mean_profit=0.197289 cases=6.0
+ spike_factor=1.6 avg_period=20.0 prox=0.001 mean_profit=0.197289 cases=6.0
+ spike_factor=1.6 avg_period=20.0 prox=0.002 mean_profit=0.197289 cases=6.0
+ spike_factor=1.6 avg_period=10.0 prox=0.002 mean_profit=0.187699 cases=6.0
+ spike_factor=1.6 avg_period=10.0 prox=0.001 mean_profit=0.187699 cases=6.0
+
+Top 5 most robust combos (by % of symbols with positive profit):
+ spike_factor=1.6 avg_period=50.0 prox=0.002 positive_symbol_pct=100.0% (6/6)
+ spike_factor=1.6 avg_period=10.0 prox=0.001 positive_symbol_pct=100.0% (6/6)
+ spike_factor=1.6 avg_period=10.0 prox=0.005 positive_symbol_pct=100.0% (6/6)
+ spike_factor=1.6 avg_period=10.0 prox=0.002 positive_symbol_pct=100.0% (6/6)
+ spike_factor=1.8 avg_period=10.0 prox=0.001 positive_symbol_pct=100.0% (6/6)

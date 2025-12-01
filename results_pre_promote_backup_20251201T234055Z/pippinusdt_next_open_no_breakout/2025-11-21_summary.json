@@ -1,0 +1,20 @@
+{
+  "symbol": "PIPPINUSDT",
+  "date": "2025-11-21",
+  "vol_threshold": 5.0,
+  "overshoot_threshold": 10.0,
+  "confirmation_bars": 1,
+  "atr_lookback": 14,
+  "atr_mult": 1.5,
+  "atr_pct": 0.010774205320963827,
+  "adaptive_stop_loss_pct": 0.01616130798144574,
+  "result_summary": {
+    "initial_balance": 1000.0,
+    "final_balance": 1000.0,
+    "profit": 0.0,
+    "profit_pct": 0.0,
+    "total_trades": 0,
+    "win_rate": 0.0,
+    "max_drawdown_pct": 0.0
+  }
+}

@@ -1,0 +1,1 @@
+﻿No handles captured during monitoring.
