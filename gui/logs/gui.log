@@ -1,0 +1,15 @@
+Could not parse stylesheet of object QTabWidget(0x20fa94fd640)
+Could not parse stylesheet of object QTabWidget(0x20fa94fd640)
+Could not parse stylesheet of object QTabWidget(0x20fa9697770)
+Could not parse stylesheet of object QTabWidget(0x20fa9697770)
+Could not parse stylesheet of object QTabWidget(0x20fa9823e50)
+Could not parse stylesheet of object QTabWidget(0x20fa9823e50)
+2025-11-26 16:24:34,468 - [INFO] - GUI 메인 윌도우 초기화 완료. (main.py:73)
+Could not parse stylesheet of object QTabWidget(0x20fa94fd640)
+Could not parse stylesheet of object QTabWidget(0x20fa9697770)
+Could not parse stylesheet of object QTabWidget(0x20fa9823e50)
+WebSocket 연결 실패: [WinError 1225] 원격 컴퓨터가 네트워크 연결을 거부했습니다. 5초 후 재시도합니다.
+2025-11-26 16:24:42,495 - [ERROR] - START 명령 전송 실패: HTTPConnectionPool(host='127.0.0.1', port=8200): Max retries exceeded with url: /api/v1/start (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000020FAEF8F340>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다')) (main.py:383)
+2025-11-26 16:24:42,495 - [CRITICAL] - GUI - 치명적인 오류: [연결 오류] 백엔드에 START 명령을 보낼 수 없습니다. (main.py:756)
+WebSocket 연결 실패: [WinError 1225] 원격 컴퓨터가 네트워크 연결을 거부했습니다. 5초 후 재시도합니다.
+2025-11-26 16:24:45,773 - [INFO] - GUI 윈도우 종료 중... (main.py:761)

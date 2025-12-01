@@ -1,0 +1,35 @@
+From 2d562725ff46ce3ce3c62a053afadf4862bb11d8 Mon Sep 17 00:00:00 2001
+From: yona-local <local@localhost>
+Date: Sat, 29 Nov 2025 14:24:49 +0900
+Subject: [PATCH 2/3] chore(ui): add exception logging in
+ StrategyAnalysisDialog._on_analysis_update (step1)
+
+---
+ gui/widgets/strategy_analysis_dialog.py | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/gui/widgets/strategy_analysis_dialog.py b/gui/widgets/strategy_analysis_dialog.py
+index 00d2d81..26abddd 100644
+--- a/gui/widgets/strategy_analysis_dialog.py
++++ b/gui/widgets/strategy_analysis_dialog.py
+@@ -55,9 +55,14 @@ class StrategyAnalysisDialog(QDialog):
+             self.analysis_data = data
+             # Rebuild UI on main thread
+             self._init_ui()
+-        except Exception:
+-            # avoid raising UI exceptions from the slot
+-            pass
++        except Exception as e:
++            # Log full traceback so errors aren't silently swallowed
++            try:
++                import logging
++                logging.exception("Exception in StrategyAnalysisDialog._on_analysis_update: %s", e)
++            except Exception:
++                import traceback
++                traceback.print_exc()
+     
+     def _init_ui(self):
+         # If there's an existing layout (e.g. when updating), clear it
+-- 
+2.51.0.windows.1
+

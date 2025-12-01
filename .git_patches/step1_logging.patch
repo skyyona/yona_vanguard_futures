@@ -1,0 +1,26 @@
+*** Begin Patch
+*** Update File: gui/widgets/strategy_analysis_dialog.py
+@@
+     def _on_analysis_update(self, data: dict):
+         """Slot: update analysis data and refresh UI in main thread"""
+-        try:
+-            self.analysis_data = data
+-            # Rebuild UI on main thread
+-            self._init_ui()
+-        except Exception:
+-            # avoid raising UI exceptions from the slot
+-            pass
++        try:
++            self.analysis_data = data
++            # Rebuild UI on main thread
++            self._init_ui()
++        except Exception as e:
++            # Log full traceback so errors aren't silently swallowed
++            try:
++                import logging
++                logging.exception("Exception in StrategyAnalysisDialog._on_analysis_update: %s", e)
++            except Exception:
++                # last-resort: print traceback
++                import traceback
++                traceback.print_exc()
+*** End Patch

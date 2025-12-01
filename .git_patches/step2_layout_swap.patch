@@ -1,0 +1,64 @@
+*** Begin Patch
+*** Update File: gui/widgets/strategy_analysis_dialog.py
+@@
+-        # If there's an existing layout (e.g. when updating), clear it
+-        old_layout = self.layout()
+-        if old_layout is not None:
+-            try:
+-                self._clear_layout(old_layout)
+-            except Exception:
+-                # best-effort: ignore UI cleanup errors
+-                pass
+-
+-        layout = QVBoxLayout(self)
++        # Safer layout replacement (build off-widget then atomically attach):
++        old_layout = self.layout()
++        if old_layout is not None:
++            try:
++                # detach immediately so we can safely set a new layout later
++                self.setLayout(None)
++                try:
++                    self._clear_layout(old_layout)
++                except Exception:
++                    pass
++                try:
++                    old_layout.deleteLater()
++                except Exception:
++                    pass
++            except Exception:
++                pass
++
++        # Build new layout without parent and attach when ready
++        layout = QVBoxLayout()
+@@
+-        layout.addWidget(action_container)
+-
+-        # Atomically attach the new layout to the dialog to avoid QLayout warnings
+-        try:
+-            # If any old layout is still attached (defensive), detach it
+-            try:
+-                old = self.layout()
+-                if old is not None:
+-                    self.setLayout(None)
+-            except Exception:
+-                pass
+-            # Set the newly-built layout on this dialog
+-            self.setLayout(layout)
+-        except Exception:
+-            try:
+-                import logging
+-                logging.exception("Failed to set StrategyAnalysisDialog layout")
+-            except Exception:
+-                pass
++        layout.addWidget(action_container)
++
++        # Atomically attach the new layout to the dialog to avoid QLayout warnings
++        try:
++            self.setLayout(layout)
++        except Exception:
++            try:
++                import logging
++                logging.exception("Failed to set StrategyAnalysisDialog layout")
++            except Exception:
++                pass
+*** End Patch
