@@ -23,28 +23,26 @@ except Exception as e:
     print(f"❌ MiddleSessionWidget import 실패: {e}")
     sys.exit(1)
 
-# 2. NewModular 위젯 생성 확인
-print("\n[2/4] NewModular 위젯 생성 확인")
+# 2. 엔진 위젯 생성 확인 (Alpha/Beta/Gamma)
+print("\n[2/4] 엔진 위젯 생성 확인 (Alpha/Beta/Gamma)")
 try:
     from PySide6.QtWidgets import QApplication
     app = QApplication.instance()
     if app is None:
         app = QApplication(sys.argv)
-    
+
     widget = MiddleSessionWidget()
-    
-    # 4개 엔진 확인
+
+    # 3개 엔진 확인
     assert hasattr(widget, 'alpha_engine'), "Alpha 엔진 없음"
     assert hasattr(widget, 'beta_engine'), "Beta 엔진 없음"
     assert hasattr(widget, 'gamma_engine'), "Gamma 엔진 없음"
-    assert hasattr(widget, 'newmodular_engine'), "NewModular 엔진 없음"
-    
-    print("✅ 4개 엔진 위젯 생성 확인:")
+
+    print("✅ 3개 엔진 위젯 생성 확인:")
     print(f"   - Alpha: {widget.alpha_engine.engine_name}")
     print(f"   - Beta: {widget.beta_engine.engine_name}")
     print(f"   - Gamma: {widget.gamma_engine.engine_name}")
-    print(f"   - NewModular: {widget.newmodular_engine.engine_name}")
-    
+
 except Exception as e:
     print(f"❌ 위젯 생성 실패: {e}")
     import traceback
@@ -55,41 +53,40 @@ except Exception as e:
 print("\n[3/4] Backend API 라우트 확인")
 try:
     from backend.api.routes import router
-    
+
     # 라우트 경로 추출
     routes = [route.path for route in router.routes]
-    
-    # NewModular 전용 라우트 확인
-    new_routes = [r for r in routes if "/strategy/new/" in r]
-    
-    print(f"✅ NewModular 전용 API 라우트 {len(new_routes)}개 발견:")
-    for route in new_routes:
+
+    # 엔진 제어 전용 라우트 확인 (Alpha/Beta/Gamma)
+    engine_routes = [r for r in routes if r.startswith("/engine/") or r == "/engine/status"]
+    print(f"✅ Engine API 관련 라우트 {len(engine_routes)}개 발견:")
+    for route in engine_routes:
         print(f"   - {route}")
-    
+
     # 필수 라우트 확인
-    assert "/strategy/new/start" in routes, "/strategy/new/start 라우트 없음"
-    assert "/strategy/new/status" in routes, "/strategy/new/status 라우트 없음"
-    assert "/strategy/new/stop" in routes, "/strategy/new/stop 라우트 없음"
-    
-    print("✅ 필수 라우트 모두 존재")
-    
+    assert "/engine/start" in routes, "/engine/start 라우트 없음"
+    assert "/engine/stop" in routes, "/engine/stop 라우트 없음"
+    assert "/engine/status" in routes, "/engine/status 라우트 없음"
+
+    print("✅ 필수 엔진 제어 라우트 모두 존재")
+
 except Exception as e:
     print(f"❌ 라우트 확인 실패: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
 
-# 4. NewStrategyWrapper import 확인
-print("\n[4/4] NewStrategyWrapper import 확인")
+# 4. Alpha/Beta/Gamma 전략 클래스 import 확인
+print("\n[4/4] Alpha/Beta/Gamma 전략 클래스 import 확인")
 try:
-    from backend.core.strategies.new_strategy_wrapper import NewStrategyWrapper
-    print("✅ NewStrategyWrapper import 성공")
-    print(f"   - Engine Name: NewModular")
-    print(f"   - BaseStrategy 상속: {hasattr(NewStrategyWrapper, 'start')}")
-    print(f"   - Orchestrator 통합: {hasattr(NewStrategyWrapper, 'orchestrator')}")
-    
+    from backend.core.strategies import AlphaStrategy, BetaStrategy, GammaStrategy, BaseStrategy
+    print("✅ Alpha/Beta/Gamma import 성공")
+    print(f"   - Alpha is subclass of BaseStrategy: {issubclass(AlphaStrategy, BaseStrategy)}")
+    print(f"   - Beta is subclass of BaseStrategy: {issubclass(BetaStrategy, BaseStrategy)}")
+    print(f"   - Gamma is subclass of BaseStrategy: {issubclass(GammaStrategy, BaseStrategy)}")
+
 except Exception as e:
-    print(f"❌ NewStrategyWrapper import 실패: {e}")
+    print(f"❌ 전략 클래스 import 실패: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)

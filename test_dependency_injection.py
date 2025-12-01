@@ -25,8 +25,7 @@ def test_shared_client_injection():
             shared_id = id(manager._shared_binance_client)
             print(f"  ✅ 공유 클라이언트 존재 (ID: {shared_id})")
         else:
-            print("  ❌ 공유 클라이언트 없음!")
-            return False
+            assert hasattr(manager, '_shared_binance_client'), "공유 BinanceClient 없음"
         
         # 각 엔진의 클라이언트 ID 확인
         print("\n[Step 3] 각 엔진의 BinanceClient ID 확인")
@@ -47,14 +46,8 @@ def test_shared_client_injection():
             print("  ✅ 모든 엔진이 동일한 BinanceClient 인스턴스 사용!")
             print("  ✅ 의존성 주입 패턴 정상 작동!")
         else:
-            print("  ❌ 엔진들이 서로 다른 클라이언트 사용!")
-            if alpha_id != shared_id:
-                print(f"     Alpha가 다른 인스턴스 사용 (차이: {alpha_id - shared_id})")
-            if beta_id != shared_id:
-                print(f"     Beta가 다른 인스턴스 사용 (차이: {beta_id - shared_id})")
-            if gamma_id != shared_id:
-                print(f"     Gamma가 다른 인스턴스 사용 (차이: {gamma_id - shared_id})")
-            return False
+            # Fail the test if clients are not the same
+            assert all_same, f"엔진들이 동일한 BinanceClient를 사용하지 않음 (Alpha:{alpha_id}, Beta:{beta_id}, Gamma:{gamma_id}, Shared:{shared_id})"
         
         # Orchestrator 확인
         print("\n[Step 5] Orchestrator의 클라이언트 확인")
@@ -92,13 +85,12 @@ def test_shared_client_injection():
         # 정리
         manager.shutdown()
         
-        return True
         
     except Exception as e:
         print(f"\n❌ 검증 실패: {e}")
         import traceback
         traceback.print_exc()
-        return False
+        assert False, f"의존성 주입 검증 중 오류 발생: {e}"
 
 
 def test_backward_compatibility():
@@ -113,20 +105,16 @@ def test_backward_compatibility():
         print("\n[테스트] binance_client 파라미터 없이 AlphaStrategy 생성")
         strategy = AlphaStrategy(symbol="TESTUSDT")
         
-        if strategy.binance_client is not None:
-            print("  ✅ 독립 BinanceClient 자동 생성됨")
-            print(f"     Client ID: {id(strategy.binance_client)}")
-            print("  ✅ 하위 호환성 유지!")
-            return True
-        else:
-            print("  ❌ BinanceClient 생성 안됨!")
-            return False
+        assert strategy.binance_client is not None, "AlphaStrategy가 BinanceClient를 생성하지 않았습니다"
+        print("  ✅ 독립 BinanceClient 자동 생성됨")
+        print(f"     Client ID: {id(strategy.binance_client)}")
+        print("  ✅ 하위 호환성 유지!")
             
     except Exception as e:
         print(f"\n❌ 하위 호환성 테스트 실패: {e}")
         import traceback
         traceback.print_exc()
-        return False
+        assert False, f"하위 호환성 테스트 중 오류 발생: {e}"
 
 
 if __name__ == "__main__":

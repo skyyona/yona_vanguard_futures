@@ -51,7 +51,7 @@ def test_empty_array_settling():
     assert len(widget._checkboxes) == 0, "❌ 체크박스 참조가 남아있습니다!"
     
     print("\n✅ SETTLING 테이블 빈 배열 테스트 통과!")
-    return True
+    
 
 
 def test_empty_array_blacklist():
@@ -101,7 +101,7 @@ def test_empty_array_blacklist():
     assert len(widget._checkboxes) == 0, "❌ 체크박스 참조가 남아있습니다!"
     
     print("\n✅ 블랙리스트 테이블 빈 배열 테스트 통과!")
-    return True
+    
 
 
 def test_multiple_updates():
@@ -135,7 +135,7 @@ def test_multiple_updates():
         assert widget_count == expected_widgets, f"❌ 위젯 개수 불일치! 예상: {expected_widgets}, 실제: {widget_count}"
     
     print("\n✅ 여러 번 업데이트 테스트 통과! (메모리 누수 없음)")
-    return True
+    
 
 
 if __name__ == "__main__":

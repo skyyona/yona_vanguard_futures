@@ -442,37 +442,40 @@ class YONAMainWindow(QMainWindow):
             QMessageBox.information(self, "앱 대기 상태", "먼저 상단의 START 버튼을 눌러주세요.")
             return
         try:
-            # NewModular 엔진은 별도 API 사용
+            # Note: NewModular is deprecated — map to Alpha for compatibility
             if engine_name == "NewModular":
-                response = requests.post(
-                    f"{BASE_URL}/api/v1/strategy/new/start",
-                    json={
-                        "symbol": "BTCUSDT",  # 기본값, 추후 설정에서 가져오기
-                        "leverage": 10,
-                        "quantity": None
-                    },
-                    timeout=5
-                )
+                # Inform the user in the GUI that NewModular is deprecated and Alpha will be used
+                try:
+                    QMessageBox.information(
+                        self,
+                        "Deprecated",
+                        "'NewModular' 엔진은 더 이상 사용되지 않습니다. 'Alpha' 엔진으로 요청을 전달합니다."
+                    )
+                except Exception:
+                    pass
+                mapped_engine = "Alpha"
             else:
-                # Alpha/Beta/Gamma 엔진: GUI에서 선택된 심볼 가져오기
-                selected_symbol = None
-                if engine_name == "Alpha":
-                    selected_symbol = self.middle_session_widget.alpha_engine.selected_symbol
-                elif engine_name == "Beta":
-                    selected_symbol = self.middle_session_widget.beta_engine.selected_symbol
-                elif engine_name == "Gamma":
-                    selected_symbol = self.middle_session_widget.gamma_engine.selected_symbol
-                
-                # 심볼이 지정되지 않았으면 기본값 사용
-                if not selected_symbol:
-                    selected_symbol = "BTCUSDT"
-                    self.logger.warning(f"{engine_name} 엔진 심볼 미지정, 기본값 사용: {selected_symbol}")
-                
-                response = requests.post(
-                    f"{BASE_URL}/api/v1/engine/start",
-                    json={"engine": engine_name, "symbol": selected_symbol},
-                    timeout=5
-                )
+                mapped_engine = engine_name
+            
+            # Alpha/Beta/Gamma 엔진: GUI에서 선택된 심볼 가져오기
+            selected_symbol = None
+            if mapped_engine == "Alpha":
+                selected_symbol = self.middle_session_widget.alpha_engine.selected_symbol
+            elif mapped_engine == "Beta":
+                selected_symbol = self.middle_session_widget.beta_engine.selected_symbol
+            elif mapped_engine == "Gamma":
+                selected_symbol = self.middle_session_widget.gamma_engine.selected_symbol
+
+            # 심볼이 지정되지 않았으면 기본값 사용
+            if not selected_symbol:
+                selected_symbol = "BTCUSDT"
+                self.logger.warning(f"{mapped_engine} 엔진 심볼 미지정, 기본값 사용: {selected_symbol}")
+
+            response = requests.post(
+                f"{BASE_URL}/api/v1/engine/start",
+                json={"engine": mapped_engine, "symbol": selected_symbol},
+                timeout=5
+            )
             response.raise_for_status()
             self.logger.info(f"{engine_name} 엔진 시작 요청 완료.")
         except requests.exceptions.RequestException as e:
@@ -486,19 +489,25 @@ class YONAMainWindow(QMainWindow):
             # 대기 상태에서도 개별 엔진 정지는 보낼 필요 없음
             return
         try:
-            # NewModular 엔진은 별도 API 사용
+            # Note: NewModular is deprecated — map to Alpha for compatibility
             if engine_name == "NewModular":
-                response = requests.post(
-                    f"{BASE_URL}/api/v1/strategy/new/stop",
-                    json={"force": False},  # 포지션 보유 시 경고
-                    timeout=5
-                )
+                try:
+                    QMessageBox.information(
+                        self,
+                        "Deprecated",
+                        "'NewModular' 엔진은 더 이상 사용되지 않습니다. 'Alpha' 엔진으로 요청을 전달합니다."
+                    )
+                except Exception:
+                    pass
+                mapped_engine = "Alpha"
             else:
-                response = requests.post(
-                    f"{BASE_URL}/api/v1/engine/stop",
-                    json={"engine": engine_name},
-                    timeout=5
-                )
+                mapped_engine = engine_name
+
+            response = requests.post(
+                f"{BASE_URL}/api/v1/engine/stop",
+                json={"engine": mapped_engine},
+                timeout=5
+            )
             response.raise_for_status()
             self.logger.info(f"{engine_name} 엔진 정지 요청 완료.")
         except requests.exceptions.RequestException as e:

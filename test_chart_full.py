@@ -8,7 +8,7 @@ from gui.main import YONAMainWindow
 
 def test_full_chart_update():
     """전체 시나리오 테스트: 클릭 → API → Signal → UI 업데이트"""
-    app = QApplication(sys.argv)
+    app = QApplication.instance() or QApplication(sys.argv)
     window = YONAMainWindow()
     window.show()
     
@@ -107,7 +107,8 @@ def test_full_chart_update():
     # 1초 후 테스트 시작
     QTimer.singleShot(1000, run_test)
     
-    sys.exit(app.exec())
+    # Run the Qt event loop until the QTimer quits the app.
+    app.exec()
 
 
 if __name__ == "__main__":

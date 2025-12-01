@@ -7,7 +7,7 @@ from gui.main import YONAMainWindow
 
 def test_chart_click():
     """차트 클릭 이벤트 테스트 - Signal/Slot 패턴 검증"""
-    app = QApplication(sys.argv)
+    app = QApplication.instance() or QApplication(sys.argv)
     window = YONAMainWindow()
     window.show()
     
@@ -85,7 +85,8 @@ def test_chart_click():
     # 1초 후 테스트 시작
     QTimer.singleShot(1000, simulate_click)
     
-    sys.exit(app.exec())
+    # Run the Qt event loop until the QTimer quits the app.
+    app.exec()
 
 
 if __name__ == "__main__":

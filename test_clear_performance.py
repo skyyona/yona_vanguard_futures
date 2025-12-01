@@ -52,12 +52,10 @@ def test_method1_performance():
                        if table.cellWidget(row, col))
     print(f"남은 위젯: {widget_count}개")
     
-    return {
-        "method": "removeCellWidget",
-        "time_ms": elapsed,
-        "removed": removed_count,
-        "remaining": widget_count
-    }
+    # Basic sanity assertions
+    assert table.rowCount() == 0, "테이블이 비워지지 않았습니다"
+    assert removed_count > 0, "위젯이 제거되지 않은 것으로 보입니다"
+    assert widget_count == 0, "위젯이 남아있습니다"
 
 
 def test_method2_performance():
@@ -98,12 +96,8 @@ def test_method2_performance():
                        if table.cellWidget(row, col))
     print(f"남은 위젯: {widget_count}개")
     
-    return {
-        "method": "clearContents",
-        "time_ms": elapsed,
-        "removed": "N/A (내부 처리)",
-        "remaining": widget_count
-    }
+    assert table.rowCount() == 0, "clearContents 후 행 개수가 0이 아닙니다"
+    assert widget_count == 0, "clearContents 후 위젯이 남아있습니다"
 
 
 def test_current_method():
@@ -141,12 +135,8 @@ def test_current_method():
     # 주의: rowCount()는 0이지만 setCellWidget로 추가된 위젯은 여전히 메모리에 있음
     print("⚠️ 주의: 위젯이 메모리에 남아있지만 rowCount()가 0이라 접근 불가")
     
-    return {
-        "method": "setRowCount only",
-        "time_ms": elapsed,
-        "removed": 0,
-        "remaining": "알 수 없음 (접근 불가)"
-    }
+    # Current method should at least result in zero rows
+    assert table.rowCount() == 0, "setRowCount(0) 후 행 개수가 0이 아닙니다"
 
 
 def test_edge_cases():

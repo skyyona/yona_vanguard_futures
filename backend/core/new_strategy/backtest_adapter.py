@@ -5,7 +5,7 @@ BacktestAdapter: NewStrategy 백테스트 어댑터
 - 성능 메트릭 계산 (PNL, MDD, 승률, Sharpe)
 """
 import logging
-from backend.core.new_strategy.data_structures import SimulatedPosition, Candle
+from backend.core.new_strategy.data_structures import Candle
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
 import asyncio

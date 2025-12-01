@@ -24,7 +24,7 @@ def test_blacklist():
         print(f"   ✓ 성공: {test_symbols} 추가됨")
     else:
         print(f"   ✗ 실패: {response.status_code} - {response.text}")
-        return False
+        assert response.status_code == 200, f"블랙리스트 추가 실패: {response.status_code} - {response.text}"
     
     # 2. 블랙리스트 조회
     print("\n2. 블랙리스트 목록 조회")
@@ -38,7 +38,7 @@ def test_blacklist():
             print(f"      - {item['symbol']}: {item['added_at_utc']} ({item['status']})")
     else:
         print(f"   ✗ 실패: {response.status_code} - {response.text}")
-        return False
+        assert response.status_code == 200, f"블랙리스트 조회 실패: {response.status_code} - {response.text}"
     
     # 3. SETTLING 상태로 심볼 추가
     print("\n3. SETTLING 상태로 심볼 추가")
@@ -52,7 +52,7 @@ def test_blacklist():
         print(f"   ✓ 성공: {settling_symbols} (SETTLING) 추가됨")
     else:
         print(f"   ✗ 실패: {response.status_code} - {response.text}")
-        return False
+        assert response.status_code == 200, f"SETTLING 추가 실패: {response.status_code} - {response.text}"
     
     # 4. 블랙리스트 재조회
     print("\n4. 블랙리스트 목록 재조회")
@@ -66,7 +66,7 @@ def test_blacklist():
             print(f"      - {item['symbol']}: {item['status']}")
     else:
         print(f"   ✗ 실패: {response.status_code} - {response.text}")
-        return False
+        assert response.status_code == 200, f"블랙리스트 재조회 실패: {response.status_code} - {response.text}"
     
     # 5. 블랙리스트에서 제거
     print("\n5. 블랙리스트에서 심볼 제거")
@@ -80,7 +80,7 @@ def test_blacklist():
         print(f"   ✓ 성공: {remove_symbols} 제거됨")
     else:
         print(f"   ✗ 실패: {response.status_code} - {response.text}")
-        return False
+        assert response.status_code == 200, f"블랙리스트 제거 실패: {response.status_code} - {response.text}"
     
     # 6. 최종 블랙리스트 확인
     print("\n6. 최종 블랙리스트 확인")
@@ -94,12 +94,11 @@ def test_blacklist():
             print(f"      - {item['symbol']}: {item['status']}")
     else:
         print(f"   ✗ 실패: {response.status_code} - {response.text}")
-        return False
+        assert response.status_code == 200, f"최종 블랙리스트 조회 실패: {response.status_code} - {response.text}"
     
     print("\n" + "=" * 60)
     print("블랙리스트 기능 테스트 완료!")
     print("=" * 60)
-    return True
 
 if __name__ == "__main__":
     try:

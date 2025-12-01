@@ -1195,6 +1195,9 @@ class MiddleSessionWidget(QWidget):
         main_layout.setStretchFactor(self.alpha_engine, 1)
         main_layout.setStretchFactor(self.beta_engine, 1)
         main_layout.setStretchFactor(self.gamma_engine, 1)
+
+        # Previously a `newmodular_engine` alias was created here for backwards compatibility.
+        # That temporary alias has been removed as part of the Alpha/Beta/Gamma migration.
     
     def _on_engine_start(self, engine_name: str):
         """엔진 시작 시그널 전파"""
