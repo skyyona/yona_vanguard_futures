@@ -1,0 +1,19 @@
+*** Begin Patch
+*** Update File: gui/widgets/strategy_analysis_dialog.py
+@@
+-    def _create_engine_section(self, engine_name: str, engine_data: dict) -> QWidget:
+-        """레거시: 엔진별 상세 섹션 생성기 (제거됨).
+-
+-        이 함수는 현재 코드 경로에서 호출되지 않으며, 유지보수 부담을
+-        줄이기 위해 제거 상태로 표시합니다. 필요 시 Git 이력에서 복원하세요.
+-        """
+-        raise NotImplementedError("_create_engine_section() has been removed; see git history for prior implementation")
++    def _create_engine_section(self, engine_name: str, engine_data: dict) -> QWidget:
++        # STAGED REMOVAL: legacy engine section helper
++        # Workflow:
++        # 1) Replace body with NotImplementedError (this file change)
++        # 2) Run full test matrix (headless + manual GUI) for at least 48 hours in QA
++        # 3) If no usages found and tests pass, remove the function definition entirely
++        # Note: do NOT remove immediately; follow staged plan above.
++        raise NotImplementedError("_create_engine_section() staged for removal; see git history if needed")
+*** End Patch

@@ -1,0 +1,24 @@
+# Ignore Python virtual environments
+.venv*
+env/
+venv/
+
+# Ignore result and temporary snapshot directories
+vss_tmp/
+results/
+
+# Ignore local DBs and logs
+*.db
+logs/
+*.log
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# IDE / editor
+.vscode/
+*.swp
+
+# Backup artifacts (pre-promote results)
+results_pre_promote_backup_*/
