@@ -50,7 +50,7 @@ def test_settling_widget():
     assert "XRPUSDT" not in checked, "❌ 새로 추가된 XRPUSDT는 체크되지 않아야 합니다!"
     
     print("\n✅ SettlingTableWidget 테스트 통과!")
-    return True
+    
 
 
 def test_blacklist_widget():
@@ -99,7 +99,7 @@ def test_blacklist_widget():
     assert "XRPUSDT" not in checked, "❌ 새로 추가된 XRPUSDT는 체크되지 않아야 합니다!"
     
     print("\n✅ BlacklistTableWidget 테스트 통과!")
-    return True
+    
 
 
 if __name__ == "__main__":

@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 from backend.core.new_strategy.data_structures import Candle
 from backend.core.new_strategy.indicator_engine import IndicatorEngine
+import pytest
 
 
 def test_indicator_calculation():
@@ -121,13 +122,13 @@ def test_indicator_calculation():
             print("✗ 일부 테스트 실패")
         print("=" * 60)
         
-        return all_ok
-        
+        # Assert overall validity
+        assert all_ok, "Indicator validation failed or some indicator checks did not pass"
     except Exception as e:
         print(f"\n✗ 지표 계산 실패: {e}")
         import traceback
         traceback.print_exc()
-        return False
+        pytest.fail(f"지표 계산 중 예외 발생: {e}")
 
 
 def test_insufficient_data():
@@ -157,12 +158,10 @@ def test_insufficient_data():
     engine = IndicatorEngine()
     
     try:
-        indicators = engine.calculate(candles)
-        print("✗ 예외가 발생해야 하는데 발생하지 않음")
-        return False
+        engine.calculate(candles)
+        pytest.fail("데이터 부족 시 예외가 발생해야 합니다")
     except Exception as e:
         print(f"✓ 예상된 예외 발생: {type(e).__name__}: {e}")
-        return True
 
 
 if __name__ == "__main__":

@@ -19,10 +19,15 @@ class WebSocketClient(QThread):
         self._loop = loop
         try:
             asyncio.set_event_loop(loop)
+            # create a task for the main connect coroutine so we can cancel it explicitly
+            self._task = loop.create_task(self._connect_async())
             try:
-                loop.run_until_complete(self._connect_async())
+                loop.run_until_complete(self._task)
+            except asyncio.CancelledError:
+                # expected when task is cancelled during shutdown
+                pass
             except RuntimeError:
-                # loop.stop() may cause run_until_complete to raise; ignore during shutdown
+                # loop.stop() or other shutdown behavior may cause run_until_complete to raise
                 pass
         finally:
             try:
@@ -33,38 +38,68 @@ class WebSocketClient(QThread):
             self._loop = None
 
     async def _connect_async(self):
-        while self._is_running:
-            try:
-                async with websockets.connect(self.uri) as websocket:
-                    print(f"WebSocket에 연결되었습니다: {self.uri}")
-                    while self._is_running:
-                        try:
-                            message = await websocket.recv()
-                            data = json.loads(message)
-                            self.message_received.emit(data)
-                        except websockets.ConnectionClosed:
-                            print("WebSocket 연결이 닫혔습니다. 재연결 시도 중...")
-                            break
-                        except json.JSONDecodeError:
-                            print(f"잘못된 JSON 형식의 메시지 수신: {message}")
-                        except Exception as e:
-                            print(f"메시지 처리 중 오류 발생: {e}")
-                            break
-            except Exception as e:
-                if not self._is_running:
-                    break
-                print(f"WebSocket 연결 실패: {e}. 5초 후 재시도합니다.")
+        websocket = None
+        try:
+            while self._is_running:
                 try:
-                    await asyncio.sleep(5)
+                    # Establish connection and process incoming messages
+                    async with websockets.connect(self.uri) as websocket:
+                        print(f"WebSocket에 연결되었습니다: {self.uri}")
+                        while self._is_running:
+                            try:
+                                message = await websocket.recv()
+                                data = json.loads(message)
+                                self.message_received.emit(data)
+                            except websockets.ConnectionClosed:
+                                print("WebSocket 연결이 닫혔습니다. 재연결 시도 중...")
+                                break
+                            except json.JSONDecodeError:
+                                print(f"잘못된 JSON 형식의 메시지 수신: {message}")
+                            except asyncio.CancelledError:
+                                # ensure websocket is closed when cancelled
+                                try:
+                                    if websocket is not None and not websocket.closed:
+                                        await websocket.close()
+                                except Exception:
+                                    pass
+                                raise
+                            except Exception as e:
+                                print(f"메시지 처리 중 오류 발생: {e}")
+                                break
                 except asyncio.CancelledError:
+                    # Propagate cancellation to outer loop
                     break
+                except Exception as e:
+                    # Connection level errors -> retry after delay unless stopping
+                    if not self._is_running:
+                        break
+                    print(f"WebSocket 연결 실패: {e}. 5초 후 재시도합니다.")
+                    try:
+                        await asyncio.sleep(5)
+                    except asyncio.CancelledError:
+                        break
+        except asyncio.CancelledError:
+            # task cancellation path
+            pass
+        finally:
+            # ensure websocket is closed if still open
+            try:
+                if websocket is not None and not websocket.closed:
+                    await websocket.close()
+            except Exception:
+                pass
 
     def stop(self):
         # signal the coroutine to stop and stop the loop safely
         self._is_running = False
         if self._loop is not None:
             try:
-                self._loop.call_soon_threadsafe(self._loop.stop)
+                # cancel the running task instead of stopping the loop immediately
+                if hasattr(self, '_task') and self._task is not None:
+                    try:
+                        self._loop.call_soon_threadsafe(self._task.cancel)
+                    except Exception:
+                        pass
             except Exception:
                 pass
         self.quit()

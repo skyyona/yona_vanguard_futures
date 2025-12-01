@@ -20,107 +20,99 @@ from backtesting_backend.core.strategy_simulator import StrategySimulator
 from backtesting_backend.core.parameter_optimizer import ParameterOptimizer
 from backtesting_backend.core.backtest_service import BacktestService
 
-def create_app() -> FastAPI:
-	app = FastAPI(title="YONA Vanguard Backtesting Backend")
+from contextlib import asynccontextmanager
 
-	# CORS - allow local GUI/dev origins by default (adjust in production)
-	app.add_middleware(
-		CORSMiddleware,
-		allow_origins=["http://localhost", "http://localhost:8080"],
-		allow_methods=["*"],
-		allow_headers=["*"],
-	)
 
-	# Expose backtesting endpoints under the same API namespace the GUI expects
-	# (e.g. GET /api/v1/backtest/strategy-analysis)
-	app.include_router(backtest_router, prefix="/api/v1/backtest")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
 
-	@app.on_event("startup")
-	async def startup_event():
-		logger.info("Starting Backtesting Backend...")
+	# Startup
+	logger.info("Starting Backtesting Backend...")
 
-		# load and validate config
-		try:
-			config.validate()
-		except Exception as e:
-			logger.warning("Config validation warning: %s", e)
+	# load and validate config
+	try:
+		config.validate()
+	except Exception as e:
+		logger.warning("Config validation warning: %s", e)
 
-		# init DB
-		await BacktestDB.get_instance().init()
+	# init DB
+	await BacktestDB.get_instance().init()
 
-		# attach config to app.state for routers to access
-		app.state.config = config
+	# attach config to app.state for routers to access
+	app.state.config = config
 
-		# instantiate core singletons and services and attach to app.state
-		rate_limiter = RateLimitManager()
-		binance_client = BinanceClient(api_key=getattr(config, 'BINANCE_API_KEY', None), api_secret=getattr(config, 'BINANCE_SECRET_KEY', None), rate_limit_manager=rate_limiter)
+	# instantiate core singletons and services and attach to app.state
+	rate_limiter = RateLimitManager()
+	binance_client = BinanceClient(api_key=getattr(config, 'BINANCE_API_KEY', None), api_secret=getattr(config, 'BINANCE_SECRET_KEY', None), rate_limit_manager=rate_limiter)
 
-		kline_repo = KlineRepository()
-		result_repo = BacktestResultRepository()
+	kline_repo = KlineRepository()
+	result_repo = BacktestResultRepository()
 
-		data_loader = DataLoader(binance_client=binance_client, kline_repo=kline_repo)
-		analyzer = StrategyAnalyzer()
-		simulator = StrategySimulator(analyzer)
-		optimizer = ParameterOptimizer(simulator)
+	data_loader = DataLoader(binance_client=binance_client, kline_repo=kline_repo)
+	analyzer = StrategyAnalyzer()
+	simulator = StrategySimulator(analyzer)
+	optimizer = ParameterOptimizer(simulator)
 
-		backtest_service = BacktestService(data_loader=data_loader, simulator=simulator, optimizer=optimizer, result_repo=result_repo)
+	backtest_service = BacktestService(data_loader=data_loader, simulator=simulator, optimizer=optimizer, result_repo=result_repo)
 
-		app.state.rate_limiter = rate_limiter
-		app.state.binance_client = binance_client
-		app.state.kline_repo = kline_repo
-		app.state.result_repo = result_repo
-		app.state.data_loader = data_loader
-		app.state.analyzer = analyzer
-		app.state.simulator = simulator
-		app.state.optimizer = optimizer
-		app.state.backtest_service = backtest_service
+	app.state.rate_limiter = rate_limiter
+	app.state.binance_client = binance_client
+	app.state.kline_repo = kline_repo
+	app.state.result_repo = result_repo
+	app.state.data_loader = data_loader
+	app.state.analyzer = analyzer
+	app.state.simulator = simulator
+	app.state.optimizer = optimizer
+	app.state.backtest_service = backtest_service
 
-		logger.info("Backtesting Backend started")
+	logger.info("Backtesting Backend started")
 
-		# Log process information for diagnostics
-		try:
-			pid = os.getpid()
-			ppid = os.getppid()
-			logger.info("Process info: pid=%s ppid=%s", pid, ppid)
-		except Exception:
-			logger.exception("Failed to get process info")
+	# Log process information for diagnostics
+	try:
+		pid = os.getpid()
+		ppid = os.getppid()
+		logger.info("Process info: pid=%s ppid=%s", pid, ppid)
+	except Exception:
+		logger.exception("Failed to get process info")
 
-		# Install asyncio exception handler to capture unhandled task exceptions
-		try:
-			loop = asyncio.get_running_loop()
+	# Install asyncio exception handler to capture unhandled task exceptions
+	try:
+		loop = asyncio.get_running_loop()
 
-			def _async_exc_handler(loop, context):
-				try:
-					logger.error("Unhandled async exception: %s", context)
-					exc = context.get("exception")
-					if exc is not None:
-						logger.exception("Exception object:", exc_info=exc)
-				except Exception:
-					logger.exception("Error in async exception handler")
+		def _async_exc_handler(loop, context):
+			try:
+				logger.error("Unhandled async exception: %s", context)
+				exc = context.get("exception")
+				if exc is not None:
+					logger.exception("Exception object:", exc_info=exc)
+			except Exception:
+				logger.exception("Error in async exception handler")
 
-			loop.set_exception_handler(_async_exc_handler)
+		loop.set_exception_handler(_async_exc_handler)
 
-			# Install sys.excepthook for uncaught exceptions in main thread
-			def _excepthook(exc_type, exc, tb):
-				logger.error("Uncaught exception", exc_info=(exc_type, exc, tb))
+		# Install sys.excepthook for uncaught exceptions in main thread
+		def _excepthook(exc_type, exc, tb):
+			logger.error("Uncaught exception", exc_info=(exc_type, exc, tb))
 
-			sys.excepthook = _excepthook
+		sys.excepthook = _excepthook
 
-			# Heartbeat task to show process is alive; helps detect external kills
-			async def _heartbeat():
-				try:
-					while True:
-						logger.info("heartbeat: pid=%s alive", os.getpid())
-						await asyncio.sleep(10)
-				except asyncio.CancelledError:
-					logger.info("heartbeat cancelled")
+		# Heartbeat task to show process is alive; helps detect external kills
+		async def _heartbeat():
+			try:
+				while True:
+					logger.info("heartbeat: pid=%s alive", os.getpid())
+					await asyncio.sleep(10)
+			except asyncio.CancelledError:
+				logger.info("heartbeat cancelled")
 
-			app.state._heartbeat_task = asyncio.create_task(_heartbeat())
-		except Exception:
-			logger.exception("Failed to install diagnostic handlers")
+		app.state._heartbeat_task = asyncio.create_task(_heartbeat())
+	except Exception:
+		logger.exception("Failed to install diagnostic handlers")
 
-	@app.on_event("shutdown")
-	async def shutdown_event():
+	try:
+		yield
+	finally:
+		# Shutdown
 		logger.info("Shutting down Backtesting Backend...")
 		# close clients and DB
 		bc = getattr(app.state, "binance_client", None)
@@ -143,9 +135,28 @@ def create_app() -> FastAPI:
 		await BacktestDB.get_instance().close()
 		logger.info("Shutdown complete")
 
-	return app
+app = FastAPI(title="YONA Vanguard Backtesting Backend", lifespan=lifespan)
 
-app = create_app()
+# Register middleware and routers at import time so they exist before the
+# application lifespan begins (TestClient/startup requires middleware be
+# present prior to starting the app).
+app.add_middleware(
+	CORSMiddleware,
+	allow_origins=["http://localhost", "http://localhost:8080"],
+	allow_methods=["*"],
+	allow_headers=["*"],
+)
+
+app.include_router(backtest_router, prefix="/api/v1/backtest")
+
+
+def create_app() -> FastAPI:
+	"""Backward-compatible factory: return the module-level `app`.
+
+	Some tests and scripts import `create_app` from this module; keeping
+	this thin factory preserves compatibility after migrating to lifespan.
+	"""
+	return app
 
 if __name__ == "__main__":
 	import uvicorn

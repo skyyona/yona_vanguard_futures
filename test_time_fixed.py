@@ -23,12 +23,9 @@ def test_set_fixed_time():
         json={"fixed_time": current_time}
     )
     
-    if response.status_code == 200:
-        result = response.json()
-        print(f"   ✓ 성공: {result.get('message')}")
-    else:
-        print(f"   ✗ 실패: {response.status_code} - {response.text}")
-        return False
+    assert response.status_code == 200, f"시간 고정 설정 실패: {response.status_code} - {response.text}"
+    result = response.json()
+    print(f"   ✓ 성공: {result.get('message')}")
     
     # 잠시 대기 후 랭킹 데이터 확인
     print("\n2. 10초 대기 후 누적 데이터 확인...")
@@ -46,19 +43,15 @@ def test_set_fixed_time():
         json={"fixed_time": None}
     )
     
-    if response.status_code == 200:
-        result = response.json()
-        print(f"   ✓ 성공: {result.get('message')}")
-        print("   - cumulative_percent: +000.00 (고정 해제 상태)")
-        print("   - energy_type: 데이터 분석 중")
-    else:
-        print(f"   ✗ 실패: {response.status_code} - {response.text}")
-        return False
+    assert response.status_code == 200, f"시간 고정 해제 실패: {response.status_code} - {response.text}"
+    result = response.json()
+    print(f"   ✓ 성공: {result.get('message')}")
+    print("   - cumulative_percent: +000.00 (고정 해제 상태)")
+    print("   - energy_type: 데이터 분석 중")
     
     print("\n" + "=" * 60)
     print("테스트 완료!")
     print("=" * 60)
-    return True
 
 if __name__ == "__main__":
     try:

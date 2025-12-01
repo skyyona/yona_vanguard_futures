@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QApplication, QTableWidget, QCheckBox, QWidget, QH
 from PySide6.QtCore import Qt
 
 
-class TestWindow(QMainWindow):
+class TableClearWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("테이블 클리어 방식 테스트")
@@ -168,7 +168,7 @@ class TestWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = TestWindow()
+    window = TableClearWindow()
     window.show()
     
     print("\n테스트 시나리오:")

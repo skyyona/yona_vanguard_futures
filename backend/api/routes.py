@@ -389,36 +389,25 @@ async def start_new_strategy(request: NewStrategyStartRequest, service: YonaServ
             "quantity": 0.001  // Optional, None이면 RiskManager가 자동 계산
         }
     """
-    global _new_strategy_instance
-    
-    if _new_strategy_instance is not None and getattr(_new_strategy_instance, "is_running", False):
-        raise HTTPException(status_code=400, detail="NewStrategy is already running. Stop it first.")
-    
+    # Deprecation: /strategy/new/* is deprecated. Forwarding to /engine/start for Alpha.
+    logger.warning("DEPRECATION: /strategy/new/start called — use /engine/start instead.")
     try:
-        from backend.core.strategies.new_strategy_wrapper import NewStrategyWrapper
-        from backend.api_client.binance_client import BinanceClient
-        
-        # BinanceClient 인스턴스 생성 (YonaService에서 재사용 가능하면 그쪽 사용 권장)
-        binance_client = BinanceClient()
-        
-        # Wrapper 초기화
-        _new_strategy_instance = NewStrategyWrapper(
-            binance_client=binance_client,
-            symbol=request.symbol,
-            leverage=request.leverage,
-            quantity=request.quantity
-        )
-        
-        # 전략 시작 (백그라운드 스레드)
-        _new_strategy_instance.start()
-        
-        return {
-            "status": "success",
-            "message": f"NewStrategy started for {request.symbol} at {request.leverage}x leverage",
-            "data": _new_strategy_instance.get_status()
-        }
+        engine_manager = get_engine_manager()
+        # Forward to Alpha for compatibility with previous NewModular behavior
+        res = engine_manager.start_engine("Alpha", symbol=request.symbol)
+        if res.get("success"):
+            return {
+                "status": "deprecated",
+                "message": "/strategy/new/start is deprecated. Forwarded to /engine/start (Alpha).",
+                "forward": {"engine": "Alpha"},
+                "result": res
+            }
+        else:
+            raise HTTPException(status_code=500, detail=f"Forward failed: {res.get('error')}")
+    except HTTPException:
+        raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to start NewStrategy: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to forward NewStrategy start: {str(e)}")
 
 
 @router.get("/strategy/new/status")
@@ -437,20 +426,16 @@ async def get_new_strategy_status():
             "orchestrator_running": bool
         }
     """
-    global _new_strategy_instance
-    
-    if _new_strategy_instance is None:
-        return {
-            "is_running": False,
-            "engine_name": "NewModular",
-            "message": "NewStrategy has not been started yet."
-        }
-    
+    # Deprecation: /strategy/new/status is deprecated. Return Alpha engine status as compatibility.
+    logger.warning("DEPRECATION: /strategy/new/status called — use /engine/status/{engine_name} instead.")
     try:
-        status = _new_strategy_instance.get_status()
-        return {"status": "success", "data": status}
+        engine_manager = get_engine_manager()
+        alpha_status = engine_manager.get_engine_status("Alpha")
+        if alpha_status is None:
+            return {"is_running": False, "engine_name": "Alpha", "message": "Alpha engine not initialized."}
+        return {"status": "deprecated", "message": "Use /engine/status/{engine_name}", "data": alpha_status}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to get status: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to get forwarded status: {str(e)}")
 
 
 @router.post("/strategy/new/stop")
@@ -463,34 +448,19 @@ async def stop_new_strategy(request: NewStrategyStopRequest = NewStrategyStopReq
             "force": false  // true이면 포지션 보유 시에도 강제 종료
         }
     """
-    global _new_strategy_instance
-    
-    if _new_strategy_instance is None:
-        raise HTTPException(status_code=400, detail="NewStrategy is not running.")
-    
+    # Deprecation: /strategy/new/stop is deprecated. Forward to /engine/stop for Alpha.
+    logger.warning("DEPRECATION: /strategy/new/stop called — use /engine/stop instead.")
     try:
-        # 포지션 체크
-        status = _new_strategy_instance.get_status()
-        has_position = status.get("position", {}).get("quantity", 0) != 0
-        
-        if has_position and not request.force:
-            return {
-                "status": "warning",
-                "message": "Strategy has open position. Set 'force=true' to stop anyway.",
-                "position": status.get("position")
-            }
-        
-        # 전략 중지
-        _new_strategy_instance.stop()
-        _new_strategy_instance = None
-        
-        return {
-            "status": "success",
-            "message": "NewStrategy stopped successfully.",
-            "had_position": has_position
-        }
+        engine_manager = get_engine_manager()
+        res = engine_manager.stop_engine("Alpha")
+        if res.get("success"):
+            return {"status": "deprecated", "message": "Forwarded to /engine/stop (Alpha).", "result": res}
+        else:
+            raise HTTPException(status_code=500, detail=f"Forward failed: {res.get('error')}")
+    except HTTPException:
+        raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to stop NewStrategy: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to forward NewStrategy stop: {str(e)}")
 
 
 # ========================================
