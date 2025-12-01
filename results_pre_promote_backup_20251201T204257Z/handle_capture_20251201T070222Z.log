@@ -1,0 +1,4 @@
+# Captured: 2025-12-01T07:02:22.820429
+File: results\btcusdt_pilot_results.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\btcusdt_pilot_results.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\btcusdt_pilot_results.csv'
+Failed running handle.exe: Command '['C:\\Users\\User\\new\\yona_vanguard_futures\\scripts\\tools\\handle.exe', '-accepteula', '-nobanner', 'results\\btcusdt_pilot_results.csv']' timed out after 10 seconds

@@ -1,0 +1,2 @@
+entry_fee,entry_index,entry_price,entry_price_effective,exit_fee,exit_index,exit_price,exit_price_effective,exit_reason,gross_pnl,net_pnl
+0.0,2025-11-18 00:45:00,0.02667,0.02667,0.0,2025-11-18 15:00:00,0.02649,0.02649,SL,-0.033745781777277765,-0.033745781777277765

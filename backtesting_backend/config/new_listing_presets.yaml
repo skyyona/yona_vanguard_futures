@@ -1,0 +1,41 @@
+alpha:
+  fast_ema_period: 5
+  slow_ema_period: 21
+  stop_loss_pct: 0.02
+  position_size: 0.015
+beta:
+  fast_ema_period: 3
+  slow_ema_period: 8
+  stop_loss_pct: 0.015
+  position_size: 0.01
+gamma:
+  fast_ema_period: 9
+  slow_ema_period: 21
+  stop_loss_pct: 0.02
+  position_size: 0.015
+# optional fourth strategy presets (round-number breakout)
+delta:
+  breakout_min_distance_pct: 0.01
+  breakout_volume_multiplier: 2.5
+  min_breakout_candle_body_pct: 0.005
+  position_size: 0.015
+
+# tuned new-listing strategy params
+volume_spike_lookback_period: 14
+volume_spike_multiplier: 3.5
+spike_ema_short_period: 5
+spike_ema_long_period: 21
+stoch_rsi_periods_short: 8
+
+ema_short_period_for_gc: 3
+ema_mid_period_for_gc: 5
+gc_volume_filter_multiplier: 1.8
+gc_stoch_rsi_oversold_threshold: 35
+
+pullback_swing_high_lookback: 12
+pullback_depth_pct: 0.04
+pullback_ema_period: 9
+rebound_stoch_rsi_oversold_threshold: 30
+rebound_volume_confirmation_multiplier: 1.6
+
+breakout_confirmation_candles: 2

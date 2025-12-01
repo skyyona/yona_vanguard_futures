@@ -1,0 +1,83 @@
+{
+  "rank": 7,
+  "runs": [
+    {
+      "run": 1,
+      "profit_pct": -0.0906185012199785,
+      "total_trades": 70,
+      "win_rate": 41.42857142857143,
+      "max_drawdown_pct": 0.47454981086062487,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "SL": 37,
+        "TP": 29,
+        "SELL": 3,
+        "LAST": 1
+      },
+      "avg_trade_net_pnl": -0.012945500174288862
+    },
+    {
+      "run": 2,
+      "profit_pct": -0.2524220844979027,
+      "total_trades": 72,
+      "win_rate": 38.88888888888889,
+      "max_drawdown_pct": 0.5094908832495663,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "TP": 28,
+        "SL": 40,
+        "SELL": 3,
+        "LAST": 1
+      },
+      "avg_trade_net_pnl": -0.03505862284692689
+    },
+    {
+      "run": 3,
+      "profit_pct": -0.08637241885566027,
+      "total_trades": 72,
+      "win_rate": 43.05555555555556,
+      "max_drawdown_pct": 0.4374651461465204,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "TP": 31,
+        "SL": 39,
+        "SELL": 2
+      },
+      "avg_trade_net_pnl": -0.01199616928551172
+    },
+    {
+      "run": 4,
+      "profit_pct": -0.14582624626443705,
+      "total_trades": 74,
+      "win_rate": 41.891891891891895,
+      "max_drawdown_pct": 0.4926460129833583,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "TP": 31,
+        "SL": 41,
+        "SELL": 1,
+        "LAST": 1
+      },
+      "avg_trade_net_pnl": -0.019706249495196827
+    },
+    {
+      "run": 5,
+      "profit_pct": -0.07715911020419526,
+      "total_trades": 69,
+      "win_rate": 42.028985507246375,
+      "max_drawdown_pct": 0.43784495776471233,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "SL": 39,
+        "TP": 29,
+        "LAST": 1
+      },
+      "avg_trade_net_pnl": -0.011182479739734002
+    }
+  ]
+}

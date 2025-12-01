@@ -1,0 +1,2 @@
+date,initial_balance,final_balance,profit,profit_pct,total_trades,win_rate,max_drawdown_pct,computed_atr_pct,stop_loss_pct_used
+2025-11-22,1000.0,1000.0,0.0,0.0,0,0.0,0.0,0.006806333156165382,0.010209499734248072

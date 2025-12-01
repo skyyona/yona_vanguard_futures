@@ -1,0 +1,238 @@
+{
+  "BTCUSDT": {
+    "status_code": 200,
+    "json": {
+      "data": {
+        "best_engine": "gamma",
+        "volatility": 0.05057656216036816,
+        "max_target_profit": {
+          "alpha": 84.45000000000145,
+          "beta": 40.55000000000437,
+          "gamma": 95.81000000000058
+        },
+        "risk_management": {
+          "stop_loss": 0.002,
+          "trailing_stop": 0.0
+        },
+        "engine_results": {
+          "alpha": {
+            "params": {
+              "fast_ema_period": 9,
+              "slow_ema_period": 21,
+              "stop_loss_pct": 0.005
+            },
+            "metrics": {
+              "profit_percentage": 84.45000000000145,
+              "total_trades": 32,
+              "win_rate": 34.375
+            },
+            "suitability": "적합",
+            "score": 84.45000000000145,
+            "expected_profit": 84.45000000000145,
+            "win_rate": 34.375,
+            "max_target_profit": 84.45000000000145,
+            "executable_parameters": {
+              "fast_ema_period": 9,
+              "slow_ema_period": 21,
+              "stop_loss_pct": 0.005,
+              "symbol": "BTCUSDT",
+              "interval": "1m",
+              "leverage": 1,
+              "position_size": 0.02,
+              "take_profit_pct": 0.0,
+              "trailing_stop_pct": 0.0,
+              "fee_pct": 0.001,
+              "slippage_pct": 0.001,
+              "no_compounding": true
+            }
+          },
+          "beta": {
+            "params": {
+              "fast_ema_period": 12,
+              "slow_ema_period": 26,
+              "stop_loss_pct": 0.01
+            },
+            "metrics": {
+              "profit_percentage": 40.55000000000437,
+              "total_trades": 28,
+              "win_rate": 28.57142857142857
+            },
+            "suitability": "적합",
+            "score": 40.55000000000437,
+            "expected_profit": 40.55000000000437,
+            "win_rate": 28.57142857142857,
+            "max_target_profit": 40.55000000000437,
+            "executable_parameters": {
+              "fast_ema_period": 12,
+              "slow_ema_period": 26,
+              "stop_loss_pct": 0.01,
+              "symbol": "BTCUSDT",
+              "interval": "1m",
+              "leverage": 1,
+              "position_size": 0.02,
+              "take_profit_pct": 0.0,
+              "trailing_stop_pct": 0.0,
+              "fee_pct": 0.001,
+              "slippage_pct": 0.001,
+              "no_compounding": true
+            }
+          },
+          "gamma": {
+            "params": {
+              "fast_ema_period": 5,
+              "slow_ema_period": 34,
+              "stop_loss_pct": 0.002
+            },
+            "metrics": {
+              "profit_percentage": 95.81000000000058,
+              "total_trades": 32,
+              "win_rate": 31.25
+            },
+            "suitability": "적합",
+            "score": 95.81000000000058,
+            "expected_profit": 95.81000000000058,
+            "win_rate": 31.25,
+            "max_target_profit": 95.81000000000058,
+            "executable_parameters": {
+              "fast_ema_period": 5,
+              "slow_ema_period": 34,
+              "stop_loss_pct": 0.002,
+              "symbol": "BTCUSDT",
+              "interval": "1m",
+              "leverage": 1,
+              "position_size": 0.02,
+              "take_profit_pct": 0.0,
+              "trailing_stop_pct": 0.0,
+              "fee_pct": 0.001,
+              "slippage_pct": 0.001,
+              "no_compounding": true
+            }
+          }
+        },
+        "symbol": "BTCUSDT",
+        "period": "1d"
+      }
+    }
+  },
+  "SQDUSDT": {
+    "status_code": 200,
+    "json": {
+      "data": {
+        "best_engine": "gamma",
+        "volatility": 0.7990932354839171,
+        "max_target_profit": {
+          "alpha": 0.0002490000000193504,
+          "beta": 0.002815999999995711,
+          "gamma": -8.599999999887586e-05
+        },
+        "risk_management": {
+          "stop_loss": 0.002,
+          "trailing_stop": 0.0
+        },
+        "engine_results": {
+          "alpha": {
+            "params": {
+              "fast_ema_period": 9,
+              "slow_ema_period": 21,
+              "stop_loss_pct": 0.005
+            },
+            "metrics": {
+              "profit_percentage": 0.0002490000000193504,
+              "total_trades": 27,
+              "win_rate": 25.925925925925924
+            },
+            "suitability": "적합",
+            "score": 0.0002490000000193504,
+            "expected_profit": 0.0002490000000193504,
+            "win_rate": 25.925925925925924,
+            "max_target_profit": 0.0002490000000193504,
+            "executable_parameters": {
+              "fast_ema_period": 9,
+              "slow_ema_period": 21,
+              "stop_loss_pct": 0.005,
+              "symbol": "SQDUSDT",
+              "interval": "1m",
+              "leverage": 1,
+              "position_size": 0.02,
+              "take_profit_pct": 0.0,
+              "trailing_stop_pct": 0.0,
+              "fee_pct": 0.001,
+              "slippage_pct": 0.001,
+              "no_compounding": true
+            }
+          },
+          "beta": {
+            "params": {
+              "fast_ema_period": 12,
+              "slow_ema_period": 26,
+              "stop_loss_pct": 0.01
+            },
+            "metrics": {
+              "profit_percentage": 0.002815999999995711,
+              "total_trades": 21,
+              "win_rate": 38.095238095238095
+            },
+            "suitability": "적합",
+            "score": 0.002815999999995711,
+            "expected_profit": 0.002815999999995711,
+            "win_rate": 38.095238095238095,
+            "max_target_profit": 0.002815999999995711,
+            "executable_parameters": {
+              "fast_ema_period": 12,
+              "slow_ema_period": 26,
+              "stop_loss_pct": 0.01,
+              "symbol": "SQDUSDT",
+              "interval": "1m",
+              "leverage": 1,
+              "position_size": 0.02,
+              "take_profit_pct": 0.0,
+              "trailing_stop_pct": 0.0,
+              "fee_pct": 0.001,
+              "slippage_pct": 0.001,
+              "no_compounding": true
+            }
+          },
+          "gamma": {
+            "params": {
+              "fast_ema_period": 5,
+              "slow_ema_period": 34,
+              "stop_loss_pct": 0.002
+            },
+            "metrics": {
+              "profit_percentage": -8.599999999887586e-05,
+              "total_trades": 29,
+              "win_rate": 17.24137931034483
+            },
+            "suitability": "부적합",
+            "score": -8.599999999887586e-05,
+            "expected_profit": -8.599999999887586e-05,
+            "win_rate": 17.24137931034483,
+            "max_target_profit": -8.599999999887586e-05,
+            "executable_parameters": {
+              "fast_ema_period": 5,
+              "slow_ema_period": 34,
+              "stop_loss_pct": 0.002,
+              "symbol": "SQDUSDT",
+              "interval": "1m",
+              "leverage": 1,
+              "position_size": 0.02,
+              "take_profit_pct": 0.0,
+              "trailing_stop_pct": 0.0,
+              "fee_pct": 0.001,
+              "slippage_pct": 0.001,
+              "no_compounding": true
+            }
+          }
+        },
+        "symbol": "SQDUSDT",
+        "period": "1d"
+      }
+    }
+  },
+  "NEWLISTCOINUSDT": {
+    "status_code": 500,
+    "json": {
+      "detail": "Failed to load klines: Binance API error 400: {\"code\":-1121,\"msg\":\"Invalid symbol.\"}"
+    }
+  }
+}

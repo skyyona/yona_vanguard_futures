@@ -1,0 +1,66 @@
+2025-11-26 16:24:23,347 - [INFO] - .env 파일 로드 완료: C:\Users\User\new\yona_vanguard_futures\.env (config_loader.py:16)
+2025-11-26 16:24:23,347 - [INFO] - Binance API 키 로드 성공 (config_loader.py:29)
+2025-11-26 16:24:23 - [INFO] - 로거 초기화 완료: Orchestrator (strategy_logger.py:71)
+2025-11-26 16:24:23,381 - [INFO] - .env 파일 로드 완료: C:\Users\User\new\yona_vanguard_futures\.env (app_main.py:42)
+2025-11-26 16:24:23,542 - [INFO] - 바이낸스 서버 시간 동기화 완료. Offset: 480ms (binance_client.py:59)
+2025-11-26 16:24:23,542 - [INFO] - BinanceClient 초기화 완료. (binance_client.py:35)
+2025-11-26 16:24:23,543 - [INFO] - FundsAllocationManager 초기화 완료 (funds_allocation_manager.py:36)
+2025-11-26 16:24:23,543 - [INFO] - AccountManager 초기화 완료. (account_manager.py:25)
+2025-11-26 16:24:23,599 - [INFO] - 바이낸스 서버 시간 동기화 완료. Offset: 480ms (binance_client.py:59)
+2025-11-26 16:24:23,599 - [INFO] - BinanceClient 초기화 완료. (binance_client.py:35)
+2025-11-26 16:24:23,600 - [INFO] - YonaService 초기화 완료. (yona_service.py:60)
+INFO:     Started server process [17696]
+INFO:     Waiting for application startup.
+2025-11-26 16:24:23,608 - [INFO] - YONA Vanguard Futures (new) 백엔드 서버 시작 중... (app_main.py:55)
+2025-11-26 16:24:23,608 - [INFO] - YonaService 비동기 초기화 시작... (yona_service.py:73)
+2025-11-26 16:24:23,609 - [INFO] - schema_version 테이블 확인/생성 완료 (db_manager.py:48)
+2025-11-26 16:24:23,611 - [INFO] - 마이그레이션 불필요 (현재 버전: 4) (db_manager.py:131)
+2025-11-26 16:24:23,613 - [INFO] - 블랙리스트 테이블 확인 완료: C:\Users\User\new\yona_vanguard_futures\yona_vanguard.db (yona_service.py:1248)
+2025-11-26 16:24:23,614 - [INFO] - 블랙리스트 캐시 로드 완료: 57개 심볼 (yona_service.py:1260)
+2025-11-26 16:24:23,615 - [WARNING] - 엔진 설정 로드 실패: no such column: symbol (yona_service.py:1142)
+2025-11-26 16:24:23,616 - [INFO] - 가용 자금 로드 완료: 0.09 USDT (yona_service.py:1227)
+2025-11-26 16:24:23,616 - [INFO] - 초기 자본 설정: 0.09 USDT (account_manager.py:39)
+2025-11-26 16:24:23,616 - [INFO] - 초기 자본 로드 완료: 0.09 USDT (yona_service.py:1223)
+2025-11-26 16:24:23,616 - [INFO] - YonaService 비동기 초기화 완료. (yona_service.py:92)
+2025-11-26 16:24:23,616 - [INFO] - YonaService 메인 루프 시작. (yona_service.py:97)
+2025-11-26 16:24:23,616 - [INFO] - YonaService 초기화 및 메인 루프 시작 완료. (app_main.py:59)
+2025-11-26 16:24:23,669 - [INFO] - 바이낸스 서버 시간 동기화 완료. Offset: 481ms (binance_client.py:59)
+2025-11-26 16:24:23,669 - [INFO] - BinanceClient 초기화 완료. (binance_client.py:35)
+[EngineManager] ✅ 공유 BinanceClient 생성 완료 (ID: 1675484299328)
+[Alpha] ✅ 공유 BinanceClient 사용 (ID: 1675484299328)
+[Alpha] 전략 초기화 완료
+[Alpha] Alpha 전략 초기화 완료
+  심볼: BTCUSDT, 레버리지: 50x, 수량: 0.001
+[Beta] ✅ 공유 BinanceClient 사용 (ID: 1675484299328)
+[Beta] 전략 초기화 완료
+[Beta] Beta 전략 초기화 완료
+  심볼: BTCUSDT, 레버리지: 50x, 수량: 0.001
+[Gamma] ✅ 공유 BinanceClient 사용 (ID: 1675484299328)
+[Gamma] 전략 초기화 완료
+[Gamma] Gamma 전략 초기화 완료
+  심볼: BTCUSDT, 레버리지: 50x, 수량: 0.001
+[EngineManager] Alpha, Beta, Gamma 엔진 초기화 완료
+[EngineManager] ✅ 모든 엔진이 공유 BinanceClient 사용 중
+[EngineManager] 엔진 매니저 초기화 완료
+2025-11-26 16:24:23,671 - [INFO] - EngineManager 초기화 및 WebSocket 연결 완료. (app_main.py:76)
+2025-11-26 16:24:23,732 - [DEBUG] - Account total balance 계산: 0.09 - 0.00 + 0.00 = 0.09 USDT (funds_allocation_manager.py:151)
+2025-11-26 16:24:23,733 - [DEBUG] - P&L % 계산: (0.00 / 0.09) * 100 = 0.00% (funds_allocation_manager.py:177)
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:3939 - "GET /docs HTTP/1.1" 200 OK
+2025-11-26 16:24:26,809 - [DEBUG] - Account total balance 계산: 0.09 - 0.00 + 0.00 = 0.09 USDT (funds_allocation_manager.py:151)
+2025-11-26 16:24:26,810 - [DEBUG] - P&L % 계산: (0.00 / 0.09) * 100 = 0.00% (funds_allocation_manager.py:177)
+2025-11-26 16:24:29,873 - [DEBUG] - Account total balance 계산: 0.09 - 0.00 + 0.00 = 0.09 USDT (funds_allocation_manager.py:151)
+2025-11-26 16:24:29,874 - [DEBUG] - P&L % 계산: (0.00 / 0.09) * 100 = 0.00% (funds_allocation_manager.py:177)
+2025-11-26 16:24:32,944 - [DEBUG] - Account total balance 계산: 0.09 - 0.00 + 0.00 = 0.09 USDT (funds_allocation_manager.py:151)
+2025-11-26 16:24:32,944 - [DEBUG] - P&L % 계산: (0.00 / 0.09) * 100 = 0.00% (funds_allocation_manager.py:177)
+2025-11-26 16:24:36,028 - [DEBUG] - Account total balance 계산: 0.09 - 0.00 + 0.00 = 0.09 USDT (funds_allocation_manager.py:151)
+2025-11-26 16:24:36,028 - [DEBUG] - P&L % 계산: (0.00 / 0.09) * 100 = 0.00% (funds_allocation_manager.py:177)
+2025-11-26 16:24:39,099 - [DEBUG] - Account total balance 계산: 0.09 - 0.00 + 0.00 = 0.09 USDT (funds_allocation_manager.py:151)
+2025-11-26 16:24:39,100 - [DEBUG] - P&L % 계산: (0.00 / 0.09) * 100 = 0.00% (funds_allocation_manager.py:177)
+2025-11-26 16:24:42,181 - [DEBUG] - Account total balance 계산: 0.09 - 0.00 + 0.00 = 0.09 USDT (funds_allocation_manager.py:151)
+2025-11-26 16:24:42,181 - [DEBUG] - P&L % 계산: (0.00 / 0.09) * 100 = 0.00% (funds_allocation_manager.py:177)
+2025-11-26 16:24:45,260 - [DEBUG] - Account total balance 계산: 0.09 - 0.00 + 0.00 = 0.09 USDT (funds_allocation_manager.py:151)
+2025-11-26 16:24:45,260 - [DEBUG] - P&L % 계산: (0.00 / 0.09) * 100 = 0.00% (funds_allocation_manager.py:177)
+2025-11-26 16:24:48,353 - [DEBUG] - Account total balance 계산: 0.09 - 0.00 + 0.00 = 0.09 USDT (funds_allocation_manager.py:151)
+2025-11-26 16:24:48,354 - [DEBUG] - P&L % 계산: (0.00 / 0.09) * 100 = 0.00% (funds_allocation_manager.py:177)

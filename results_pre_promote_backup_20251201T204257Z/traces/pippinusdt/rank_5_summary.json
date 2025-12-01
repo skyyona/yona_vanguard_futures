@@ -1,0 +1,75 @@
+{
+  "rank": 5,
+  "runs": [
+    {
+      "run": 1,
+      "profit_pct": -0.3964711663606863,
+      "total_trades": 50,
+      "win_rate": 24.0,
+      "max_drawdown_pct": 0.6940064172141053,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "SL": 38,
+        "TP": 12
+      },
+      "avg_trade_net_pnl": -0.07929423327214011
+    },
+    {
+      "run": 2,
+      "profit_pct": -0.08750336998205056,
+      "total_trades": 42,
+      "win_rate": 26.190476190476193,
+      "max_drawdown_pct": 0.6168313786499441,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "SL": 31,
+        "TP": 11
+      },
+      "avg_trade_net_pnl": -0.02083413571001722
+    },
+    {
+      "run": 3,
+      "profit_pct": -0.47745067736922236,
+      "total_trades": 48,
+      "win_rate": 18.75,
+      "max_drawdown_pct": 0.721780899216219,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "SL": 39,
+        "TP": 9
+      },
+      "avg_trade_net_pnl": -0.09946889111858705
+    },
+    {
+      "run": 4,
+      "profit_pct": -0.4373585724348232,
+      "total_trades": 40,
+      "win_rate": 20.0,
+      "max_drawdown_pct": 0.7725527324911923,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "SL": 32,
+        "TP": 8
+      },
+      "avg_trade_net_pnl": -0.10933964310870181
+    },
+    {
+      "run": 5,
+      "profit_pct": -0.26406196414532135,
+      "total_trades": 44,
+      "win_rate": 18.181818181818183,
+      "max_drawdown_pct": 0.711677784330891,
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "exit_reasons": {
+        "SL": 36,
+        "TP": 8
+      },
+      "avg_trade_net_pnl": -0.06001408276030873
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# Backend
+fastapi==0.115.2
+uvicorn[standard]==0.30.6
+websockets==12.0
+python-dotenv==1.0.1
+requests==2.32.3
+
+# GUI
+PySide6==6.7.2
+
+# Data & API
+pandas==2.0.3
+numpy==1.25.2
+sqlalchemy==2.0.30
+aiosqlite==0.20.0

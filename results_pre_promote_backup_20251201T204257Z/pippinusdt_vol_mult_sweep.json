@@ -1,0 +1,65 @@
+[
+  {
+    "final_balance": 1000.6777515235763,
+    "profit": 0.6777515235762621,
+    "profit_percentage": 0.06777515235762621,
+    "total_trades": 23,
+    "win_rate": 17.391304347826086,
+    "max_drawdown_pct": 0.1403285069312119,
+    "vol_mult_threshold": 1.5
+  },
+  {
+    "final_balance": 1002.4002506822178,
+    "profit": 2.400250682217802,
+    "profit_percentage": 0.24002506822178019,
+    "total_trades": 34,
+    "win_rate": 17.647058823529413,
+    "max_drawdown_pct": 0.2050191103634617,
+    "vol_mult_threshold": 2.0
+  },
+  {
+    "final_balance": 1004.1067614446437,
+    "profit": 4.106761444643666,
+    "profit_percentage": 0.4106761444643666,
+    "total_trades": 55,
+    "win_rate": 21.818181818181817,
+    "max_drawdown_pct": 0.40486399288609626,
+    "vol_mult_threshold": 3.0
+  },
+  {
+    "final_balance": 1007.972153995431,
+    "profit": 7.972153995430972,
+    "profit_percentage": 0.7972153995430972,
+    "total_trades": 63,
+    "win_rate": 26.984126984126984,
+    "max_drawdown_pct": 0.26411584433058793,
+    "vol_mult_threshold": 4.0
+  },
+  {
+    "final_balance": 1008.0812870092122,
+    "profit": 8.081287009212247,
+    "profit_percentage": 0.8081287009212247,
+    "total_trades": 68,
+    "win_rate": 26.47058823529412,
+    "max_drawdown_pct": 0.26411584433057084,
+    "vol_mult_threshold": 5.0
+  },
+  {
+    "final_balance": 1007.7894565435737,
+    "profit": 7.789456543573692,
+    "profit_percentage": 0.7789456543573692,
+    "total_trades": 71,
+    "win_rate": 25.352112676056336,
+    "max_drawdown_pct": 0.27356948263918984,
+    "vol_mult_threshold": 8.0
+  },
+  {
+    "final_balance": 1007.7894565435737,
+    "profit": 7.789456543573692,
+    "profit_percentage": 0.7789456543573692,
+    "total_trades": 71,
+    "win_rate": 25.352112676056336,
+    "max_drawdown_pct": 0.27356948263918984,
+    "vol_mult_threshold": 10.0
+  }
+]

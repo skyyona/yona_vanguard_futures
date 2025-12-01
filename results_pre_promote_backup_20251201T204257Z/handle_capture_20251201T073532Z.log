@@ -1,0 +1,60 @@
+# Captured: 2025-12-01T07:35:32.837233
+File: results\inusdt_pilot_results.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\inusdt_pilot_results.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\inusdt_pilot_results.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.851246
+File: results\lskusdt_pilot_results.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\lskusdt_pilot_results.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\lskusdt_pilot_results.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.865766
+File: results\pippinusdt_aggregate_grid.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_aggregate_grid.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_aggregate_grid.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.878778
+File: results\pippinusdt_masked_next_open_grid_expanded_20251118_20251124.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_masked_next_open_grid_expanded_20251118_20251124.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_masked_next_open_grid_expanded_20251118_20251124.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.892791
+File: results\pippinusdt_next_open_grid_20251118_20251124.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_next_open_grid_20251118_20251124.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_next_open_grid_20251118_20251124.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.905802
+File: results\pippinusdt_pilot_results.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_pilot_results.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_pilot_results.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.919815
+File: results\pippinusdt_unmasked_aggregate_grid.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_unmasked_aggregate_grid.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_unmasked_aggregate_grid.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.933827
+File: results\pippinusdt_unmasked_grid_20251118_20251124.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_unmasked_grid_20251118_20251124.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_unmasked_grid_20251118_20251124.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.947841
+File: results\pippinusdt_masked_next_open\2025-11-18_v1.5_c0_a1.5_summary.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_masked_next_open\\2025-11-18_v1.5_c0_a1.5_summary.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_masked_next_open\\2025-11-18_v1.5_c0_a1.5_summary.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.961853
+File: results\pippinusdt_masked_next_open\2025-11-18_v1.5_c0_a1_summary.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_masked_next_open\\2025-11-18_v1.5_c0_a1_summary.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_masked_next_open\\2025-11-18_v1.5_c0_a1_summary.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.975866
+File: results\pippinusdt_masked_next_open\2025-11-18_v1.5_c0_a2_summary.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_masked_next_open\\2025-11-18_v1.5_c0_a2_summary.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_masked_next_open\\2025-11-18_v1.5_c0_a2_summary.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+
+# Captured: 2025-12-01T07:35:32.989878
+File: results\pippinusdt_masked_next_open\2025-11-18_v1.5_c0_a3_summary.csv
+Note: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'results\\pippinusdt_masked_next_open\\2025-11-18_v1.5_c0_a3_summary.csv' -> 'C:\\Users\\User\\new\\yona_vanguard_futures\\results_backups\\results\\results\\pippinusdt_masked_next_open\\2025-11-18_v1.5_c0_a3_summary.csv'
+Unable to extract x64 image. Run Handle from a writeable directory.
+

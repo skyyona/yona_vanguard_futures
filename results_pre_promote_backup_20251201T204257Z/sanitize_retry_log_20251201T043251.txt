@@ -1,0 +1,5 @@
+﻿Retry-run started: 2025-12-01T04:32:51.8246315+09:00
+Attempt 1: 2025-12-01T04:32:51.8336406+09:00
+No WinError 32 failures detected on attempt 1.
+Retry-run completed: 2025-12-01T04:32:51.9289125+09:00
+Wrote logs: ..\results\sanitize_retry_log_20251201T043251.txt and ..\results\sanitize_retry_summary_20251201T043251.txt

@@ -1,0 +1,4 @@
+MC_TEST_RUNNER: start
+argv: ['scripts\\mc_test_runner.py', '--symbol', 'TEST', '--mc-iter', '1']
+env PYTHONPATH sample (if set): <unset>
+MC_TEST_RUNNER: done
