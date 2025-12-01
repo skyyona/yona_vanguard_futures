@@ -19,3 +19,6 @@ __pycache__/
 # IDE / editor
 .vscode/
 *.swp
+
+# Backup artifacts (pre-promote results)
+results_pre_promote_backup_*/
