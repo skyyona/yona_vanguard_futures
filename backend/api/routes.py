@@ -1,15 +1,54 @@
 from fastapi import APIRouter, Depends, HTTPException, Body
 from starlette.requests import Request
+import os
 from pydantic import BaseModel, field_validator, ValidationError
 from typing import Optional, Dict, List, Any, Tuple
 import logging
 from datetime import datetime, timedelta
+import asyncio
 from asyncio import Semaphore
 from backend.core.yona_service import YonaService
 from backend.core.engine_manager import get_engine_manager
+import httpx
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
+
+def _engine_operations_disabled(req: Request) -> bool:
+    """Return True when engine start/stop/prepare/emergency endpoints should be disabled.
+
+    Preference is given to `app.state.engine_manager_disabled` when available; otherwise
+    fall back to the environment variable `ENGINE_DISABLE_ENGINE_MANAGER` (default: '1').
+    """
+    disabled = getattr(req.app.state, "engine_manager_disabled", None)
+    if disabled is not None:
+        return bool(disabled)
+    return os.getenv("ENGINE_DISABLE_ENGINE_MANAGER", "1") not in ("0", "false", "False")
+
+
+async def _proxy_to_engine_host(req: Request, method: str = "POST", json_data: Optional[dict] = None, params: Optional[dict] = None):
+    """Attempt to proxy the current request to the Engine Host.
+
+    Returns a tuple `(response, body)` where `response` is the httpx.Response
+    or `None` on connection error, and `body` is the parsed JSON or a dict
+    describing the error/status.
+    """
+    host = os.getenv("ENGINE_HOST_URL", "http://localhost:8203")
+    path = str(req.url.path)
+    url = host.rstrip("/") + path
+    timeout = float(os.getenv("ENGINE_HOST_TIMEOUT", "5"))
+    try:
+        async with httpx.AsyncClient(timeout=timeout) as client:
+            resp = await client.request(method, url, json=json_data, params=params)
+    except Exception as e:
+        logger.warning("Engine host proxy error connecting to %s: %s", url, e)
+        return None, {"error": str(e)}
+
+    try:
+        body = resp.json()
+    except Exception:
+        body = {"status_code": resp.status_code, "text": resp.text}
+    return resp, body
 
 # ========================================
 # 백테스트 캐싱 & 동시 실행 제한
@@ -66,8 +105,13 @@ async def stop_analysis(service: YonaService = Depends(get_yona_service)):
     return {"status": "success", "message": "Analysis and trading engines stopped."}
 
 @router.post("/emergency/liquidate")
-async def emergency_liquidate(service: YonaService = Depends(get_yona_service)):
+async def emergency_liquidate(req: Request, service: YonaService = Depends(get_yona_service)):
     """긴급 포지션 청산 - 모든 활성 포지션을 시장가로 즉시 청산합니다."""
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST")
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; emergency liquidation unavailable. Use engine host http://localhost:8203")
     await service.emergency_liquidate()
     return {"status": "success", "message": "Emergency liquidation initiated."}
 
@@ -135,7 +179,7 @@ async def analyze_entry(symbol: str, service: YonaService = Depends(get_yona_ser
 
 # 엔진 제어 엔드포인트
 @router.post("/engine/start")
-async def start_engine(request: EngineControlRequest):
+async def start_engine(payload: EngineControlRequest, req: Request):
     """
     특정 엔진 시작
     
@@ -144,10 +188,16 @@ async def start_engine(request: EngineControlRequest):
     """
     engine_manager = get_engine_manager()
     
-    if request.engine not in ["Alpha", "Beta", "Gamma"]:
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST", json_data=payload.dict())
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; engine start unavailable. Use engine host http://localhost:8203")
+
+    if payload.engine not in ["Alpha", "Beta", "Gamma"]:
         raise HTTPException(status_code=400, detail="Invalid engine name. Must be 'Alpha', 'Beta', or 'Gamma'.")
     
-    result = engine_manager.start_engine(request.engine, symbol=request.symbol)
+    result = engine_manager.start_engine(payload.engine, symbol=payload.symbol)
     
     if result.get("success"):
         return {"status": "success", "message": f"{request.engine} engine started."}
@@ -155,7 +205,7 @@ async def start_engine(request: EngineControlRequest):
         raise HTTPException(status_code=500, detail=result.get("error", "Unknown error"))
 
 @router.post("/engine/stop")
-async def stop_engine(request: EngineControlRequest):
+async def stop_engine(payload: EngineControlRequest, req: Request):
     """
     특정 엔진 정지
     
@@ -164,10 +214,16 @@ async def stop_engine(request: EngineControlRequest):
     """
     engine_manager = get_engine_manager()
     
-    if request.engine not in ["Alpha", "Beta", "Gamma"]:
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST", json_data=payload.dict())
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; engine stop unavailable. Use engine host http://localhost:8203")
+
+    if payload.engine not in ["Alpha", "Beta", "Gamma"]:
         raise HTTPException(status_code=400, detail="Invalid engine name. Must be 'Alpha', 'Beta', or 'Gamma'.")
     
-    result = engine_manager.stop_engine(request.engine)
+    result = engine_manager.stop_engine(payload.engine)
     
     if result.get("success"):
         return {"status": "success", "message": f"{request.engine} engine stopped."}
@@ -220,13 +276,18 @@ class EnginePrepareSymbolRequest(BaseModel):
     leverage: int  # 1~125
 
 @router.post("/funds/allocation/set")
-async def set_funds_allocation(request: FundsAllocationRequest, service: YonaService = Depends(get_yona_service)):
+async def set_funds_allocation(request: FundsAllocationRequest, req: Request, service: YonaService = Depends(get_yona_service)):
     """
     특정 엔진의 배분 자금 설정
     
     Request Body:
         {"engine": "NewModular", "amount": 3000.0}
     """
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST", json_data=request.dict())
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; set_funds_allocation unavailable. Use engine host http://localhost:8203")
     try:
         await service.set_funds_allocation(request.engine, request.amount)
         return {"status": "success", "message": f"{request.engine} 엔진 배분 자금 설정: {request.amount:.2f} USDT"}
@@ -234,13 +295,18 @@ async def set_funds_allocation(request: FundsAllocationRequest, service: YonaSer
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/funds/allocation/remove")
-async def remove_funds_allocation(request: EngineControlRequest, service: YonaService = Depends(get_yona_service)):
+async def remove_funds_allocation(request: EngineControlRequest, req: Request, service: YonaService = Depends(get_yona_service)):
     """
     특정 엔진의 배분 자금 제거
     
     Request Body:
         {"engine": "NewModular"}
     """
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST", json_data=request.dict())
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; remove_funds_allocation unavailable. Use engine host http://localhost:8203")
     try:
         await service.remove_funds_allocation(request.engine)
         return {"status": "success", "message": f"{request.engine} 엔진 배분 자금 제거 완료"}
@@ -248,7 +314,7 @@ async def remove_funds_allocation(request: EngineControlRequest, service: YonaSe
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/engine/symbol")
-async def set_engine_symbol(request: EngineSymbolRequest, service: YonaService = Depends(get_yona_service)):
+async def set_engine_symbol(request: EngineSymbolRequest, req: Request, service: YonaService = Depends(get_yona_service)):
     """
     특정 엔진의 거래 심볼을 설정합니다.
 
@@ -260,6 +326,11 @@ async def set_engine_symbol(request: EngineSymbolRequest, service: YonaService =
     symbol = (request.symbol or "").upper().strip()
     if not symbol or not symbol.endswith("USDT"):
         raise HTTPException(status_code=400, detail="Invalid symbol. Must be a non-empty USDT perpetual symbol.")
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST", json_data=request.dict())
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; set_engine_symbol unavailable. Use engine host http://localhost:8203")
     try:
         await service.update_engine_symbol(request.engine, symbol)
         return {"status": "success", "message": f"{request.engine} 심볼 설정: {symbol}"}
@@ -267,10 +338,15 @@ async def set_engine_symbol(request: EngineSymbolRequest, service: YonaService =
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/funds/allocation/return")
-async def return_funds_allocation(request: EngineControlRequest, service: YonaService = Depends(get_yona_service)):
+async def return_funds_allocation(request: EngineControlRequest, req: Request, service: YonaService = Depends(get_yona_service)):
     """
     특정 엔진의 운용 자금을 Available Funds로 반환
     """
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST", json_data=request.dict())
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; return_funds unavailable. Use engine host http://localhost:8203")
     try:
         returned_amount = await service.return_funds(request.engine)
         return {
@@ -296,8 +372,13 @@ async def get_account_total_balance(service: YonaService = Depends(get_yona_serv
     return {"status": "success", "data": {"total_balance": balance}}
 
 @router.post("/account/initial/reset")
-async def reset_initial_investment(service: YonaService = Depends(get_yona_service)):
+async def reset_initial_investment(req: Request, service: YonaService = Depends(get_yona_service)):
     """현재 선물 계정 잔고를 기준으로 Initial Investment를 재설정"""
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST")
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; reset_initial_investment unavailable. Use engine host http://localhost:8203")
     try:
         new_amount = await service.reset_initial_investment()
         return {"status": "success", "data": {"initial_investment": new_amount}}
@@ -307,7 +388,7 @@ async def reset_initial_investment(service: YonaService = Depends(get_yona_servi
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/engine/leverage")
-async def set_engine_leverage(request: EngineLeverageRequest, service: YonaService = Depends(get_yona_service)):
+async def set_engine_leverage(request: EngineLeverageRequest, req: Request, service: YonaService = Depends(get_yona_service)):
     """
     특정 엔진의 런타임 레버리지를 동기화합니다.
 
@@ -316,6 +397,11 @@ async def set_engine_leverage(request: EngineLeverageRequest, service: YonaServi
     """
     if request.engine not in ["Alpha", "Beta", "Gamma"]:
         raise HTTPException(status_code=400, detail="Invalid engine name. Must be 'Alpha', 'Beta', or 'Gamma'.")
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST", json_data=request.dict())
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; set_engine_leverage unavailable. Use engine host http://localhost:8203")
     try:
         await service.update_engine_leverage(request.engine, request.leverage)
         return {"status": "success", "message": f"{request.engine} 레버리지 {request.leverage}x 적용"}
@@ -325,7 +411,7 @@ async def set_engine_leverage(request: EngineLeverageRequest, service: YonaServi
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/engine/prepare-symbol")
-async def prepare_engine_symbol(request: EnginePrepareSymbolRequest):
+async def prepare_engine_symbol(payload: EnginePrepareSymbolRequest, req: Request):
     """
     엔진의 심볼을 Binance에 준비 (마진 타입 + 레버리지 설정)
     
@@ -334,28 +420,34 @@ async def prepare_engine_symbol(request: EnginePrepareSymbolRequest):
     Request Body:
         {"engine": "Alpha", "symbol": "TNSRUSDT", "leverage": 30}
     """
-    if request.engine not in ["Alpha", "Beta", "Gamma"]:
+    if _engine_operations_disabled(req):
+        resp, body = await _proxy_to_engine_host(req, method="POST", json_data=payload.dict())
+        if resp is not None and resp.status_code < 400:
+            return body
+        raise HTTPException(status_code=503, detail="Engine operations disabled on this host; prepare-symbol unavailable. Use engine host http://localhost:8203")
+
+    if payload.engine not in ["Alpha", "Beta", "Gamma"]:
         raise HTTPException(status_code=400, detail="Invalid engine name. Must be 'Alpha', 'Beta', or 'Gamma'.")
     
     from backend.core.engine_manager import get_engine_manager
     engine_manager = get_engine_manager()
     
-    engine = engine_manager.engines.get(request.engine)
+    engine = engine_manager.engines.get(payload.engine)
     if not engine:
-        raise HTTPException(status_code=404, detail=f"Engine {request.engine} not found.")
+        raise HTTPException(status_code=404, detail=f"Engine {payload.engine} not found.")
     
     if not hasattr(engine, 'orchestrator') or not hasattr(engine.orchestrator, 'exec'):
         raise HTTPException(status_code=500, detail="Engine orchestrator not initialized.")
     
     # Orchestrator config 업데이트
-    engine.orchestrator.cfg.symbol = request.symbol
-    engine.orchestrator.cfg.leverage = request.leverage
-    engine.current_symbol = request.symbol
+    engine.orchestrator.cfg.symbol = payload.symbol
+    engine.orchestrator.cfg.leverage = payload.leverage
+    engine.current_symbol = payload.symbol
     
     # Binance에 마진 타입 + 레버리지 설정
     ok = engine.orchestrator.exec.prepare_symbol(
-        request.symbol, 
-        request.leverage, 
+        payload.symbol,
+        payload.leverage,
         engine.orchestrator.cfg.isolated_margin
     )
     
@@ -378,7 +470,7 @@ async def prepare_engine_symbol(request: EnginePrepareSymbolRequest):
 _new_strategy_instance: Optional[Any] = None
 
 @router.post("/strategy/new/start")
-async def start_new_strategy(request: NewStrategyStartRequest, service: YonaService = Depends(get_yona_service)):
+async def start_new_strategy(request: NewStrategyStartRequest, req: Request, service: YonaService = Depends(get_yona_service)):
     """
     NewStrategy (모듈형 고도화 전략)를 시작합니다.
 
@@ -392,6 +484,14 @@ async def start_new_strategy(request: NewStrategyStartRequest, service: YonaServ
     # Deprecation: /strategy/new/* is deprecated. Forwarding to /engine/start for Alpha.
     logger.warning("DEPRECATION: /strategy/new/start called — use /engine/start instead.")
     try:
+        if _engine_operations_disabled(req):
+            # Proxy NewStrategy start to Engine Host (forward to /engine/start with Alpha)
+            payload = {"engine": "Alpha", "symbol": request.symbol}
+            resp, body = await _proxy_to_engine_host(req, method="POST", json_data=payload)
+            if resp is not None and resp.status_code < 400:
+                return body
+            raise HTTPException(status_code=503, detail="Engine operations disabled on this host; strategy start unavailable. Use engine host http://localhost:8203")
+
         engine_manager = get_engine_manager()
         # Forward to Alpha for compatibility with previous NewModular behavior
         res = engine_manager.start_engine("Alpha", symbol=request.symbol)
@@ -439,7 +539,7 @@ async def get_new_strategy_status():
 
 
 @router.post("/strategy/new/stop")
-async def stop_new_strategy(request: NewStrategyStopRequest = NewStrategyStopRequest()):
+async def stop_new_strategy(request: NewStrategyStopRequest = NewStrategyStopRequest(), req: Request = None):
     """
     NewStrategy를 중지합니다.
 
@@ -451,6 +551,13 @@ async def stop_new_strategy(request: NewStrategyStopRequest = NewStrategyStopReq
     # Deprecation: /strategy/new/stop is deprecated. Forward to /engine/stop for Alpha.
     logger.warning("DEPRECATION: /strategy/new/stop called — use /engine/stop instead.")
     try:
+        if req is not None and _engine_operations_disabled(req):
+            payload = {"engine": "Alpha"}
+            resp, body = await _proxy_to_engine_host(req, method="POST", json_data=payload)
+            if resp is not None and resp.status_code < 400:
+                return body
+            raise HTTPException(status_code=503, detail="Engine operations disabled on this host; strategy stop unavailable. Use engine host http://localhost:8203")
+
         engine_manager = get_engine_manager()
         res = engine_manager.stop_engine("Alpha")
         if res.get("success"):
@@ -685,7 +792,11 @@ async def get_trading_suitability(
             
             from backend.core.new_strategy.backtest_adapter import BacktestAdapter
             adapter = BacktestAdapter(shared_binance_client)
-            results = adapter.run_backtest(orchestrator, config)
+            # run_backtest is synchronous/CPU bound and calls orchestrator.step(),
+            # which raises if invoked on a running asyncio event loop. Execute
+            # the adapter in a worker thread to avoid RuntimeError and to keep
+            # the ASGI event loop responsive.
+            results = await asyncio.to_thread(adapter.run_backtest, orchestrator, config)
             
             logger.info(f"[BACKTEST] 완료: {symbol} - {results.get('total_trades', 0)}건 거래")
             
@@ -927,7 +1038,9 @@ async def get_strategy_analysis(
                 # 백테스트 실행
                 from backend.core.new_strategy.backtest_adapter import BacktestAdapter
                 adapter = BacktestAdapter(shared_binance_client)
-                results = adapter.run_backtest(orchestrator, backtest_config)
+                # Execute synchronous backtest in a thread to avoid calling
+                # orchestrator.step() from within the ASGI event loop.
+                results = await asyncio.to_thread(adapter.run_backtest, orchestrator, backtest_config)
                 
                 # 적합성 평가
                 suitability, score = evaluate_suitability(results)

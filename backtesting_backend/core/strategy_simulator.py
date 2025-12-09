@@ -2,8 +2,14 @@ from typing import Dict, Any, List
 import pandas as pd
 from dataclasses import dataclass
 import math
+import logging
 
 from backtesting_backend.core.strategy_analyzer import StrategyAnalyzer
+
+# Default capital fraction to use when the strategy does not supply a position_size_policy.
+# This is an app-level default (not a strategy parameter) and can be tuned by ops.
+DEFAULT_CAPITAL_FRACTION = 0.01  # 1%
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -100,6 +106,14 @@ class StrategySimulator:
             except Exception:
                 position_size_policy = {"method": "capital_fraction", "value": 1.0}
 
+        # If still None, apply app-level default capital fraction policy (do NOT treat this as a strategy parameter)
+        if position_size_policy is None:
+            position_size_policy = {"method": "capital_fraction", "value": DEFAULT_CAPITAL_FRACTION}
+            try:
+                logger.debug("No explicit position_size_policy in strategy_parameters; using app default: %s", position_size_policy)
+            except Exception:
+                pass
+
         no_compounding = bool(strategy_parameters.get("no_compounding", False))
 
         # early-stop and minimum trade safeguards
@@ -131,11 +145,12 @@ class StrategySimulator:
                     method = position_size_policy.get("method", "capital_fraction")
                     val = float(position_size_policy.get("value", 1.0))
                     if method == "capital_fraction":
-                        # allocate val fraction of equity as position notional, then convert to units considering leverage
+                        # allocate val fraction of equity as position notional
                         notional = balance_for_sizing * val
-                        # with leverage, position notional = units * entry_price / leverage_effect? treat as leveraged exposure
-                        # compute units so that exposure = notional * leverage -> units = (notional * leverage) / entry_price_effective
-                        units = (notional * leverage) / entry_price_effective if entry_price_effective > 0 else 0.0
+                        # compute exposure = notional * leverage, then derive units = exposure / price
+                        # This keeps leverage application explicit and avoids double-counting.
+                        exposure = notional * leverage
+                        units = (exposure) / entry_price_effective if entry_price_effective > 0 else 0.0
                     elif method == "risk_per_trade":
                         # val is fraction of capital to risk (e.g., 0.01 for 1%)
                         risk_amount = balance_for_sizing * val
@@ -196,7 +211,8 @@ class StrategySimulator:
                     exit_price_effective = exit_price * (1 - slippage_pct)
                     units = position.get("units", 0.0)
                     exit_fee = exit_price_effective * units * fee_pct
-                    gross_pnl = (exit_price_effective - position["entry_price_effective"]) * units * leverage
+                    # gross_pnl computed from price difference * units. 'units' already reflects leveraged exposure.
+                    gross_pnl = (exit_price_effective - position["entry_price_effective"]) * units
                     net_pnl = gross_pnl - (position.get("entry_fee", 0.0) + exit_fee)
                     balance += net_pnl
                     trades.append({
@@ -241,7 +257,8 @@ class StrategySimulator:
             exit_price_effective = exit_price * (1 - slippage_pct)
             units = position.get("units", 0.0)
             exit_fee = exit_price_effective * units * fee_pct
-            gross_pnl = (exit_price_effective - position["entry_price_effective"]) * units * leverage
+            # gross_pnl computed from price difference * units. 'units' already reflects leveraged exposure.
+            gross_pnl = (exit_price_effective - position["entry_price_effective"]) * units
             net_pnl = gross_pnl - (position.get("entry_fee", 0.0) + exit_fee)
             balance += net_pnl
             trades.append({

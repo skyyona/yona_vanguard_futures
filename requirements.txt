@@ -13,3 +13,4 @@ pandas==2.0.3
 numpy==1.25.2
 sqlalchemy==2.0.30
 aiosqlite==0.20.0
+httpx==0.24.1

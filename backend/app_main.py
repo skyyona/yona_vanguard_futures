@@ -25,14 +25,9 @@ def create_app() -> FastAPI:
     # Lifespan context handles startup and shutdown logic
     @asynccontextmanager
     async def lifespan(app: FastAPI):
-        # CORS 설정
-        app.add_middleware(
-            CORSMiddleware,
-            allow_origins=["*"],
-            allow_credentials=True,
-            allow_methods=["*"],
-            allow_headers=["*"],
-        )
+        # NOTE: CORS middleware is added in application setup (outside
+        # the lifespan) so it does not cause "add middleware after
+        # start" runtime errors when tests use TestClient lifecycle.
 
         # 로거 설정
         logger = setup_logger()
@@ -89,6 +84,16 @@ def create_app() -> FastAPI:
             logger.info("YONA Vanguard Futures (new) 백엔드 서버가 성공적으로 종료되었습니다.")
 
     app = FastAPI(title="YONA Vanguard Futures (new) - Backend", lifespan=lifespan)
+
+    # Add CORS middleware during app construction so middleware stack
+    # is prepared before any startup/shutdown lifecycle begins.
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     # WebSocket 엔드포인트 추가
     @app.websocket("/ws")
