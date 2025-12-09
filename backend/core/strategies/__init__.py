@@ -1,12 +1,14 @@
-"""자동매매 전략 모듈"""
-from backend.core.strategies.base_strategy import BaseStrategy
-from backend.core.strategies.alpha_strategy import AlphaStrategy
-from backend.core.strategies.beta_strategy import BetaStrategy
-from backend.core.strategies.gamma_strategy import GammaStrategy
+﻿"""Compatibility re-exports for strategy implementations.
 
-__all__ = [
-    'BaseStrategy',
-    'AlphaStrategy',
-    'BetaStrategy',
-    'GammaStrategy',
-]
+After migrating strategy implementations into `backtesting_backend.strategies`,
+we re-export the public strategy symbols here so existing imports in the Live
+Backend continue to resolve. This file acts as a compatibility shim and should
+be removed once the cutover is finalized.
+"""
+
+from backtesting_backend.strategies import *  # re-export all canonical strategy symbols
+
+try:
+    __all__
+except NameError:
+    __all__ = [k for k in globals().keys() if not k.startswith("_")]
