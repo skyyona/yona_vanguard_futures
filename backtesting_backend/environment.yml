@@ -1,0 +1,12 @@
+name: yonabacktest
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pandas
+  - numpy
+  - pytest
+  - pip:
+    - fastapi
+    - uvicorn
