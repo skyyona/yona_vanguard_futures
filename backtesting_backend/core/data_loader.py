@@ -57,10 +57,30 @@ class DataLoader:
             data.append(d)
 
         df = pd.DataFrame(data)
+
+        # If no data was returned/available, raise a clear error so callers
+        # can handle it instead of failing deeper inside the simulator.
         if df.empty:
-            return df
+            logger.error("No klines found for %s %s %s-%s", symbol, interval, start_time, end_time)
+            raise ValueError(f"No klines found for {symbol} {interval} {start_time}-{end_time}")
+
+        # Ensure required columns exist
+        required = {"open_time", "open", "high", "low", "close", "volume"}
+        missing = required - set(df.columns)
+        if missing:
+            logger.error("Klines missing required columns %s for %s %s", missing, symbol, interval)
+            raise ValueError(f"Klines missing required columns: {sorted(list(missing))}")
 
         # Ensure open_time is sorted and set index
         df = df.sort_values(by="open_time")
-        # convert to timestamps index if needed
+
+        # Convert `open_time` (ms) to a UTC datetime index for downstream analyzers
+        try:
+            df["open_time"] = pd.to_numeric(df["open_time"])  # ensure numeric
+            df.index = pd.to_datetime(df["open_time"], unit="ms", utc=True)
+        except Exception:
+            # If conversion fails, keep original ordering but log for diagnostics
+            logger.debug("Failed to convert open_time to datetime index for %s %s", symbol, interval)
+
+        # return the DataFrame with a proper datetime index where possible
         return df
