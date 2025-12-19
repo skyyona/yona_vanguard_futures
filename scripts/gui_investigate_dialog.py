@@ -37,6 +37,7 @@ logging.basicConfig(
 logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
 
 from PySide6.QtWidgets import QApplication
+from gui.utils.analysis_payload_mapper import ensure_ui_payload
 from PySide6.QtCore import QTimer
 
 # Import the dialog class
@@ -139,7 +140,9 @@ def run_test_loop():
         try:
             # Use queued emit if available
             try:
-                dialog.analysis_update.emit(payload)
+                # normalize payload before emitting to simulate real GUI behavior
+                normalized = ensure_ui_payload(payload)
+                dialog.analysis_update.emit(normalized.get('data', {}))
             except Exception:
                 logging.exception('Emit failed, trying direct set and _init_ui')
                 try:

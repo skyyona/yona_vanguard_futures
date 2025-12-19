@@ -13,35 +13,5 @@
     ],
     "screenshot": "C:\\Users\\User\\new\\yona_vanguard_futures\\scripts\\screenshots\\BTCUSDT.png",
     "assign_payload": "C:\\Users\\User\\new\\yona_vanguard_futures\\scripts\\screenshots\\BTCUSDT_assign_payload.json"
-  },
-  {
-    "symbol": "AIUSDT",
-    "analysis_keys": [
-      "is_new_listing",
-      "data_missing",
-      "min_required_candles_for_analysis",
-      "available_candles",
-      "confidence",
-      "best_engine",
-      "engine_results",
-      "risk_management"
-    ],
-    "screenshot": "C:\\Users\\User\\new\\yona_vanguard_futures\\scripts\\screenshots\\AIUSDT.png",
-    "assign_payload": "C:\\Users\\User\\new\\yona_vanguard_futures\\scripts\\screenshots\\AIUSDT_assign_payload.json"
-  },
-  {
-    "symbol": "RECENT_NEW_LOWDATA",
-    "analysis_keys": [
-      "is_new_listing",
-      "data_missing",
-      "min_required_candles_for_analysis",
-      "available_candles",
-      "confidence",
-      "best_engine",
-      "engine_results",
-      "risk_management"
-    ],
-    "screenshot": "C:\\Users\\User\\new\\yona_vanguard_futures\\scripts\\screenshots\\RECENT_NEW_LOWDATA.png",
-    "assign_payload": "C:\\Users\\User\\new\\yona_vanguard_futures\\scripts\\screenshots\\RECENT_NEW_LOWDATA_assign_payload.json"
   }
 ]

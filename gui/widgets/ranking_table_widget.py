@@ -43,6 +43,8 @@ class RankingTableWidget(QTableWidget):
         self._checkboxes: List[QCheckBox] = []
 
         # 전략 분석 버튼 관리: symbol -> QPushButton
+        # populate() 리프레시가 반복되더라도 버튼/상태를
+        # 유지하여 "분석중..." 상태가 중간에 초기화되지 않도록 함
         self._analysis_buttons: Dict[str, QPushButton] = {}
         # 전략 분석 상태 저장: symbol -> AnalysisState
         self._analysis_states: Dict[str, AnalysisState] = {}
@@ -95,7 +97,7 @@ class RankingTableWidget(QTableWidget):
         top_items = items[:100]
         self.setRowCount(len(top_items))
         
-        # 초기화
+        # 초기화 (체크박스/깜빡임 상태만 리셋)
         self._checkboxes.clear()
         self._blink_cells.clear()
         
@@ -123,8 +125,18 @@ class RankingTableWidget(QTableWidget):
             
             # ========================================
             # 전략 백테스팅 (컬럼 1) - "전략 분석" 버튼
+            #   - 기존 버튼/상태가 있으면 재사용하여
+            #     LOADING/RUNNING 상태가 테이블 리프레시로
+            #     초기화되지 않도록 함
             # ========================================
-            button = self._create_strategy_analysis_button(symbol)
+            existing_btn = self._analysis_buttons.get(symbol)
+            if existing_btn is not None:
+                button = existing_btn
+                # 현재 저장된 상태로 텍스트/스타일 재적용
+                state = self._analysis_states.get(symbol, AnalysisState.IDLE)
+                self.set_analysis_state(symbol, state)
+            else:
+                button = self._create_strategy_analysis_button(symbol)
             button_widget = QWidget()
             button_layout = QHBoxLayout(button_widget)
             button_layout.addWidget(button)

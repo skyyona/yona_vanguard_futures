@@ -6,6 +6,10 @@ import time
 import os
 import aiosqlite
 from datetime import datetime
+import json
+
+import requests
+from backend.utils.config_loader import ENABLE_ENGINE_EXECUTOR, ENGINE_EXECUTOR_URL
 
 from backend.core.strategies import AlphaStrategy, BetaStrategy, GammaStrategy
 
@@ -437,19 +441,52 @@ class EngineManager:
             # 현재 시간 (거래 일시)
             trade_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             created_at_utc = datetime.utcnow().isoformat()
-            
+
+            # 1) 메인 백엔드의 로컬 DB에 저장
             async with aiosqlite.connect(self._db_path) as db:
-                await db.execute("""
+                await db.execute(
+                    """
                     INSERT INTO trade_history (
                         engine_name, symbol, trade_datetime, funds, leverage,
                         profit_loss, pnl_percent, created_at_utc
                     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                """, (
-                    engine_name, symbol, trade_datetime, funds, leverage,
-                    profit_loss, pnl_percent, created_at_utc
-                ))
+                    """,
+                    (
+                        engine_name,
+                        symbol,
+                        trade_datetime,
+                        funds,
+                        leverage,
+                        profit_loss,
+                        pnl_percent,
+                        created_at_utc,
+                    ),
+                )
                 await db.commit()
                 print(f"[EngineManager] 거래 기록 저장 완료: {engine_name} - {symbol}")
+
+            # 2) 옵션: 엔진 백엔드에도 동일 히스토리를 전송해 동기화
+            if ENABLE_ENGINE_EXECUTOR and ENGINE_EXECUTOR_URL:
+                try:
+                    payload = {
+                        "engine_name": engine_name,
+                        "symbol": symbol,
+                        "trade_datetime": trade_datetime,
+                        "funds": float(funds),
+                        "leverage": int(leverage),
+                        "profit_loss": float(profit_loss),
+                        "pnl_percent": float(pnl_percent),
+                        "entry_price": None,
+                        "exit_price": None,
+                        "position_side": None,
+                    }
+                    url = ENGINE_EXECUTOR_URL.rstrip("/") + "/internal/v1/trade-history"
+                    # 동기 요청이지만, 실패해도 전체 흐름에 영향 주지 않도록 예외만 로깅
+                    resp = requests.post(url, data=json.dumps(payload), headers={"Content-Type": "application/json"}, timeout=2.0)
+                    if resp.status_code >= 400:
+                        print(f"[EngineManager] 엔진 백엔드 trade_history 동기화 실패: {resp.status_code} {resp.text}")
+                except Exception as sync_err:
+                    print(f"[EngineManager] 엔진 백엔드 trade_history 동기화 예외: {sync_err}")
         except Exception as e:
             print(f"[EngineManager] 거래 기록 저장 실패: {e}")
     

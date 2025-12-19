@@ -1,3 +1,4 @@
+"""Core simulation package"""
 """
 Core package for Backtesting Backend.
 

@@ -36,7 +36,10 @@ def main():
         log('[TEST] Fetching analysis from backend: %s' % url)
         resp = requests.get(url, timeout=30)
         resp.raise_for_status()
-        data = resp.json().get('data')
+        raw = resp.json()
+        # normalize using central mapper if backend returned a flat row
+        from gui.utils.analysis_payload_mapper import ensure_ui_payload
+        data = ensure_ui_payload(raw).get('data')
         if not data:
             log('[ERROR] No data returned from strategy-analysis')
             return 2

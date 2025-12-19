@@ -10,6 +10,7 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 from gui.widgets.strategy_analysis_dialog import StrategyAnalysisDialog
+from gui.utils.analysis_payload_mapper import ensure_ui_payload
 
 
 def main():
@@ -50,8 +51,9 @@ def main():
         'best_engine':'loading', 'volatility':0, 'max_target_profit':{}, 'risk_management':{}, 'engine_results':{}
     })
 
-    # emit update
-    dialog.analysis_update.emit(data)
+    # emit update (normalized)
+    payload = ensure_ui_payload(data)
+    dialog.analysis_update.emit(payload.get('data', {}))
     for _ in range(10):
         app.processEvents()
         time.sleep(0.02)

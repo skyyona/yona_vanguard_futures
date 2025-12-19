@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
     QMessageBox, QLabel, QTabWidget, QPushButton, QSplitter
 )
 from PySide6.QtCore import Slot, Signal, Qt, QTimer
+import json
 
 # --- 경로 설정 ---
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -43,6 +44,10 @@ class YONAMainWindow(QMainWindow):
     backtest_completed = Signal(str, str, float, dict)  # symbol, suitability, score, metrics
     backtest_failed = Signal(str, str)  # symbol, error
     strategy_engine_assigned = Signal(str, dict)  # 엔진 배치 시 (engine_name, strategy_data)
+    # 전략 백테스팅 분석 결과 (symbol, raw_response). dict 대신 object 사용해 타입 불일치 방지
+    strategy_analysis_result = Signal(str, object)
+    # 전략 백테스팅 분석 실패 (symbol, error_message)
+    strategy_analysis_error = Signal(str, str)
     
     def __init__(self):
         super().__init__()
@@ -70,6 +75,8 @@ class YONAMainWindow(QMainWindow):
         self.backtest_completed.connect(self._on_backtest_completed)
         self.backtest_failed.connect(self._on_backtest_failed)
         self.strategy_engine_assigned.connect(self._on_strategy_engine_assigned)  # 전략 엔진 배치
+        self.strategy_analysis_result.connect(self._on_strategy_analysis_result)
+        self.strategy_analysis_error.connect(self._on_strategy_analysis_error)
 
         self.logger.info("GUI 메인 윌도우 초기화 완료.")
 
@@ -929,39 +936,17 @@ class YONAMainWindow(QMainWindow):
         전략 분석 요청 처리
         
         플로우:
-        1. 팝업창 표시 (로딩 인디케이터)
-        2. 백그라운드 스레드에서 API 호출
-        3. 결과 수신 시 팝업창 업데이트
+        1. 백그라운드 스레드에서 API 호출 (시뮬레이션 수행)
+        2. 결과 수신 후 메인 스레드에서 팝업창 생성 및 표시
         
         Args:
             symbol: 코인 심볼
         """
         print(f"[MAIN] 🔬 전략 분석 요청: {symbol}")
 
-        # 팝업창 생성 (로딩 상태)
-        dialog = StrategyAnalysisDialog(
-            symbol=symbol,
-            analysis_data={
-                "best_engine": "분석중",
-                "volatility": 0,
-                "max_target_profit": {"alpha": 0, "beta": 0, "gamma": 0},
-                "risk_management": {"stop_loss": 0, "trailing_stop": 0},
-                "engine_results": {}
-            },
-            parent=self
-        )
-
-        # 엔진 배치 Signal 연결
-        dialog.engine_assigned.connect(self._on_strategy_engine_assigned)
-
-        # 팝업창 표시 (비동기 모달)
-        dialog.show()
-
-        # 버튼 상태: 요청 시작 (메인 스레드에서 LOADING -> RUNNING)
+        # 버튼을 안전하게 LOADING("다운로드 중...") 상태로 설정
         try:
-            # 이미 랭킹테이블 버튼은 클릭 시 LOADING으로 바뀌지만
-            # 안전하게 RUNNING 상태로 전환하여 진행중 표기를 보장
-            self.ranking_table.set_analysis_state(symbol, AnalysisState.RUNNING)
+            self.ranking_table.set_analysis_state(symbol, AnalysisState.LOADING)
         except Exception:
             pass
 
@@ -970,84 +955,235 @@ class YONAMainWindow(QMainWindow):
             try:
                 print(f"[MAIN] 🌐 전략 분석 API 호출: {symbol}")
 
-                # API 호출 (타임아웃 60초 - 3개 엔진 백테스팅은 시간 소요)
+                # 로컬 백테스트 서버를 직접 호출하므로, 인위적인 짧은 타임아웃을 두지 않고
+                # 서버가 응답을 돌려줄 때까지 기다린다.
                 response = requests.get(
                     f"{BACKTEST_BASE_URL}/api/v1/backtest/strategy-analysis",
                     params={"symbol": symbol, "period": "1w"},
-                    timeout=60
+                    timeout=None,
                 )
 
                 if response.ok:
-                    data = response.json().get("data", {})
-
-                    print(f"[MAIN] ✅ 전략 분석 완료: {symbol} -> 추천 엔진: {data.get('best_engine', 'Unknown')}")
-
-                    # 팝업창 업데이트: 워커 스레드에서 직접 UI를 조작하지 않고
-                    # dialog.analysis_update 시그널을 emit 하여 메인 스레드에서 처리하게 함
+                    raw = response.json()
                     try:
-                        dialog.analysis_update.emit(data)
-                    except Exception:
-                        # If direct emit failed (rare), schedule a queued emit on main thread
-                        try:
-                            QTimer.singleShot(0, lambda d=data: dialog.analysis_update.emit(d))
-                        except Exception:
-                            # as a last resort, set data for later
-                            dialog.analysis_data = data
-
-                    # 버튼 상태: 완료 (마샬링)
-                    try:
-                        QTimer.singleShot(0, lambda s=symbol: self.ranking_table.set_analysis_state(s, AnalysisState.COMPLETED))
+                        print(f"[MAIN] ✅ 전략 분석 완료: {symbol} (응답 수신)")
+                        print(f"[MAIN] 🔍 전략 분석 raw 응답: {raw}")
                     except Exception:
                         pass
+
+                    # 결과는 메인 스레드에서 처리하도록 시그널로 전달
+                    try:
+                        self.strategy_analysis_result.emit(symbol, raw)
+                    except Exception as e:
+                        print(f"[MAIN] ❌ 전략 분석 결과 시그널 emit 실패: {e}")
                 else:
                     error = f"API 오류 (status={response.status_code})"
                     print(f"[MAIN] ❌ 전략 분석 실패: {symbol} -> {error}")
 
-                    # 에러 팝업 표시
-                    QMessageBox.warning(
-                        self,
-                        "전략 분석 실패",
-                        f"{symbol} 전략 분석 실패:\n{error}"
-                    )
-                    # 버튼 상태: 오류
+                    # 워커 스레드에서는 직접 UI를 건드리지 않고, 에러 시그널만 보낸다.
                     try:
-                        QTimer.singleShot(0, lambda s=symbol: self.ranking_table.set_analysis_state(s, AnalysisState.ERROR))
-                    except Exception:
-                        pass
-                    dialog.reject()  # 팝업창 닫기
-
-            except requests.Timeout:
-                error = "타임아웃 (60초 초과)"
-                print(f"[MAIN] ⏱️ 전략 분석 타임아웃: {symbol}")
-
-                QMessageBox.warning(
-                    self,
-                    "전략 분석 타임아웃",
-                    f"{symbol} 전략 분석 시간이 초과되었습니다.\n잠시 후 다시 시도해주세요."
-                )
-                dialog.reject()
-                try:
-                    QTimer.singleShot(0, lambda s=symbol: self.ranking_table.set_analysis_state(s, AnalysisState.ERROR))
-                except Exception:
-                    pass
+                        self.strategy_analysis_error.emit(symbol, error)
+                    except Exception as e:
+                        print(f"[MAIN] ❌ 전략 분석 에러 시그널 emit 실패: {e}")
 
             except Exception as e:
                 error = str(e)
                 print(f"[MAIN] ❌ 전략 분석 예외: {symbol} -> {error}")
 
-                QMessageBox.warning(
-                    self,
-                    "전략 분석 오류",
-                    f"{symbol} 전략 분석 중 오류 발생:\n{error}"
-                )
-                dialog.reject()
+                # 기타 예외도 에러 시그널로 처리
                 try:
-                    QTimer.singleShot(0, lambda s=symbol: self.ranking_table.set_analysis_state(s, AnalysisState.ERROR))
-                except Exception:
-                    pass
+                    self.strategy_analysis_error.emit(symbol, error)
+                except Exception as e2:
+                    print(f"[MAIN] ❌ 전략 분석 예외 에러 시그널 emit 실패: {e2}")
 
         # 데몬 스레드로 실행 (GUI 메인 스레드 블로킹 방지)
         threading.Thread(target=worker, daemon=True).start()
+
+    def _on_strategy_analysis_result(self, symbol: str, raw: dict):
+        """워커 스레드에서 전달된 전략 분석 결과를 메인 스레드에서 처리.
+
+        - raw: 백엔드가 반환한 전체 JSON(dict expected)
+        - data: raw["data"] 서브딕셔너리 (없으면 {})
+        """
+        # API 호출(데이터 다운로드)가 끝났으므로 이제 "분석중..." 상태로 전환
+        try:
+            self.ranking_table.set_analysis_state(symbol, AnalysisState.RUNNING)
+        except Exception:
+            pass
+
+        try:
+            print(f"[MAIN] 📥 전략 분석 결과 수신 (메인 스레드): {symbol}")
+            print(f"[MAIN] 🔍 전략 분석 raw 응답(메인): {raw}")
+        except Exception:
+            pass
+
+        # Non-invasive compatibility: if `raw` looks like a DB row (flat fields)
+        # map it to the UI-shaped payload `{"data": {...}}` that the dialog expects.
+        try:
+            if isinstance(raw, dict) and "data" not in raw and any(k in raw for k in ("run_id", "final_balance", "profit_percentage", "parameters")):
+                def _map_db_row_to_ui(r: dict) -> dict:
+                    # Try to parse parameters if stored as JSON string
+                    params = {}
+                    if isinstance(r.get("parameters"), str):
+                        try:
+                            params = json.loads(r.get("parameters") or "{}")
+                        except Exception:
+                            params = {}
+                    elif isinstance(r.get("parameters_parsed"), dict):
+                        params = r.get("parameters_parsed") or {}
+
+                    perf = {
+                        "profit_percentage": float(r.get("profit_percentage") or r.get("profit") or 0.0),
+                        "max_drawdown_pct": float(r.get("max_drawdown") or r.get("max_drawdown_pct") or 0.0),
+                        "total_trades": int(r.get("total_trades") or 0),
+                        "win_rate": float(r.get("win_rate") or 0.0),
+                        "aborted_early": bool(r.get("aborted_early", False)),
+                        "insufficient_trades": bool(int(r.get("total_trades") or 0) < 5),
+                    }
+
+                    mapped = {
+                        "symbol": r.get("symbol"),
+                        "run_id": r.get("run_id"),
+                        "initial_balance": float(r.get("initial_balance") or 0.0),
+                        "final_balance": float(r.get("final_balance") or 0.0),
+                        "created_at": r.get("created_at"),
+                        "period": r.get("period", "1w"),
+                        "interval": r.get("interval", "1m"),
+                        "volatility": 0.0,
+                        "best_parameters": params,
+                        "performance": perf,
+                        "leverage_recommendation": {},
+                        "listing_meta": {"days_since_listing": r.get("days_since_listing", 999), "is_new_listing": False, "new_listing_strategy_applied": False},
+                        "scenarios": {},
+                        "strategy_performance": [perf],
+                        "trade_logs": [],
+                        "engine_results": {"alpha": {"executable_parameters": params}, "beta": {}, "gamma": {}},
+                    }
+                    return mapped
+
+                mapped = _map_db_row_to_ui(raw)
+                raw = {"data": mapped}
+                print(f"[MAIN] mapped DB-row to UI payload for dialog (symbol={symbol})")
+        except Exception:
+            pass
+
+        data = raw.get("data", {}) if isinstance(raw, dict) else {}
+        try:
+            print(f"[MAIN] 🔍 전략 분석 data 페이로드(메인): {data}")
+        except Exception:
+            pass
+
+        # 데이터 매핑 보정: strategy_performance, trade_logs 키 추가
+        if isinstance(data, dict):
+            if 'performance' in data and 'strategy_performance' not in data:
+                data['strategy_performance'] = [data['performance']]
+            if 'trade_logs' not in data:
+                data['trade_logs'] = []
+
+        # 메인 스레드에서 안전하게 다이얼로그 생성/표시
+        try:
+            print(f"[MAIN] 🪟 전략 분석 다이얼로그 생성 시도(메인): {symbol}")
+        except Exception:
+            pass
+
+        try:
+            dialog = StrategyAnalysisDialog(
+                symbol=symbol,
+                analysis_data=data,
+                parent=self
+            )
+        except Exception as e:
+            try:
+                import traceback
+                print(f"[MAIN] ❌ 전략 분석 다이얼로그 생성 실패(메인): {e}")
+                traceback.print_exc()
+            except Exception:
+                pass
+            try:
+                self.ranking_table.set_analysis_state(symbol, AnalysisState.ERROR)
+            except Exception:
+                pass
+            return
+
+        try:
+            dialog.engine_assigned.connect(self._on_strategy_engine_assigned)
+        except Exception as e:
+            try:
+                import traceback
+                print(f"[MAIN] ❌ 전략 분석 engine_assigned 연결 실패(메인): {e}")
+                traceback.print_exc()
+            except Exception:
+                pass
+
+        try:
+            try:
+                import logging, traceback
+                logging.getLogger(__name__).info(
+                    "Showing StrategyAnalysisDialog for %s — stack:\n%s",
+                    symbol,
+                    ''.join(traceback.format_stack())
+                )
+            except Exception:
+                pass
+            dialog.show()
+            print(f"[MAIN] 🪟 전략 분석 다이얼로그 표시 완료(메인): {symbol}")
+        except Exception as e:
+            try:
+                import traceback
+                print(f"[MAIN] ❌ 전략 분석 다이얼로그 표시 중 오류(메인): {e}")
+                traceback.print_exc()
+            except Exception:
+                pass
+            try:
+                self.ranking_table.set_analysis_state(symbol, AnalysisState.ERROR)
+            except Exception:
+                pass
+            return
+
+        # 팝업이 정상적으로 표시되면 버튼 상태를 다시 "전략 분석"(IDLE)으로 복원
+        try:
+            self.ranking_table.set_analysis_state(symbol, AnalysisState.IDLE)
+        except Exception:
+            pass
+
+    def _on_strategy_analysis_error(self, symbol: str, error: str):
+        """전략 분석 실패/타임아웃/예외를 메인 스레드에서 처리.
+
+        - symbol: 요청한 코인 심볼
+        - error: 에러 메시지 (타임아웃, HTTP 오류 등)
+        """
+        try:
+            print(f"[MAIN] ❌ 전략 분석 에러 처리 (메인 스레드): {symbol} -> {error}")
+        except Exception:
+            pass
+
+        # 먼저 버튼 상태를 ERROR 로 설정하여, 팝업이 떠 있는 동안에도
+        # "다운로드 중..." 이 아닌 "오류" 상태가 보이도록 한다.
+        try:
+            self.ranking_table.set_analysis_state(symbol, AnalysisState.ERROR)
+        except Exception:
+            pass
+
+        # 에러 팝업 표시
+        try:
+            try:
+                from gui.utils.popup import show_warning
+                show_warning(
+                    self,
+                    "전략 분석 실패",
+                    f"{symbol} 전략 분석 중 오류 발생:\n{error}"
+                )
+            except Exception:
+                try:
+                    QMessageBox.warning(
+                        self,
+                        "전략 분석 실패",
+                        f"{symbol} 전략 분석 중 오류 발생:\n{error}"
+                    )
+                except Exception:
+                    pass
+        except Exception:
+            pass
     
     def _on_strategy_engine_assigned(self, engine_name: str, strategy_data: dict):
         """
@@ -1087,27 +1223,35 @@ class YONAMainWindow(QMainWindow):
 
         print(f"[MAIN] 🎯 엔진 배치: {symbol} -> {engine_name} 엔진")
 
-        # engine key (alpha/beta/gamma)
-        engine_key = engine_name.lower()
-        engine_results = analysis_data.get("engine_results", {}) if isinstance(analysis_data, dict) else {}
-        engine_result = engine_results.get(engine_key, {}) if isinstance(engine_results, dict) else {}
-
-        # 추출 가능한 실행 파라미터
-        # 우선: assign_payload(함수 인자 strategy_data) 탑-레벨의 executable_parameters 사용
+        # 추출 가능한 실행 파라미터: assign_payload 에서 전달된 값 사용
         exec_params = {}
         if isinstance(strategy_data, dict):
             exec_params = strategy_data.get("executable_parameters") or {}
-        # 폴백: analysis_data.engine_results[engine_key].executable_parameters
-        if not exec_params:
-            if isinstance(engine_result, dict):
-                exec_params = engine_result.get("executable_parameters", {})
 
-        # 최대 목표 수익률: analysis_data의 mapping 우선, 없으면 engine_result 내 값 사용
-        max_profit = analysis_data.get("max_target_profit", {}).get(engine_key,
-                                                                     engine_result.get("max_target_profit", 0) if isinstance(engine_result, dict) else 0)
+        # 최대 목표 수익률: 단일 전략의 총 수익률을 사용 (백테스트 결과)
+        perf = analysis_data.get("performance", {}) if isinstance(analysis_data, dict) else {}
+        max_profit = 0.0
+        try:
+            if isinstance(perf, dict):
+                max_profit = float(perf.get("profit_percentage", 0.0) or 0.0)
+        except Exception:
+            max_profit = 0.0
 
-        # 리스크 관리
-        risk_mgmt = analysis_data.get("risk_management", {})
+        # 리스크 관리: 추천 TP/SL/트레일링/청산 방지율을 간단히 매핑
+        bp = analysis_data.get("best_parameters", {}) if isinstance(analysis_data, dict) else {}
+        risk_mgmt = {}
+        if isinstance(bp, dict):
+            try:
+                if bp.get("stop_loss_pct") is not None:
+                    # GUI 메시지와 일관성을 위해 % 단위로 변환
+                    risk_mgmt["stop_loss"] = float(bp.get("stop_loss_pct")) * 100.0
+            except Exception:
+                pass
+            try:
+                if bp.get("trailing_stop_pct") is not None:
+                    risk_mgmt["trailing_stop"] = float(bp.get("trailing_stop_pct")) * 100.0
+            except Exception:
+                pass
 
         # 하단 푸터의 해당 엔진에 전달 (exec_params 포함)
         if engine_name == "Alpha":

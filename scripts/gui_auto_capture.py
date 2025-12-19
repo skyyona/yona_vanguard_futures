@@ -23,6 +23,8 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, ROOT)
 
 from gui.widgets.strategy_analysis_dialog import StrategyAnalysisDialog
+from gui.utils.popup import set_suppress_popups
+from gui.utils.analysis_payload_mapper import ensure_ui_payload
 
 BASE_URL = 'http://127.0.0.1:8001/api/v1/backtest/strategy-analysis'
 
@@ -92,9 +94,11 @@ def capture_for_symbol(symbol: str):
     data = fetch_analysis(symbol)
     app = QApplication.instance() or QApplication([])
 
-    dialog = StrategyAnalysisDialog(symbol=symbol, analysis_data=data)
+    # normalize payload to UI shape before creating dialog
+    payload = ensure_ui_payload(data)
+    dialog = StrategyAnalysisDialog(symbol=payload.get('data', {}).get('symbol', symbol), analysis_data=payload.get('data', {}))
 
-    captured = {'symbol': symbol, 'analysis_keys': list(data.keys())}
+    captured = {'symbol': symbol, 'analysis_keys': list((payload.get('data') or {}).keys())}
 
     # connect to capture assign payload
     assign_payload = {}
@@ -120,12 +124,15 @@ def capture_for_symbol(symbol: str):
     except Exception as e:
         print(f'[AUTO] Screenshot failed: {e}')
 
-    # simulate Assign -> Alpha
+    # simulate Assign -> Alpha: suppress real popups in automated capture
     try:
-        dialog._on_engine_assigned('Alpha')
+        set_suppress_popups(True)
+        dialog._preview_and_assign('Alpha')
         time.sleep(0.1)
     except Exception as e:
         print(f'[AUTO] Assign simulation failed: {e}')
+    finally:
+        set_suppress_popups(False)
 
     # write captured assign payload
     payload_path = os.path.join(out_dir, f'{symbol}_assign_payload.json')

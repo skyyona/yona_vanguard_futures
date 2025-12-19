@@ -16,7 +16,7 @@ from backtesting_backend.database.repositories.kline_repository import KlineRepo
 from backtesting_backend.database.repositories.backtest_result_repository import BacktestResultRepository
 from backtesting_backend.core.data_loader import DataLoader
 from backtesting_backend.core.strategy_analyzer import StrategyAnalyzer
-from backtesting_backend.core.strategy_simulator import StrategySimulator
+from backtesting_backend.core.strategy_simulator import StrategySimulatorFeature
 from backtesting_backend.core.parameter_optimizer import ParameterOptimizer
 from backtesting_backend.core.backtest_service import BacktestService
 
@@ -50,7 +50,7 @@ async def lifespan(app: FastAPI):
 
 	data_loader = DataLoader(binance_client=binance_client, kline_repo=kline_repo)
 	analyzer = StrategyAnalyzer()
-	simulator = StrategySimulator(analyzer)
+	simulator = StrategySimulatorFeature(analyzer)
 	optimizer = ParameterOptimizer(simulator)
 
 	backtest_service = BacktestService(data_loader=data_loader, simulator=simulator, optimizer=optimizer, result_repo=result_repo)

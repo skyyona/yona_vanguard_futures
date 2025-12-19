@@ -491,12 +491,18 @@ class YonaService:
         - If DB has no data, attempt to load recent klines into backtest DB (async) and retry.
         - On success, cache the resolved onboard timestamp in `_symbol_onboard_dates`.
         - If all fallbacks fail, return 999.
+
+        NOTE:
+        - `exchangeInfo.onboardDate` is a UTC millisecond timestamp. To avoid off‑by‑one
+          errors between services, we must compute days using *UTC-aware* datetimes
+          (see backtesting_backend.api.backtest_router._calculate_days_since_listing_for_backtest).
         """
         try:
             onboard_date = self._symbol_onboard_dates.get(symbol, 0)
             if onboard_date and onboard_date > 0:
-                listing_time = dt.datetime.fromtimestamp(onboard_date / 1000)
-                current_time = dt.datetime.utcnow()
+                # onboard_date is UTC ms since epoch
+                listing_time = dt.datetime.fromtimestamp(onboard_date / 1000, tz=dt.timezone.utc)
+                current_time = dt.datetime.utcnow().replace(tzinfo=dt.timezone.utc)
                 return (current_time - listing_time).days
 
             # Attempt local backtesting DB fallback

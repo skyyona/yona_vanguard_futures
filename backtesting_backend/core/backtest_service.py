@@ -1,27 +1,41 @@
 import asyncio
 import uuid
 import time
-from typing import Dict, Any, Optional
+import json
+from typing import Dict, Any, Optional, List
 
 from backtesting_backend.schemas.backtest_request import BacktestRequest
 from backtesting_backend.schemas.backtest_result import BacktestResult
+from backtesting_backend.schemas.strategy_assignment import (
+    StrategyAssignmentCreate,
+    StrategyAssignmentRead,
+    StrategyAssignmentListResponse,
+)
 from backtesting_backend.core.data_loader import DataLoader
 from backtesting_backend.core.strategy_simulator import StrategySimulator
 from backtesting_backend.core.parameter_optimizer import ParameterOptimizer
 from backtesting_backend.optimizers.grid_search import GridSearch
 from backtesting_backend.database.repositories.backtest_result_repository import BacktestResultRepository
+from backtesting_backend.database.repositories.strategy_parameter_repository import StrategyParameterRepository
+from backtesting_backend.database.repositories.strategy_assignment_repository import StrategyAssignmentRepository
 from backtesting_backend.core.logger import logger
+from backend.utils.config_loader import ENGINE_BROKER_ENABLED
+from backend.utils.redis_broker import publish_to_stream
 
 
 class BacktestService:
     def __init__(self, data_loader: Optional[DataLoader] = None,
                  simulator: Optional[StrategySimulator] = None,
                  optimizer: Optional[ParameterOptimizer] = None,
-                 result_repo: Optional[BacktestResultRepository] = None):
+                 result_repo: Optional[BacktestResultRepository] = None,
+                 strategy_param_repo: Optional[StrategyParameterRepository] = None,
+                 strategy_assignment_repo: Optional[StrategyAssignmentRepository] = None):
         self.data_loader = data_loader or DataLoader()
         self.simulator = simulator or StrategySimulator()
         self.optimizer = optimizer or ParameterOptimizer(self.simulator)
         self.result_repo = result_repo or BacktestResultRepository()
+        self.strategy_param_repo = strategy_param_repo or StrategyParameterRepository()
+        self.strategy_assignment_repo = strategy_assignment_repo or StrategyAssignmentRepository()
 
         # in-memory status store: {run_id: {status, progress, result}}
         self._statuses: Dict[str, Dict[str, Any]] = {}
@@ -48,6 +62,14 @@ class BacktestService:
 
             df = await self.data_loader.get_klines_for_backtest(request.symbol, request.interval, request.start_time, request.end_time)
             self._statuses[run_id]["progress"] = 50
+
+            # Defensive check: DataLoader now raises for empty/missing klines, but
+            # double-check here to provide an explicit error message and set status.
+            try:
+                if df is None or (hasattr(df, 'empty') and df.empty):
+                    raise ValueError(f"No klines available for {request.symbol} {request.interval} {request.start_time}-{request.end_time}")
+            except Exception:
+                raise
 
             if request.optimization_mode and request.optimization_ranges:
                 # run optimization using GridSearch for parallel evaluation
@@ -151,6 +173,22 @@ class BacktestService:
                     md = 0.0
 
             # map simulator result fields to DB columns (ensure max_drawdown persisted)
+            # Ensure initial_balance is present (DB schema requires non-null)
+            initial_balance_to_persist = None
+            try:
+                initial_balance_to_persist = result.get("initial_balance") if result.get("initial_balance") is not None else request.initial_balance
+            except Exception:
+                initial_balance_to_persist = request.initial_balance
+
+            # ensure parameters persisted as a JSON string
+            try:
+                if isinstance(best_params, str):
+                    params_to_persist = best_params
+                else:
+                    params_to_persist = json.dumps(best_params or {})
+            except Exception:
+                params_to_persist = "{}"
+
             result_record = {
                 "run_id": run_id,
                 "strategy_name": request.strategy_name,
@@ -158,6 +196,7 @@ class BacktestService:
                 "interval": request.interval,
                 "start_time": request.start_time,
                 "end_time": request.end_time,
+                "initial_balance": float(initial_balance_to_persist) if initial_balance_to_persist is not None else None,
                 "final_balance": result.get("final_balance"),
                 "profit_percentage": result.get("profit_percentage"),
                 # persist computed/derived max drawdown (percent)
@@ -165,7 +204,7 @@ class BacktestService:
                 "total_trades": result.get("total_trades"),
                 "win_rate": result.get("win_rate"),
                 # Do NOT persist or expose user capital/leverage in stored parameters.
-                "parameters": str(best_params),
+                "parameters": params_to_persist,
                 "created_at": now_ms,
             }
 
@@ -211,3 +250,148 @@ class BacktestService:
 
     async def collect_historical_klines(self, symbol: str, interval: str, start_time: int, end_time: int) -> None:
         await self.data_loader.load_historical_klines(symbol, interval, start_time, end_time)
+
+    # ------------------------------------------------------------------
+    # Strategy parameter & engine assignment helpers
+    # ------------------------------------------------------------------
+
+    async def assign_strategy(self, payload: StrategyAssignmentCreate) -> StrategyAssignmentRead:
+        """Create a parameter set and assign it to the given engine/symbol.
+
+        This is the main entry point used by the API when a user selects
+        "assign to engine" from strategy-analysis results.
+        """
+
+        # 1) persist parameter set
+        param_rec = await self.strategy_param_repo.create_parameter_set(
+            symbol=payload.symbol,
+            interval=payload.interval,
+            parameters=payload.parameters,
+            engine_hint=payload.engine,
+            source=payload.source,
+            note=payload.note,
+        )
+
+        # 2) upsert assignment (enforces one engine per symbol)
+        assignment = await self.strategy_assignment_repo.upsert_assignment(
+            symbol=payload.symbol,
+            engine=payload.engine,
+            parameter_set_id=param_rec.id,
+            assigned_by=payload.assigned_by,
+            note=payload.note,
+        )
+
+        # 3) build response model (decode parameters JSON)
+        # StrategyParameterRepository stores parameters as JSON string in the ORM
+        import json
+
+        try:
+            params_dict = json.loads(param_rec.parameters or "{}")
+        except Exception:
+            params_dict = {}
+
+        result = StrategyAssignmentRead(
+            id=assignment.id,
+            symbol=assignment.symbol,
+            interval=param_rec.interval,
+            engine=assignment.engine,
+            parameter_set_id=assignment.parameter_set_id,
+            parameters=params_dict,
+            assigned_at=assignment.assigned_at,
+            assigned_by=assignment.assigned_by,
+            note=assignment.note,
+        )
+
+        # 4) notify engine backend via Redis Stream (if enabled)
+        try:
+            if ENGINE_BROKER_ENABLED:
+                event = {
+                    "type": "STRATEGY_ASSIGNED",
+                    "symbol": result.symbol,
+                    "interval": result.interval,
+                    "engine": result.engine,
+                    "parameter_set_id": result.parameter_set_id,
+                    "parameters": result.parameters,
+                    "assigned_at": result.assigned_at,
+                    "assigned_by": result.assigned_by,
+                    "note": result.note,
+                    "schema": "strategy_assignment.v1",
+                }
+                publish_to_stream(event)
+            else:
+                logger.info("Engine broker disabled; skipping STRATEGY_ASSIGNED publish for %s", payload.symbol)
+        except Exception as ex:
+            logger.exception("Failed to publish STRATEGY_ASSIGNED event for %s: %s", payload.symbol, ex)
+
+        return result
+
+    async def unassign_strategy(self, symbol: str) -> None:
+        """Remove any assignment for the given symbol."""
+
+        await self.strategy_assignment_repo.unassign_symbol(symbol)
+
+    async def get_assignment_for_symbol(self, symbol: str) -> Optional[StrategyAssignmentRead]:
+        """Fetch current assignment for a symbol, including parameters."""
+
+        assignment = await self.strategy_assignment_repo.get_assignment_for_symbol(symbol)
+        if assignment is None:
+            return None
+
+        param_rec = await self.strategy_param_repo.get_by_id(assignment.parameter_set_id)
+        if param_rec is None:
+            return None
+
+        import json
+
+        try:
+            params_dict = json.loads(param_rec.parameters or "{}")
+        except Exception:
+            params_dict = {}
+
+        return StrategyAssignmentRead(
+            id=assignment.id,
+            symbol=assignment.symbol,
+            interval=param_rec.interval,
+            engine=assignment.engine,
+            parameter_set_id=assignment.parameter_set_id,
+            parameters=params_dict,
+            assigned_at=assignment.assigned_at,
+            assigned_by=assignment.assigned_by,
+            note=assignment.note,
+        )
+
+    async def list_assignments_for_engine(self, engine: str) -> StrategyAssignmentListResponse:
+        """List all assignments for a given engine, newest first."""
+
+        assignments = await self.strategy_assignment_repo.list_assignments_for_engine(engine)
+        items: List[StrategyAssignmentRead] = []
+
+        # prefetch parameter sets per id to avoid N+1 queries if needed later
+        # For now we fetch one-by-one which is acceptable for small counts.
+        for a in assignments:
+            param_rec = await self.strategy_param_repo.get_by_id(a.parameter_set_id)
+            if not param_rec:
+                continue
+
+            import json
+
+            try:
+                params_dict = json.loads(param_rec.parameters or "{}")
+            except Exception:
+                params_dict = {}
+
+            items.append(
+                StrategyAssignmentRead(
+                    id=a.id,
+                    symbol=a.symbol,
+                    interval=param_rec.interval,
+                    engine=a.engine,
+                    parameter_set_id=a.parameter_set_id,
+                    parameters=params_dict,
+                    assigned_at=a.assigned_at,
+                    assigned_by=a.assigned_by,
+                    note=a.note,
+                )
+            )
+
+        return StrategyAssignmentListResponse(items=items)

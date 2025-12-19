@@ -19,8 +19,9 @@ class ConfigManager:
         self.FASTAPI_PORT = int(os.getenv("FASTAPI_PORT", "8001"))
         self.LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
         # New-listing related defaults
-        # Number of days from first available kline to consider a coin "newly listed"
-        self.NEW_LISTING_CUTOFF_DAYS = int(os.getenv("NEW_LISTING_CUTOFF_DAYS", "7"))
+        # Number of days from first available listing date to consider a coin "newly listed".
+        # Default is 30 days to align with live ranking logic.
+        self.NEW_LISTING_CUTOFF_DAYS = int(os.getenv("NEW_LISTING_CUTOFF_DAYS", "30"))
         # Minimum required 1m candles for running full analysis on new listings
         self.MIN_REQUIRED_CANDLES_FOR_ANALYSIS = int(os.getenv("MIN_REQUIRED_CANDLES_FOR_ANALYSIS", "60"))
         # Backtest minimum candles (legacy compatibility)

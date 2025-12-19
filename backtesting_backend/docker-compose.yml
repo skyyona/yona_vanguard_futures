@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  engine_host:
+    build:
+      context: ..
+      dockerfile: backtesting_backend/Dockerfile
+    env_file:
+      - .env
+    environment:
+      - ENGINE_HOST_PORT=8203
+      - FASTAPI_HOST=0.0.0.0
+    ports:
+      - "8203:8203"
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped

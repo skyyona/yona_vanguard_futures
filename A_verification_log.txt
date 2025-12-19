@@ -1,0 +1,24 @@
+﻿2025-12-11T05:13:34.1050742+09:00 === A verification start ===
+2025-12-11T05:13:34.2105701+09:00 catroot2 exists: True
+2025-12-11T05:13:34.2121052+09:00 catroot2.old exists: True
+2025-12-11T05:13:34.2131376+09:00 SoftwareDistribution exists: True
+2025-12-11T05:13:34.2136480+09:00 SoftwareDistribution.old exists: True
+2025-12-11T05:13:34.2274542+09:00 TrustedInstaller: Stopped
+2025-12-11T05:13:34.2284548+09:00 wuauserv: Running
+2025-12-11T05:13:34.2294558+09:00 bits: Running
+2025-12-11T05:13:34.2307943+09:00 cryptSvc: Running
+2025-12-11T05:13:34.3086872+09:00 RebootRequired registry present: False
+2025-12-11T05:13:34.3159017+09:00 WinSxS pending.xml present: False
+2025-12-11T05:13:34.3174630+09:00 Running: wsl --update
+2025-12-11T05:14:35.6317053+09:00 === A verification start ===
+2025-12-11T05:14:35.7203443+09:00 catroot2 exists: True
+2025-12-11T05:14:35.7213457+09:00 catroot2.old exists: True
+2025-12-11T05:14:35.7223469+09:00 SoftwareDistribution exists: True
+2025-12-11T05:14:35.7233474+09:00 SoftwareDistribution.old exists: True
+2025-12-11T05:14:35.7343572+09:00 TrustedInstaller: Stopped
+2025-12-11T05:14:35.7353581+09:00 wuauserv: Running
+2025-12-11T05:14:35.7363590+09:00 bits: Running
+2025-12-11T05:14:35.7373599+09:00 cryptSvc: Running
+2025-12-11T05:14:35.8050141+09:00 RebootRequired registry present: False
+2025-12-11T05:14:35.8070157+09:00 WinSxS pending.xml present: False
+2025-12-11T05:14:35.8070157+09:00 Running: wsl --update

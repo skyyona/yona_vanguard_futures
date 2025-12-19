@@ -9,6 +9,7 @@ import httpx
 from dotenv import load_dotenv
 
 from backtesting_backend.api_client.rate_limit_manager import RateLimitManager
+from backtesting_backend.core.logger import logger
 
 
 class BinanceAPIException(Exception):
@@ -83,6 +84,13 @@ class BinanceClient:
 
         all_klines: List[Dict[str, Any]] = []
 
+        # Log request parameters for debugging empty/timeout responses
+        try:
+            logger.info("BinanceClient.get_klines request: symbol=%s interval=%s startTime=%s endTime=%s limit=%s",
+                        symbol, interval, start_time, end_time, limit)
+        except Exception:
+            pass
+
         while True:
             data = await self._send_request("GET", path, params=params, signed=False)
             if not data:
@@ -106,6 +114,12 @@ class BinanceClient:
                     "interval": interval,
                 }
                 all_klines.append(k)
+
+            # Log page details
+            try:
+                logger.info("BinanceClient.get_klines: fetched %d items (page), last_open_time=%s", len(data), int(data[-1][0]) if data else None)
+            except Exception:
+                pass
 
             if len(data) < limit:
                 break

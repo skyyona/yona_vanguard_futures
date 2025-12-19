@@ -1,9 +1,11 @@
 from typing import Dict, Any, List
+import logging
 import pandas as pd
 from dataclasses import dataclass
 import math
 
 from backtesting_backend.core.strategy_analyzer import StrategyAnalyzer
+from backtesting_backend.core.strategy_conditions import compute_indicators, generate_signals
 
 
 @dataclass
@@ -16,6 +18,11 @@ class TradeRecord:
 
 
 class StrategySimulator:
+    """Feature-rich simulator: runs backtests over DataFrames and returns detailed results.
+
+    This class is intended for heavier batch/backtest usage and exposes `run_simulation(...)`.
+    """
+
     def __init__(self, analyzer: StrategyAnalyzer | None = None):
         self.analyzer = analyzer or StrategyAnalyzer()
 
@@ -24,12 +31,17 @@ class StrategySimulator:
 
         This is a simplified simulator for PoC and will approximate PnL using close prices.
         """
+        logger = logging.getLogger("backtest")
         results: Dict[str, Any] = {}
 
+        # Defensive: log incoming dataframe columns early to aid debugging
+        try:
+            cols = list(df.columns) if hasattr(df, 'columns') else str(type(df))
+            logger.debug("run_simulation: received df columns: %s", cols)
+        except Exception:
+            logger.debug("run_simulation: unable to read df columns")
+
         # compute indicators and signals
-        # If the necessary indicator columns already exist on the dataframe (e.g. cached),
-        # skip recalculation to save CPU. Detect by checking expected EMA columns and
-        # optional volume momentum columns when enabled.
         fast = int(strategy_parameters.get("fast_ema_period", 9))
         slow = int(strategy_parameters.get("slow_ema_period", 21))
         ema_fast_col = f"ema_fast_{fast}"
@@ -38,7 +50,6 @@ class StrategySimulator:
         need_calc = True
         try:
             if ema_fast_col in df.columns and ema_slow_col in df.columns:
-                # if volume momentum is requested, ensure its columns are present
                 if strategy_parameters.get("enable_volume_momentum"):
                     if "VolumeSpike" in df.columns and "VWAP" in df.columns:
                         need_calc = False
@@ -48,19 +59,19 @@ class StrategySimulator:
             need_calc = True
 
         if need_calc:
-            df2 = self.analyzer.calculate_indicators(df, strategy_parameters)
+            # Delegate indicator calculation to the shared conditions module.
+            try:
+                df2 = compute_indicators(df, strategy_parameters)
+            except Exception as e:
+                logger.error("Indicator computation failed for %s %s: %s", symbol, interval, e, exc_info=True)
+                raise
         else:
-            # use the provided df directly (assumed to already contain indicators)
             df2 = df.copy()
 
-        # allow callers to supply precomputed signals and skip re-generation
         if not strategy_parameters.get("use_precomputed_signals", False):
-            df2 = self.analyzer.generate_signals(df2, strategy_parameters)
-        else:
-            # assume df2 already contains `buy_signal`/`sell_signal`
-            df2 = df2
+            # Likewise, generate strategy signals via the conditions module.
+            df2 = generate_signals(df2, strategy_parameters)
 
-        # Volume spike detection: compute rolling median volume and multiplier if requested
         try:
             if strategy_parameters.get("enable_volume_spike_filter"):
                 lookback = int(strategy_parameters.get("vol_spike_lookback", 10))
@@ -69,10 +80,8 @@ class StrategySimulator:
                 if med_col not in df2.columns:
                     df2[med_col] = df2["volume"].rolling(window=lookback, min_periods=1).median()
                 if mult_col not in df2.columns:
-                    # avoid division by zero
                     df2[mult_col] = df2.apply(lambda r: (float(r["volume"]) / float(r[med_col])) if r.get(med_col) and float(r[med_col]) > 0 else 0.0, axis=1)
         except Exception:
-            # non-fatal: continue without volume spike columns
             pass
 
         balance = initial_balance
@@ -81,19 +90,15 @@ class StrategySimulator:
         balance_history: List[float] = [balance]
         aborted_early = False
 
-        # risk and execution parameters
-        stop_loss_pct = float(strategy_parameters.get("stop_loss_pct", 0.005))  # 0.5% default
+        stop_loss_pct = float(strategy_parameters.get("stop_loss_pct", 0.005))
         take_profit_pct = float(strategy_parameters.get("take_profit_pct", 0.0))
         trailing_stop_pct = float(strategy_parameters.get("trailing_stop_pct", 0.0))
         fee_pct = float(strategy_parameters.get("fee_pct", 0.0))
         slippage_pct = float(strategy_parameters.get("slippage_pct", 0.0))
 
-        # position sizing policy support
-        # legacy: numeric 'position_size' interpreted as units; preferred: dict 'position_size_policy'
         position_size_raw = strategy_parameters.get("position_size", None)
         position_size_policy = strategy_parameters.get("position_size_policy", None)
         if position_size_policy is None and position_size_raw is not None:
-            # support old callers by treating numeric as capital_fraction
             try:
                 pct = float(position_size_raw)
                 position_size_policy = {"method": "capital_fraction", "value": pct}
@@ -101,8 +106,6 @@ class StrategySimulator:
                 position_size_policy = {"method": "capital_fraction", "value": 1.0}
 
         no_compounding = bool(strategy_parameters.get("no_compounding", False))
-
-        # early-stop and minimum trade safeguards
         early_stop_frac = float(strategy_parameters.get("early_stop_balance_frac", 0.0))
         min_trades_required = int(strategy_parameters.get("min_trades", 0))
 
@@ -110,44 +113,32 @@ class StrategySimulator:
             price = float(row["close"]) if "close" in row else float(row.close)
 
             if position is None and row.get("buy_signal"):
-                # volume-spike filter: if enabled, skip entries when current volume is anomalously high
                 try:
                     if strategy_parameters.get("enable_volume_spike_filter"):
                         thresh = float(strategy_parameters.get("vol_spike_threshold", 5.0))
                         vol_mult = float(row.get("vol_mult") or 0.0)
                         if vol_mult and vol_mult >= thresh:
-                            # skip this entry (treat as no signal)
                             continue
                 except Exception:
-                    # if any error in filter evaluation, fall back to allowing entry
                     pass
-                # Enter long at market price (apply slippage)
                 entry_price = price
                 entry_price_effective = entry_price * (1 + slippage_pct)
-                # determine sizing (units) based on policy
                 balance_for_sizing = initial_balance if no_compounding else balance
                 units = None
                 if position_size_policy and isinstance(position_size_policy, dict):
                     method = position_size_policy.get("method", "capital_fraction")
                     val = float(position_size_policy.get("value", 1.0))
                     if method == "capital_fraction":
-                        # allocate val fraction of equity as position notional, then convert to units considering leverage
                         notional = balance_for_sizing * val
-                        # with leverage, position notional = units * entry_price / leverage_effect? treat as leveraged exposure
-                        # compute units so that exposure = notional * leverage -> units = (notional * leverage) / entry_price_effective
                         units = (notional * leverage) / entry_price_effective if entry_price_effective > 0 else 0.0
                     elif method == "risk_per_trade":
-                        # val is fraction of capital to risk (e.g., 0.01 for 1%)
                         risk_amount = balance_for_sizing * val
-                        # units such that if price moves by stop_loss_pct, loss equals risk_amount: units = risk_amount / (stop_loss_pct * entry_price_effective)
                         sl = stop_loss_pct if stop_loss_pct > 0 else 0.001
                         units = risk_amount / (sl * entry_price_effective) if (sl * entry_price_effective) > 0 else 0.0
                     else:
-                        # fallback: treat as fraction
                         notional = balance_for_sizing * float(position_size_policy.get("value", 1.0))
                         units = (notional * leverage) / entry_price_effective if entry_price_effective > 0 else 0.0
                 else:
-                    # legacy numeric units or default full unit
                     try:
                         units = float(position_size_raw) if position_size_raw is not None else 1.0
                     except Exception:
@@ -169,30 +160,23 @@ class StrategySimulator:
             elif position is not None:
                 exit_price = None
                 exit_reason = None
-
-                # update highest price for trailing stop
                 if price > position["highest_price"]:
                     position["highest_price"] = price
 
-                # 1) Take profit check
                 if position.get("tp_price") is not None and price >= position.get("tp_price"):
                     exit_price = price
                     exit_reason = "TP"
-                # 2) Trailing stop check
                 elif position.get("trailing_stop_pct", 0) > 0 and price <= position["highest_price"] * (1 - position.get("trailing_stop_pct")):
                     exit_price = price
                     exit_reason = "TRAIL"
-                # 3) Stop loss check
                 elif price <= position["entry_price"] * (1 - position.get("stop_loss_pct", stop_loss_pct)):
                     exit_price = price
                     exit_reason = "SL"
-                # 4) Signal-based close
                 elif row.get("sell_signal"):
                     exit_price = price
                     exit_reason = "SELL"
 
                 if exit_price is not None:
-                    # apply slippage and fees on exit
                     exit_price_effective = exit_price * (1 - slippage_pct)
                     units = position.get("units", 0.0)
                     exit_fee = exit_price_effective * units * fee_pct
@@ -212,10 +196,8 @@ class StrategySimulator:
                         "entry_index": position.get("entry_index"),
                         "exit_index": idx,
                     })
-                    # do not append here; we'll append per-bar equity below for consistent equity curve
                     position = None
 
-            # append current equity for this bar (include unrealized PnL if position open)
             try:
                 if position is not None:
                     units = position.get('units', 0.0)
@@ -224,7 +206,6 @@ class StrategySimulator:
                 else:
                     equity = balance
                 balance_history.append(equity)
-                # early-stop: if configured and equity falls below threshold, abort to save time
                 try:
                     if early_stop_frac and initial_balance and equity <= (initial_balance * early_stop_frac):
                         aborted_early = True
@@ -234,7 +215,6 @@ class StrategySimulator:
             except Exception:
                 balance_history.append(balance)
 
-        # close open position at last price
         if position is not None:
             last_price = float(df2.iloc[-1]["close"])
             exit_price = last_price
@@ -257,10 +237,8 @@ class StrategySimulator:
                 "entry_index": position.get("entry_index"),
                 "exit_index": df2.index[-1],
             })
-            # append final balance to equity curve
             balance_history.append(balance)
 
-        # mark insufficient trades if below threshold
         total_trades = len(trades)
         insufficient_trades = False
         if min_trades_required and total_trades < min_trades_required:
@@ -270,7 +248,6 @@ class StrategySimulator:
         wins = [t for t in trades if t.get("net_pnl", 0) > 0]
         win_rate = (len(wins) / total_trades) * 100 if total_trades else 0.0
 
-        # compute max drawdown from balance history
         try:
             peak = -math.inf
             max_dd = 0.0
@@ -299,3 +276,30 @@ class StrategySimulator:
         }
 
         return results
+
+
+# Backwards-compatible wrapper: provide a simple `run_once`-style API by delegating
+# to the lightweight adapter runner when callers expect the old lightweight behavior.
+class StrategySimulatorWrapper:
+    def __init__(self, *args, **kwargs):
+        from backtesting_backend.core.adapter_runner import AdapterRunner
+
+        self._runner = AdapterRunner()
+
+    def run_once(self, strategy: str, symbol: str, start: str, end: str, config: Dict[str, Any] = None) -> Dict[str, Any]:
+        return self._runner.run_once(strategy=strategy, symbol=symbol, start=start, end=end, config=config)
+
+
+# Maintain the name `StrategySimulator` for backward compatibility by exposing the
+# wrapper class at module level. Heavier callers should import `StrategySimulator` (class)
+# and use `run_simulation` by instantiating `StrategySimulator()` (feature-rich) directly
+# via `from backtesting_backend.core.strategy_simulator import StrategySimulator`. To avoid
+# confusion, we export the feature-rich class under a distinct name and keep the wrapper
+# as the module-level `StrategySimulator` for scripts that call `run_once()`.
+#
+# Note: callers requiring the feature-rich simulator should import it explicitly:
+# `from backtesting_backend.core.strategy_simulator import StrategySimulatorFeature`.
+
+# Expose names:
+StrategySimulatorFeature = StrategySimulator
+StrategySimulator = StrategySimulatorWrapper

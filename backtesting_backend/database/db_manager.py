@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 
 from backtesting_backend.database import models
+from backtesting_backend.core.logger import logger
 
 
 class BacktestDB:
@@ -29,6 +30,13 @@ class BacktestDB:
         # Use absolute path to avoid surprises from different CWDs
         db_path = os.path.abspath(db_path)
         self.database_url = f"sqlite+aiosqlite:///{db_path}"
+        # Log the resolved DB path/url for visibility at startup
+        try:
+            logger.info("Backtest DB path resolved: %s", db_path)
+            logger.info("Backtest DB URL: %s", self.database_url)
+        except Exception:
+            # avoid failing init if logging has issues
+            pass
         self.engine = None
         self.async_session = None
 

@@ -50,7 +50,7 @@ class TradingEngineWidget(QWidget):
         # 모든 엔진 배경/강조 색상 통일 (#263238)
         bg_color = "#263238"
         border_color = "#263238"
-        
+
         self.setStyleSheet(f"""
             QWidget {{
                 background-color: {bg_color};
@@ -60,32 +60,35 @@ class TradingEngineWidget(QWidget):
         
         # 탭 위젯 생성
         self.tab_widget = QTabWidget()
-        self.tab_widget.setStyleSheet(f""""
+        # 탭바에 엔진명을 직접 표시하고, 텍스트 크기/굵기/색상을
+        # 기존 상단 헤더의 엔진명 라벨과 동일한 톤으로 맞춘다.
+        self.tab_widget.setStyleSheet(f"""
             QTabWidget::pane {{
                 background-color: {bg_color};
             }}
             QTabBar::tab {{
                 background-color: #2a2a2a;
-                color: #cccccc;
+                color: {self.engine_color};
                 padding: 6px 12px;
                 margin-right: 2px;
                 border-top-left-radius: 4px;
                 border-top-right-radius: 4px;
+                font-size: 10px;
+                font-weight: bold;
             }}
             QTabBar::tab:selected {{
                 background-color: {bg_color};
-                color: {border_color};
-                font-weight: bold;
+                color: {self.engine_color};
             }}
             QTabBar::tab:hover {{
                 background-color: #333333;
             }}
         """)
-        
-        # 탭1: 엔진 실행
+
+        # 탭1: 엔진별 메인 탭 (엔진명으로 표시)
         self.engine_tab = self._create_engine_tab()
-        self.tab_widget.addTab(self.engine_tab, "엔진 실행")
-        
+        self.tab_widget.addTab(self.engine_tab, f"{self.engine_name} 엔진")
+
         # 탭2: Trade History
         self.history_tab = self._create_history_tab()
         self.tab_widget.addTab(self.history_tab, "Trade History")
@@ -101,19 +104,10 @@ class TradingEngineWidget(QWidget):
         
         # ========== 1. 상부 영역 - 설정 및 제어 ==========
         
-        # Row 1: 엔진명, Selected Symbol, 심볼 지정 버튼, 거래 활성화 토글 버튼
+        # Row 1: Selected Symbol, 설정 적용, Return Funds, 거래 활성화 토글 버튼
         row1_layout = QHBoxLayout()
         row1_layout.setContentsMargins(0, 0, 0, 0)
         row1_layout.setSpacing(8)
-        
-        # 엔진명 라벨
-        self.title_label = QLabel(f"{self.engine_name} 엔진")
-        title_font = QFont()
-        title_font.setPointSize(10)
-        title_font.setBold(True)
-        self.title_label.setFont(title_font)
-        self.title_label.setStyleSheet(f"color: {self.engine_color}; padding: 2px;")
-        row1_layout.addWidget(self.title_label)
         
         # Selected Symbol 표시
         symbol_container = QWidget()
@@ -151,9 +145,11 @@ class TradingEngineWidget(QWidget):
             }
         """)
         self.apply_settings_button.clicked.connect(self._on_apply_settings)
-        row1_layout.addWidget(self.apply_settings_button)
         
         row1_layout.addStretch()
+        
+        # 오른쪽 버튼들: 설정 적용, Return Funds, 거래 활성화
+        row1_layout.addWidget(self.apply_settings_button)
         
         # Return Funds 버튼
         self.return_funds_button = QPushButton("Return Funds")
@@ -428,7 +424,7 @@ class TradingEngineWidget(QWidget):
         tab_widget = QWidget()
         layout = QVBoxLayout(tab_widget)
         layout.setContentsMargins(5, 5, 5, 5)
-        layout.setSpacing(0)
+        layout.setSpacing(4)
         
         # 거래 기록 테이블
         self.history_table = QTableWidget()
@@ -484,7 +480,35 @@ class TradingEngineWidget(QWidget):
         self.history_table.setColumnWidth(4, 110)  # 수익/손실
         
         layout.addWidget(self.history_table)
-        
+
+        # 하단: 기록 삭제 버튼
+        button_row = QHBoxLayout()
+        button_row.addStretch()
+
+        self.clear_history_button = QPushButton("기록 삭제")
+        self.clear_history_button.setFixedSize(80, 24)
+        self.clear_history_button.setStyleSheet(
+            """
+            QPushButton {
+                background-color: #F44336;
+                color: white;
+                font-size: 9px;
+                font-weight: bold;
+                border-radius: 3px;
+            }
+            QPushButton:hover {
+                background-color: #E53935;
+            }
+            QPushButton:pressed {
+                background-color: #D32F2F;
+            }
+            """
+        )
+        self.clear_history_button.clicked.connect(self._on_clear_history_clicked)
+        button_row.addWidget(self.clear_history_button)
+
+        layout.addLayout(button_row)
+
         return tab_widget
     
     def _on_toggle_clicked(self):
@@ -701,6 +725,46 @@ class TradingEngineWidget(QWidget):
                 self._add_trade_message(f"자금 반환 실패: {error_detail}")
         except Exception as e:
             self._add_trade_message(f"자금 반환 오류: {str(e)}")
+
+    def _on_clear_history_clicked(self):
+        """Trade History '기록 삭제' 버튼 클릭 핸들러.
+
+        - 백엔드 API에 "이 엔진"의 trade_history 삭제를 요청하고
+        - 성공 시 이 위젯의 로컬 테이블 및 메모리 기록도 초기화합니다.
+        """
+
+        from PySide6.QtWidgets import QMessageBox
+        import requests
+        from gui.main import BASE_URL
+
+        reply = QMessageBox.question(
+            self,
+            "Trade History 삭제",
+            f"{self.engine_name} 엔진의 거래 기록을 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.",
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+        if reply != QMessageBox.Yes:
+            return
+
+        try:
+            resp = requests.delete(
+                f"{BASE_URL}/api/v1/engine/trade-history/{self.engine_name}",
+                timeout=5,
+            )
+            if resp.status_code != 200:
+                try:
+                    detail = resp.json().get("detail", resp.text)
+                except Exception:
+                    detail = resp.text
+                QMessageBox.warning(self, "삭제 실패", f"서버에서 기록 삭제에 실패했습니다:\n{detail}")
+                return
+
+            # 서버 삭제 성공 시 이 엔진 위젯의 로컬 히스토리도 정리
+            self.clear_trade_history()
+            QMessageBox.information(self, "삭제 완료", f"{self.engine_name} 엔진의 거래 기록이 삭제되었습니다.")
+        except Exception as e:
+            QMessageBox.warning(self, "삭제 오류", f"기록 삭제 중 오류가 발생했습니다:\n{e}")
     
     def handle_funds_returned(self, returned_amount: float = 0.0, log_message: bool = True):
         """엔진 자금 반환 후 UI 및 통계를 초기화"""
@@ -1071,7 +1135,7 @@ class TradingEngineWidget(QWidget):
     
     def add_trade_record(self, symbol: str, funds: float, leverage: int, profit_loss: float, pnl_percent: float):
         """거래 기록 추가"""
-        # 현재 시간
+        # 현재 시간 기준 기록 (실시간 완료 이벤트용)
         trade_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
         # 거래 기록 저장
@@ -1141,6 +1205,83 @@ class TradingEngineWidget(QWidget):
         # 최대 행 수 제한
         while self.history_table.rowCount() > self._max_history:
             self.history_table.removeRow(self.history_table.rowCount() - 1)
+
+    def add_trade_record_from_history(
+        self,
+        trade_datetime: str,
+        symbol: str,
+        funds: float,
+        leverage: int,
+        profit_loss: float,
+        pnl_percent: float,
+    ) -> None:
+        """DB에서 불러온 기존 Trade History 레코드를 추가합니다.
+
+        앱 재실행 후 과거 기록 복원용으로 사용됩니다.
+        """
+
+        record = {
+            "datetime": trade_datetime,
+            "symbol": symbol,
+            "funds": funds,
+            "leverage": leverage,
+            "profit_loss": profit_loss,
+            "pnl_percent": pnl_percent,
+        }
+        self._trade_history.append(record)
+
+        # 테이블의 맨 아래에 추가 (오래된 기록부터 위로 쌓이도록)
+        row = self.history_table.rowCount()
+        self.history_table.insertRow(row)
+
+        datetime_item = QTableWidgetItem(trade_datetime)
+        datetime_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.history_table.setItem(row, 0, datetime_item)
+
+        symbol_item = QTableWidgetItem(symbol)
+        symbol_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.history_table.setItem(row, 1, symbol_item)
+
+        funds_item = QTableWidgetItem(f"{funds:,.0f} USDT")
+        funds_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        self.history_table.setItem(row, 2, funds_item)
+
+        leverage_item = QTableWidgetItem(f"{leverage}x")
+        leverage_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.history_table.setItem(row, 3, leverage_item)
+
+        if profit_loss >= 0:
+            profit_loss_text = f"+{profit_loss:,.2f} USDT"
+            profit_loss_color = QColor(76, 175, 80)
+        else:
+            profit_loss_text = f"{profit_loss:,.2f} USDT"
+            profit_loss_color = QColor(244, 67, 54)
+
+        profit_loss_item = QTableWidgetItem(profit_loss_text)
+        profit_loss_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        profit_loss_item.setForeground(profit_loss_color)
+        self.history_table.setItem(row, 4, profit_loss_item)
+
+        if pnl_percent >= 0:
+            pnl_text = f"+{pnl_percent:.2f} %"
+            pnl_color = QColor(76, 175, 80)
+        else:
+            pnl_text = f"{pnl_percent:.2f} %"
+            pnl_color = QColor(244, 67, 54)
+
+        pnl_item = QTableWidgetItem(pnl_text)
+        pnl_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        pnl_item.setForeground(pnl_color)
+        self.history_table.setItem(row, 5, pnl_item)
+
+        # 최대 행 수 제한 (오래된 것부터 제거)
+        while self.history_table.rowCount() > self._max_history:
+            self.history_table.removeRow(0)
+
+    def clear_trade_history(self):
+        """로컬 Trade History 기록 및 테이블을 모두 삭제"""
+        self._trade_history.clear()
+        self.history_table.setRowCount(0)
     
     def set_status(self, is_running: bool):
         """상태 설정 (외부에서 호출)"""
@@ -1167,6 +1308,7 @@ class MiddleSessionWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self._init_ui()
+        self._load_initial_trade_history()
     
     def _init_ui(self):
         main_layout = QHBoxLayout(self)
@@ -1190,11 +1332,44 @@ class MiddleSessionWidget(QWidget):
         self.gamma_engine.start_signal.connect(self._on_engine_start)
         self.gamma_engine.stop_signal.connect(self._on_engine_stop)
         main_layout.addWidget(self.gamma_engine)
-        
-        # 엔진 너비 비율 (1:1:1)
-        main_layout.setStretchFactor(self.alpha_engine, 1)
-        main_layout.setStretchFactor(self.beta_engine, 1)
-        main_layout.setStretchFactor(self.gamma_engine, 1)
+
+    def _load_initial_trade_history(self) -> None:
+        """앱 시작 시 각 엔진의 과거 Trade History를 백엔드에서 불러와 복원합니다."""
+
+        try:
+            import requests
+            from gui.main import BASE_URL
+        except Exception:
+            return
+
+        for engine_name, widget in [
+            ("Alpha", self.alpha_engine),
+            ("Beta", self.beta_engine),
+            ("Gamma", self.gamma_engine),
+        ]:
+            try:
+                resp = requests.get(
+                    f"{BASE_URL}/api/v1/engine/trade-history/{engine_name}",
+                    timeout=5,
+                )
+                if resp.status_code != 200:
+                    continue
+
+                data = resp.json() or []
+                # API는 최신 기록이 먼저 오도록 정렬해서 주지만,
+                # 테이블에는 오래된 기록부터 위→아래로 쌓이도록 역순으로 추가
+                for item in reversed(data):
+                    widget.add_trade_record_from_history(
+                        trade_datetime=item.get("trade_datetime", ""),
+                        symbol=item.get("symbol", ""),
+                        funds=float(item.get("funds", 0.0) or 0.0),
+                        leverage=int(item.get("leverage", 1) or 1),
+                        profit_loss=float(item.get("profit_loss", 0.0) or 0.0),
+                        pnl_percent=float(item.get("pnl_percent", 0.0) or 0.0),
+                    )
+            except Exception:
+                # 초기 로딩 실패는 치명적이지 않으므로 조용히 무시
+                continue
 
         # Previously a `newmodular_engine` alias was created here for backwards compatibility.
         # That temporary alias has been removed as part of the Alpha/Beta/Gamma migration.

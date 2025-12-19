@@ -2,7 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException, Body
 from starlette.requests import Request
 from pydantic import BaseModel, field_validator, ValidationError
 from typing import Optional, Dict, List, Any, Tuple
+from backend.utils.config_loader import ENGINE_BROKER_ENABLED, ENGINE_BROKER_STREAM
+from backend.utils.config_loader import ENABLE_ENGINE_EXECUTOR, ENGINE_EXECUTOR_URL, ENGINE_EXECUTOR_TOKEN
+import aiosqlite
 import logging
+import threading
+import requests
 from datetime import datetime, timedelta
 from asyncio import Semaphore
 from backend.core.yona_service import YonaService
@@ -48,6 +53,21 @@ class NewStrategyStartRequest(BaseModel):
 
 class NewStrategyStopRequest(BaseModel):
     force: bool = False  # True: 포지션 보유 시에도 강제 종료
+
+
+class TradeHistoryDeleteResponse(BaseModel):
+    status: str
+    engine_backend: Optional[str] = None
+
+
+class TradeHistoryItem(BaseModel):
+    engine_name: str
+    symbol: str
+    trade_datetime: str
+    funds: float
+    leverage: int
+    profit_loss: float
+    pnl_percent: float
 
 # FastAPI의 의존성 주입 시스템을 올바르게 사용
 def get_yona_service(request: Request) -> YonaService:
@@ -114,6 +134,57 @@ async def remove_blacklist(payload: dict = Body(...), service: YonaService = Dep
     await service.remove_blacklist(data.symbols)
     return {"status": "ok"}
 
+
+@router.get("/api/v1/engine/trade-history/{engine_name}", response_model=List[TradeHistoryItem])
+async def get_trade_history_for_engine(engine_name: str) -> List[TradeHistoryItem]:
+    """특정 엔진의 Trade History 목록을 반환합니다.
+
+    - 메인 백엔드 SQLite trade_history 테이블에서 engine_name 기준으로 조회합니다.
+    - 최신 기록이 먼저 오도록 trade_datetime DESC, created_at_utc DESC로 정렬하고
+      최대 100개까지만 반환합니다.
+    """
+
+    if engine_name not in ["Alpha", "Beta", "Gamma"]:
+        raise HTTPException(status_code=400, detail="Invalid engine name. Must be 'Alpha', 'Beta', or 'Gamma'.")
+
+    engine_manager = get_engine_manager()
+
+    try:
+        items: List[TradeHistoryItem] = []
+        async with aiosqlite.connect(engine_manager._db_path) as db:  # type: ignore[attr-defined]
+            db.row_factory = aiosqlite.Row
+            cursor = await db.execute(
+                """
+                SELECT engine_name, symbol, trade_datetime, funds, leverage,
+                       profit_loss, pnl_percent
+                FROM trade_history
+                WHERE engine_name = ?
+                ORDER BY trade_datetime DESC, created_at_utc DESC
+                LIMIT 100
+                """,
+                (engine_name,),
+            )
+            rows = await cursor.fetchall()
+            await cursor.close()
+
+        for row in rows:
+            items.append(
+                TradeHistoryItem(
+                    engine_name=row["engine_name"],
+                    symbol=row["symbol"],
+                    trade_datetime=row["trade_datetime"],
+                    funds=float(row["funds"]),
+                    leverage=int(row["leverage"]),
+                    profit_loss=float(row["profit_loss"]),
+                    pnl_percent=float(row["pnl_percent"]),
+                )
+            )
+
+        return items
+    except Exception as e:
+        logger.error("[API] failed to load trade_history for engine %s: %s", engine_name, e)
+        raise HTTPException(status_code=500, detail="failed to load trade_history")
+
 @router.get("/live/analysis/entry")
 async def analyze_entry(symbol: str, service: YonaService = Depends(get_yona_service)):
     """포지션 진입 타이밍 분석"""
@@ -144,6 +215,7 @@ async def start_engine(request: EngineControlRequest):
     """
     engine_manager = get_engine_manager()
     
+    from backend.utils.redis_broker import publish_to_stream
     if request.engine not in ["Alpha", "Beta", "Gamma"]:
         raise HTTPException(status_code=400, detail="Invalid engine name. Must be 'Alpha', 'Beta', or 'Gamma'.")
     
@@ -155,6 +227,7 @@ async def start_engine(request: EngineControlRequest):
         raise HTTPException(status_code=500, detail=result.get("error", "Unknown error"))
 
 @router.post("/engine/stop")
+        # New code for engine backend forwarding
 async def stop_engine(request: EngineControlRequest):
     """
     특정 엔진 정지
@@ -200,6 +273,96 @@ async def get_all_engine_statuses():
     engine_manager = get_engine_manager()
     statuses = engine_manager.get_all_statuses()
     return {"status": "success", "data": statuses}
+
+
+@router.delete("/engine/trade-history")
+async def delete_trade_history() -> TradeHistoryDeleteResponse:
+    """모든 trade_history 기록을 삭제합니다 (메인 DB + 엔진 백엔드).
+
+    - 메인 백엔드 SQLite의 trade_history 테이블을 비우고
+    - Engine Executor 연동이 활성화된 경우 엔진 백엔드의 trade_history도 함께 삭제합니다.
+    """
+
+    engine_manager = get_engine_manager()
+
+    # 1) 메인 DB의 trade_history 삭제
+    try:
+        async with aiosqlite.connect(engine_manager._db_path) as db:  # type: ignore[attr-defined]
+            await db.execute("DELETE FROM trade_history;")
+            await db.commit()
+            logger.info("[API] trade_history cleared in main backend DB")
+    except Exception as e:
+        logger.error(f"[API] failed to clear trade_history in main DB: {e}")
+        raise HTTPException(status_code=500, detail="failed to clear trade_history in main DB")
+
+    # 2) 선택적으로 엔진 백엔드에도 삭제 요청
+    engine_backend_status: Optional[str] = None
+    if ENABLE_ENGINE_EXECUTOR and ENGINE_EXECUTOR_URL:
+        try:
+            url = ENGINE_EXECUTOR_URL.rstrip("/") + "/internal/v1/trade-history"
+            resp = requests.delete(url, timeout=2.0)
+            if resp.status_code < 400:
+                engine_backend_status = "deleted"
+                logger.info("[API] trade_history cleared in engine backend DB")
+            else:
+                engine_backend_status = f"error:{resp.status_code}"
+                logger.warning("[API] engine backend trade_history delete failed: %s %s", resp.status_code, resp.text)
+        except Exception as e:
+            engine_backend_status = "exception"
+            logger.warning("[API] engine backend trade_history delete exception: %s", e)
+
+    return TradeHistoryDeleteResponse(status="success", engine_backend=engine_backend_status)
+
+
+@router.delete("/engine/trade-history/{engine_name}")
+async def delete_trade_history_for_engine(engine_name: str) -> TradeHistoryDeleteResponse:
+    """특정 엔진의 trade_history 기록만 삭제합니다 (메인 DB + 엔진 백엔드).
+
+    Path Parameter:
+        engine_name: "Alpha", "Beta", or "Gamma"
+    """
+
+    if engine_name not in ["Alpha", "Beta", "Gamma"]:
+        raise HTTPException(status_code=400, detail="Invalid engine name. Must be 'Alpha', 'Beta', or 'Gamma'.")
+
+    engine_manager = get_engine_manager()
+
+    # 1) 메인 DB의 해당 엔진 trade_history 삭제
+    try:
+        async with aiosqlite.connect(engine_manager._db_path) as db:  # type: ignore[attr-defined]
+            await db.execute("DELETE FROM trade_history WHERE engine_name = ?;", (engine_name,))
+            await db.commit()
+            logger.info("[API] trade_history cleared in main backend DB for engine=%s", engine_name)
+    except Exception as e:
+        logger.error("[API] failed to clear trade_history in main DB for engine %s: %s", engine_name, e)
+        raise HTTPException(status_code=500, detail="failed to clear trade_history in main DB for engine")
+
+    # 2) 선택적으로 엔진 백엔드에도 삭제 요청
+    engine_backend_status: Optional[str] = None
+    if ENABLE_ENGINE_EXECUTOR and ENGINE_EXECUTOR_URL:
+        try:
+            url = ENGINE_EXECUTOR_URL.rstrip("/") + f"/internal/v1/trade-history/{engine_name}"
+            resp = requests.delete(url, timeout=2.0)
+            if resp.status_code < 400:
+                engine_backend_status = "deleted"
+                logger.info("[API] trade_history cleared in engine backend DB for engine=%s", engine_name)
+            else:
+                engine_backend_status = f"error:{resp.status_code}"
+                logger.warning(
+                    "[API] engine backend trade_history delete failed for engine %s: %s %s",
+                    engine_name,
+                    resp.status_code,
+                    resp.text,
+                )
+        except Exception as e:
+            engine_backend_status = "exception"
+            logger.warning(
+                "[API] engine backend trade_history delete exception for engine %s: %s",
+                engine_name,
+                e,
+            )
+
+    return TradeHistoryDeleteResponse(status="success", engine_backend=engine_backend_status)
 
 # 자금 배분 관리 엔드포인트
 class FundsAllocationRequest(BaseModel):
@@ -337,6 +500,7 @@ async def prepare_engine_symbol(request: EnginePrepareSymbolRequest):
     if request.engine not in ["Alpha", "Beta", "Gamma"]:
         raise HTTPException(status_code=400, detail="Invalid engine name. Must be 'Alpha', 'Beta', or 'Gamma'.")
     
+    from backend.utils.redis_broker import publish_to_stream
     from backend.core.engine_manager import get_engine_manager
     engine_manager = get_engine_manager()
     
@@ -389,6 +553,21 @@ async def start_new_strategy(request: NewStrategyStartRequest, service: YonaServ
             "quantity": 0.001  // Optional, None이면 RiskManager가 자동 계산
         }
     """
+    # If Engine Broker is enabled, publish to Redis stream for Engine Backend consumers
+    if ENGINE_BROKER_ENABLED:
+        payload = {
+            "type": "PREPARE_SYMBOL",
+            "engine": request.engine,
+            "symbol": request.symbol,
+            "leverage": request.leverage,
+            "isolated_margin": engine.orchestrator.cfg.isolated_margin,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        xid = publish_to_stream(payload, stream=ENGINE_BROKER_STREAM)
+        if xid:
+            return {"status": "accepted", "message": "Published prepare request to broker", "id": xid}
+        else:
+            logger.error("Broker publish failed; falling back to local execution")
     # Deprecation: /strategy/new/* is deprecated. Forwarding to /engine/start for Alpha.
     logger.warning("DEPRECATION: /strategy/new/start called — use /engine/start instead.")
     try:

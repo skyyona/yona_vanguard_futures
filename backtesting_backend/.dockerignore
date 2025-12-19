@@ -1,0 +1,13 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+venv
+.venv*
+.git
+.gitignore
+backtesting_backend/.venv*
+backtesting_backend/*.db
+.env
