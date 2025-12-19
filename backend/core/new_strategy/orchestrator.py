@@ -70,6 +70,11 @@ class StrategyOrchestrator:
         self.indicator = indicator or IndicatorEngine()
         self.signal = signal or SignalEngine()
         self.risk = risk or RiskManager(RiskManagerConfig())
+        # Log applied RiskManagerConfig for runtime verification
+        try:
+            logger.info("RiskManagerConfig applied: %s", getattr(self.risk.config, "__dict__", str(self.risk.config)))
+        except Exception:
+            logger.info("RiskManagerConfig applied (unserializable object)")
         self.exec = executor or ExecutionAdapter(self.client)
         self.cfg = config or OrchestratorConfig(symbol="BTCUSDT")
 
@@ -292,6 +297,11 @@ class StrategyOrchestrator:
         )
 
         events = []
+        # Backtest compatibility flags
+        entry_triggered = False
+        exit_triggered = False
+        entry_signal_payload = None
+        exit_reason = None
 
         if self.position is None and not self._protective_active():
             # 진입 시도
@@ -315,7 +325,20 @@ class StrategyOrchestrator:
                         take_profit_price=entry * (1.0 + self.risk.config.tp_extended_pct),
                         trailing_activated=False,
                     )
+                    # Log actual position parameters applied (entry/stop/tp/qty)
+                    try:
+                        logger.info("Position opened: entry=%s stop=%s tp=%s qty=%s",
+                                    entry, self.position.stop_loss_price, self.position.take_profit_price, self.position.quantity)
+                    except Exception:
+                        logger.info("Position opened (unable to serialize position details)")
                     events.append({"type": "ENTRY", "order_id": order.order_id, "price": entry})
+                    # Backtest compatibility: mark entry triggered and include minimal entry metadata
+                    entry_triggered = True
+                    entry_signal_payload = {
+                        "direction": "LONG",
+                        "executed_qty": order.executed_qty or self.cfg.order_quantity,
+                        "avg_price": entry,
+                    }
                 else:
                     events.append({"type": "ENTRY_FAIL", "error": order.error_message})
             else:
@@ -349,6 +372,9 @@ class StrategyOrchestrator:
                 order = self.exec.close_market_long(symbol)
                 if order.ok:
                     events.append({"type": "EXIT", "reason": exit_sig.reason.value, "price": order.avg_price})
+                    # Backtest compatibility: mark exit triggered and include reason
+                    exit_triggered = True
+                    exit_reason = exit_sig.reason.value
                 else:
                     events.append({"type": "EXIT_FAIL", "reason": exit_sig.reason.value, "error": order.error_message})
                 self.position = None
@@ -358,17 +384,30 @@ class StrategyOrchestrator:
         self.prev_ind_1m = ind_1m
         self.last_signal = sig
 
-        return {
+        result_payload: Dict[str, Any] = {
             "signal_action": sig.action.value,
             "signal_score": sig.score,
             "events": events,
-            "position": None if self.position is None else {
-                "entry": self.position.entry_price,
-                "stop": self.position.stop_loss_price,
-                "tp": self.position.take_profit_price,
-                "pnl_pct": self.position.unrealized_pnl_pct,
-            }
+            "entry_triggered": entry_triggered,
+            "exit_triggered": exit_triggered,
         }
+
+        # include minimal entry/exit metadata for backtest adapter convenience
+        if entry_signal_payload:
+            result_payload["entry_signal"] = entry_signal_payload
+            result_payload["position_size"] = entry_signal_payload.get("executed_qty")
+
+        if exit_reason:
+            result_payload["exit_reason"] = exit_reason
+
+        result_payload["position"] = None if self.position is None else {
+            "entry": self.position.entry_price,
+            "stop": self.position.stop_loss_price,
+            "tp": self.position.take_profit_price,
+            "pnl_pct": self.position.unrealized_pnl_pct,
+        }
+
+        return result_payload
 
     def set_event_callback(self, callback: Callable[[Dict[str, Any]], None]):
         """이벤트 발생 시 호출할 콜백 함수 설정"""
