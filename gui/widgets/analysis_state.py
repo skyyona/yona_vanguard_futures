@@ -13,7 +13,11 @@ class AnalysisState(Enum):
 def state_label(state: AnalysisState) -> str:
     return {
         AnalysisState.IDLE: "전략 분석",
-        AnalysisState.LOADING: "요청중...",
+        # LOADING: 백엔드에 전략 분석 요청을 보내고
+        # 히스토리컬 데이터를 수집하는 단계 - "다운로드 중..."
+        AnalysisState.LOADING: "다운로드 중...",
+        # RUNNING: 수집된 데이터를 기반으로 전략 시뮬레이션을
+        # 수행하는 단계 - "분석중..."
         AnalysisState.RUNNING: "분석중...",
         AnalysisState.COMPLETED: "완료",
         AnalysisState.ERROR: "오류",

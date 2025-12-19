@@ -71,24 +71,38 @@ REM ----------------------------------------------
 REM # 2. Backtesting Backend 실행
 REM ----------------------------------------------
 echo [%DATE% %TIME%] 백테스팅 백엔드 시작 중... >> "%SM_LOG%"
-netstat -ano | findstr ":8001" >nul
-if %errorlevel%==0 (
-    echo [%DATE% %TIME%] 8001 포트가 이미 사용 중입니다. >> "%SM_LOG%"
-    echo.
-    echo 경고: 8001 포트가 이미 사용 중입니다. 백테스팅 백엔드를 시작할 수 없습니다.
+if exist "%BASE_DIR%backtesting_backend\app_main.py" (
+    echo [%DATE% %TIME%] 백테스팅 백엔드 시작 중... >> "%SM_LOG%"
+    REM 프로젝트 루트에서 모듈 경로를 사용해 uvicorn 실행 (패키지 인식 보장)
+    REM 포트 사용 여부와 상관없이 항상 프롬프트를 띄워 사용자에게 상태를 보여준다.
+    start "Backtesting Backend" cmd /k "cd /d "%BASE_DIR%" && call "%BASE_DIR%.venv_backtest\Scripts\activate.bat" && python -m uvicorn backtesting_backend.app_main:app --host 0.0.0.0 --port 8001 --log-level info"
 ) else (
-    if exist "%BASE_DIR%backtesting_backend\app_main.py" (
-        echo [%DATE% %TIME%] 백테스팅 백엔드 시작 중... >> "%SM_LOG%"
-        REM Use the single-process runner (no reload) to avoid reloader parent/child lifecycle issues on Windows
-        start "Backtesting Backend" cmd /k "cd /d "%BASE_DIR%backtesting_backend" && call "%BASE_DIR%.venv_backtest\Scripts\activate.bat" && python "%BASE_DIR%backtesting_backend\run_uvicorn.py""
+    echo [%DATE% %TIME%] 오류: backtesting_backend 디렉토리에서 app_main.py를 찾을 수 없습니다. >> "%SM_LOG%"
+    echo 오류: backtesting_backend 디렉토리에서 app_main.py를 찾을 수 없습니다.
+)
+
+REM ----------------------------------------------
+REM # 3. Engine Backend 실행
+REM ----------------------------------------------
+echo [%DATE% %TIME%] 엔진 백엔드 시작 중... >> "%SM_LOG%"
+netstat -ano | findstr ":8202" >nul
+if %errorlevel%==0 (
+    echo [%DATE% %TIME%] 8202 포트가 이미 사용 중입니다. >> "%SM_LOG%"
+    echo.
+    echo 경고: 8202 포트가 이미 사용 중입니다. 엔진 백엔드를 시작할 수 없습니다.
+) else (
+    if exist "%BASE_DIR%engine_backend\app_main.py" (
+        echo [%DATE% %TIME%] 엔진 백엔드 시작 중... >> "%SM_LOG%"
+        REM 엔진 전용 가상환경에서 signal-logger 래퍼를 통해 uvicorn 실행
+        start "Engine Backend" cmd /k "cd /d "%BASE_DIR%" && call "%BASE_DIR%engine_backend\.venv\Scripts\activate.bat" && python run_engine_backend_with_signal_logger.py --port 8202"
     ) else (
-        echo [%DATE% %TIME%] 오류: backtesting_backend 디렉토리에서 app_main.py를 찾을 수 없습니다. >> "%SM_LOG%"
-        echo 오류: backtesting_backend 디렉토리에서 app_main.py를 찾을 수 없습니다.
+        echo [%DATE% %TIME%] 오류: engine_backend 디렉토리에서 app_main.py를 찾을 수 없습니다. >> "%SM_LOG%"
+        echo 오류: engine_backend 디렉토리에서 app_main.py를 찾을 수 없습니다.
     )
 )
 
 REM ----------------------------------------------
-REM # 3. GUI/Frontend 실행
+REM # 4. GUI/Frontend 실행
 REM ----------------------------------------------
 echo [%DATE% %TIME%] GUI/프론트엔드 시작 중... >> "%SM_LOG%"
 if exist "%BASE_DIR%gui\main.py" (

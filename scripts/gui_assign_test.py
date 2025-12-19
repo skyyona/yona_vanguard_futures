@@ -10,6 +10,7 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 from gui.widgets.strategy_analysis_dialog import StrategyAnalysisDialog
+from gui.utils.analysis_payload_mapper import ensure_ui_payload
 from gui.widgets.footer_engines_widget import TradingEngineWidget
 import time
 
@@ -85,8 +86,9 @@ def main():
 
     dialog.engine_assigned.connect(on_assigned)
 
-    # Update dialog with real data via signal (mimic worker)
-    dialog.analysis_update.emit(data)
+    # Update dialog with real data via signal (mimic worker) — normalize first
+    payload = ensure_ui_payload(data)
+    dialog.analysis_update.emit(payload.get('data', {}))
     # process Qt events so the queued analysis_update slot runs and updates UI
     for _ in range(20):
         app.processEvents()
@@ -136,16 +138,16 @@ def main():
     print('[TEST] Before apply - funds slider value:', engine_widget.funds_slider.value(), engine_widget.funds_value_label.text())
 
     # Use engine result executable params (if present) for applying to widget
-    alpha_exec = data.get('engine_results', {}).get('alpha', {}).get('executable_parameters')
+    alpha_exec = payload.get('data', {}).get('engine_results', {}).get('alpha', {}).get('executable_parameters')
     if alpha_exec:
         # For this direct-apply test, simulate that user confirmed leverage application
-        engine_widget.update_strategy_from_analysis(
-            data.get('symbol','SQDUSDT'),
-            data.get('max_target_profit',{}).get('alpha',0),
-            data.get('risk_management',{}),
-            alpha_exec,
-            {'leverage_user_confirmed': True}
-        )
+            engine_widget.update_strategy_from_analysis(
+                payload.get('data', {}).get('symbol','SQDUSDT'),
+                payload.get('data', {}).get('max_target_profit',{}).get('alpha',0),
+                payload.get('data', {}).get('risk_management',{}),
+                alpha_exec,
+                {'leverage_user_confirmed': True}
+            )
         print('[TEST] After apply - leverage slider value:', engine_widget.leverage_slider.value(), engine_widget.leverage_value_label.text())
         print('[TEST] After apply - funds slider value:', engine_widget.funds_slider.value(), engine_widget.funds_value_label.text())
 

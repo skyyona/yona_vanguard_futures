@@ -1,4 +1,0 @@
-{
-  "input": ["open","high","low","close","volume"],
-  "output": {"action": ["BUY","SELL","HOLD"], "score": "float"}
-}

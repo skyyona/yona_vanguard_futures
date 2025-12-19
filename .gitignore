@@ -22,3 +22,8 @@ __pycache__/
 
 # Backup artifacts (pre-promote results)
 results_pre_promote_backup_*/
+
+# Local environment files (do NOT commit secrets)
+*.env
+engine_backend/.env
+backtesting_backend/.env

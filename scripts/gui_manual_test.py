@@ -22,6 +22,7 @@ from PySide6.QtWidgets import QApplication
 
 try:
     from gui.widgets.strategy_analysis_dialog import StrategyAnalysisDialog
+    from gui.utils.analysis_payload_mapper import ensure_ui_payload
 except Exception as e:
     logging.exception('Failed to import StrategyAnalysisDialog: %s', e)
     raise
@@ -61,7 +62,9 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     payload = make_sample_payload()
 
-    dialog = StrategyAnalysisDialog(symbol=payload.get('symbol', 'TEST'), analysis_data=payload)
+    # Ensure payload is UI-shaped for the dialog
+    dialog_payload = ensure_ui_payload(payload)
+    dialog = StrategyAnalysisDialog(symbol=dialog_payload.get('data', {}).get('symbol', payload.get('symbol', 'TEST')), analysis_data=dialog_payload.get('data', {}))
     dialog.engine_assigned.connect(on_engine_assigned)
 
     logging.info('Showing StrategyAnalysisDialog - interact with it, then close the dialog to finish test')

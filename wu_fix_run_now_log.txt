@@ -1,0 +1,450 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20251211034057
+Username: DESKTOP-QU3OTU8\User
+RunAs User: DESKTOP-QU3OTU8\User
+Configuration Name: 
+Machine: DESKTOP-QU3OTU8 (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1
+Process ID: 22220
+PSVersion: 5.1.19041.6691
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.6691
+BuildVersion: 10.0.19041.6691
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:25 char:26
++ net stop wuauserv 2>&1 | Out-File -FilePath $log -Append
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:25 char:26
++ net stop wuauserv 2>&1 | Out-File -FilePath $log -Append
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:26 char:26
++ net stop cryptSvc 2>&1 | Out-File -FilePath $log -Append
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:26 char:26
++ net stop cryptSvc 2>&1 | Out-File -FilePath $log -Append
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:27 char:22
++ net stop bits 2>&1 | Out-File -FilePath $log -Append
++                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:27 char:22
++ net stop bits 2>&1 | Out-File -FilePath $log -Append
++                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:28 char:27
++ net stop msiserver 2>&1 | Out-File -FilePath $log -Append
++                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:28 char:27
++ net stop msiserver 2>&1 | Out-File -FilePath $log -Append
++                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+Rename-Item : Access to the path 'C:\Windows\SoftwareDistribution' is denied.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:34 char:10
++     try{ Rename-Item -Path $sd -NewName "SoftwareDistribution.old" -F ...
++          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Windows\SoftwareDistribution:String) [Rename-Item], IOException
+    + FullyQualifiedErrorId : RenameItemIOError,Microsoft.PowerShell.Commands.RenameItemCommand
+Rename-Item : Access to the path 'C:\Windows\SoftwareDistribution' is denied.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:34 char:10
++     try{ Rename-Item -Path $sd -NewName "SoftwareDistribution.old" -F ...
++          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Windows\SoftwareDistribution:String) [Rename-Item], IOException
+    + FullyQualifiedErrorId : RenameItemIOError,Microsoft.PowerShell.Commands.RenameItemCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+Rename-Item : Access to the path 'C:\Windows\System32\catroot2' is denied.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:40 char:10
++     try{ Rename-Item -Path $cat -NewName "catroot2.old" -Force; Log " ...
++          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Windows\System32\catroot2:String) [Rename-Item], IOException
+    + FullyQualifiedErrorId : RenameItemIOError,Microsoft.PowerShell.Commands.RenameItemCommand
+Rename-Item : Access to the path 'C:\Windows\System32\catroot2' is denied.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:40 char:10
++     try{ Rename-Item -Path $cat -NewName "catroot2.old" -Force; Log " ...
++          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : WriteError: (C:\Windows\System32\catroot2:String) [Rename-Item], IOException
+    + FullyQualifiedErrorId : RenameItemIOError,Microsoft.PowerShell.Commands.RenameItemCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:45 char:27
++ net start wuauserv 2>&1 | Out-File -FilePath $log -Append
++                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:45 char:27
++ net start wuauserv 2>&1 | Out-File -FilePath $log -Append
++                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:46 char:27
++ net start cryptSvc 2>&1 | Out-File -FilePath $log -Append
++                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:46 char:27
++ net start cryptSvc 2>&1 | Out-File -FilePath $log -Append
++                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:47 char:23
++ net start bits 2>&1 | Out-File -FilePath $log -Append
++                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:47 char:23
++ net start bits 2>&1 | Out-File -FilePath $log -Append
++                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:48 char:28
++ net start msiserver 2>&1 | Out-File -FilePath $log -Append
++                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:48 char:28
++ net start msiserver 2>&1 | Out-File -FilePath $log -Append
++                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+>> TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS>TerminatingError(Out-File): "The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because it is being used by another process."
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because i
+t is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+Out-File : The process cannot access the file 'C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now_log.txt' because
+it is being used by another process.
+At C:\Users\User\new\yona_vanguard_futures\wu_fix_run_now.ps1:2 char:56
++ ... $((Get-Date).ToString('s')) - $s" | Out-File -FilePath $log -Append }
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+**********************
+Windows PowerShell transcript end
+End time: 20251211034110
+**********************

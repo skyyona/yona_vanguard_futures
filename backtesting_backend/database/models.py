@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, BigInteger, Text, Index
+from sqlalchemy import Column, Integer, String, Float, BigInteger, Text, Index, ForeignKey
 from sqlalchemy.orm import declarative_base
 from datetime import datetime
 
@@ -51,4 +51,50 @@ class BacktestResult(Base):
 
     __table_args__ = (
         Index("ix_backtest_results_run_id", "run_id", unique=True),
+    )
+
+
+class StrategyParameterSet(Base):
+    """분석된 전략 파라미터 세트.
+
+    단일 심볼/인터벌에 대한 백테스트/전략 분석 결과를 영구 저장합니다.
+    실제 필드는 JSON 문자열로 직렬화된 파라미터를 포함합니다.
+    """
+
+    __tablename__ = "strategy_parameter_sets"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    symbol = Column(String(32), nullable=False)
+    interval = Column(String(16), nullable=False)
+    engine_hint = Column(String(32), nullable=True)
+    parameters = Column(Text, nullable=False)
+    source = Column(String(32), nullable=True)
+    note = Column(String(255), nullable=True)
+    created_at = Column(BigInteger, default=lambda: int(datetime.utcnow().timestamp()))
+
+    __table_args__ = (
+        Index("ix_strategy_params_symbol_interval", "symbol", "interval"),
+    )
+
+
+class StrategyAssignment(Base):
+    """엔진 할당 정보.
+
+    하나의 심볼은 하나의 엔진에만 할당되도록 (symbol UNIQUE) 제약을 둡니다.
+    parameter_set_id 는 StrategyParameterSet 을 참조합니다.
+    """
+
+    __tablename__ = "strategy_assignments"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    symbol = Column(String(32), nullable=False)
+    engine = Column(String(32), nullable=False)
+    parameter_set_id = Column(Integer, ForeignKey("strategy_parameter_sets.id"), nullable=False)
+    assigned_at = Column(BigInteger, default=lambda: int(datetime.utcnow().timestamp()))
+    assigned_by = Column(String(64), nullable=True)
+    note = Column(String(255), nullable=True)
+
+    __table_args__ = (
+        Index("ux_strategy_assignments_symbol", "symbol", unique=True),
+        Index("ix_strategy_assignments_engine_symbol", "engine", "symbol"),
     )

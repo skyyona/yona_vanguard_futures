@@ -1,9 +1,11 @@
 from typing import Dict, Any, List
+import logging
 import pandas as pd
 from dataclasses import dataclass
 import math
 
 from backtesting_backend.core.strategy_analyzer import StrategyAnalyzer
+from backtesting_backend.core.strategy_conditions import compute_indicators, generate_signals
 
 
 @dataclass
@@ -29,7 +31,15 @@ class StrategySimulator:
 
         This is a simplified simulator for PoC and will approximate PnL using close prices.
         """
+        logger = logging.getLogger("backtest")
         results: Dict[str, Any] = {}
+
+        # Defensive: log incoming dataframe columns early to aid debugging
+        try:
+            cols = list(df.columns) if hasattr(df, 'columns') else str(type(df))
+            logger.debug("run_simulation: received df columns: %s", cols)
+        except Exception:
+            logger.debug("run_simulation: unable to read df columns")
 
         # compute indicators and signals
         fast = int(strategy_parameters.get("fast_ema_period", 9))
@@ -49,12 +59,18 @@ class StrategySimulator:
             need_calc = True
 
         if need_calc:
-            df2 = self.analyzer.calculate_indicators(df, strategy_parameters)
+            # Delegate indicator calculation to the shared conditions module.
+            try:
+                df2 = compute_indicators(df, strategy_parameters)
+            except Exception as e:
+                logger.error("Indicator computation failed for %s %s: %s", symbol, interval, e, exc_info=True)
+                raise
         else:
             df2 = df.copy()
 
         if not strategy_parameters.get("use_precomputed_signals", False):
-            df2 = self.analyzer.generate_signals(df2, strategy_parameters)
+            # Likewise, generate strategy signals via the conditions module.
+            df2 = generate_signals(df2, strategy_parameters)
 
         try:
             if strategy_parameters.get("enable_volume_spike_filter"):

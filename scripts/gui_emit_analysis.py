@@ -9,6 +9,7 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 from gui.widgets.strategy_analysis_dialog import StrategyAnalysisDialog
+from gui.utils.analysis_payload_mapper import ensure_ui_payload
 from gui.widgets.footer_engines_widget import TradingEngineWidget
 
 
@@ -31,8 +32,9 @@ def run_headless_test(json_path: str):
 
     dialog.engine_assigned.connect(on_assigned)
 
-    # Emit analysis update
-    dialog.analysis_update.emit(data)
+    # Emit analysis update (ensure UI-shaped payload)
+    payload = ensure_ui_payload(data)
+    dialog.analysis_update.emit(payload.get('data', {}))
     # process events
     for _ in range(30):
         app.processEvents()
@@ -61,9 +63,9 @@ def run_headless_test(json_path: str):
     # Test applying params to engine widget
     engine_widget = TradingEngineWidget('Alpha', '#4CAF50')
     print('[GUI-TEST] engine_widget before - leverage:', engine_widget.leverage_slider.value(), engine_widget.leverage_value_label.text())
-    alpha_exec = data.get('engine_results', {}).get('alpha', {}).get('executable_parameters')
+    alpha_exec = payload.get('data', {}).get('engine_results', {}).get('alpha', {}).get('executable_parameters')
     if alpha_exec:
-        engine_widget.update_strategy_from_analysis(data.get('symbol','SYM'), data.get('max_target_profit',{}).get('alpha',0), data.get('risk_management',{}), alpha_exec, {'leverage_user_confirmed': True})
+        engine_widget.update_strategy_from_analysis(payload.get('data', {}).get('symbol','SYM'), payload.get('data', {}).get('max_target_profit',{}).get('alpha',0), payload.get('data', {}).get('risk_management',{}), alpha_exec, {'leverage_user_confirmed': True})
         print('[GUI-TEST] engine_widget after - leverage:', engine_widget.leverage_slider.value(), engine_widget.leverage_value_label.text())
 
     print('[GUI-TEST] finished')

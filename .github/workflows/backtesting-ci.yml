@@ -1,0 +1,40 @@
+name: Backtesting CI
+
+on:
+  push:
+    paths:
+      - 'backtesting_backend/**'
+      - 'requirements.txt'
+      - 'dev-requirements.txt'
+  pull_request:
+    paths:
+      - 'backtesting_backend/**'
+      - 'requirements.txt'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: [3.10]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r dev-requirements.txt || true
+
+      - name: Run unit tests
+        run: python -m pytest backtesting_backend/tests/unit -q
+
+      - name: Run integration tests
+        run: python -m pytest backtesting_backend/tests/integration -q

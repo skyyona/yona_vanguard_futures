@@ -1,0 +1,53 @@
+{
+  "captured_file": "scripts\\captured_raw_payload.json",
+  "summary": {
+    "run_id": "256a482a-c31b-4585-a085-ce617a51e92e",
+    "symbol": "BTCUSDT",
+    "final_balance": 4664.017065973945,
+    "profit_percentage": 366.40170659739454,
+    "total_trades": 1,
+    "win_rate": 100.0
+  },
+  "comparisons": {
+    "profit_percentage": {
+      "orig": 366.40170659739454,
+      "mapped": 366.40170659739454,
+      "ok": true,
+      "note": ""
+    },
+    "final_balance": {
+      "orig": 4664.017065973945,
+      "mapped": null,
+      "ok": false,
+      "note": "mapped_missing"
+    },
+    "total_trades": {
+      "orig": 1,
+      "mapped": 1,
+      "ok": true,
+      "note": ""
+    },
+    "win_rate": {
+      "orig": 100.0,
+      "mapped": 100.0,
+      "ok": true,
+      "note": ""
+    }
+  },
+  "parameters": {
+    "orig": "{\"stop_loss_pct\": 0.005, \"take_profit_pct\": 0.03, \"no_compounding\": false, \"position_size\": 1.0}",
+    "parameters_parsed": {
+      "stop_loss_pct": 0.005,
+      "take_profit_pct": 0.03,
+      "no_compounding": false,
+      "position_size": 1.0
+    },
+    "mapped_best_parameters": {
+      "stop_loss_pct": 0.005,
+      "take_profit_pct": 0.03,
+      "no_compounding": false,
+      "position_size": 1.0
+    },
+    "params_equal": true
+  }
+}

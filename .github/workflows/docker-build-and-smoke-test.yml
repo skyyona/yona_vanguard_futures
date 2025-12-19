@@ -1,0 +1,60 @@
+name: CI - Engine Host Docker Build & Smoke Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: backtesting_backend/Dockerfile
+          tags: yona-engine-host:ci
+          load: true
+
+      - name: Run container (smoke test)
+        run: |
+          set -eu
+          docker run -d --name test-engine -p 8203:8203 --env-file backtesting_backend/.env yona-engine-host:ci || docker ps -a
+          echo "Waiting for /health endpoint (timeout ~20s)"
+          ok=false
+          for i in $(seq 1 20); do
+            sleep 1
+            if curl -sS http://localhost:8203/health >/dev/null 2>&1; then
+              echo "health endpoint reachable"
+              ok=true
+              break
+            fi
+            echo "retry $i"
+          done
+          if [ "$ok" != "true" ]; then
+            echo "Health check failed" >&2
+            docker logs test-engine || true
+            exit 1
+          fi
+
+      - name: Show container logs
+        if: always()
+        run: |
+          docker logs test-engine || true
+
+      - name: Cleanup
+        if: always()
+        run: |
+          docker stop test-engine || true
+          docker rm test-engine || true

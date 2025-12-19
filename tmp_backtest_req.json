@@ -1,0 +1,16 @@
+﻿{
+    "start_time":  1765911416661,
+    "end_time":  1765915016661,
+    "leverage":  50,
+    "symbol":  "BTCUSDT",
+    "strategy_name":  "auto_test_tp",
+    "initial_balance":  1000,
+    "parameters":  {
+        "stop_loss_pct": 0.005,
+        "take_profit_pct": 0.03,
+        "no_compounding": false,
+        "position_size": 1.0
+    },
+    "interval":  "1m"
+}
+
