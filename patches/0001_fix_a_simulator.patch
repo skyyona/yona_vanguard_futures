@@ -1,0 +1,24 @@
+*** Begin Patch
+*** Update File: c:\Users\User\new\yona_vanguard_futures\backtesting_backend\core\strategy_simulator.py
+@@
+-                    if method == "capital_fraction":
+-                        notional = balance_for_sizing * val
+-                        units = (notional * leverage) / entry_price_effective if entry_price_effective > 0 else 0.0
++                    if method == "capital_fraction":
++                        # NOTE (Fix A): compute units WITHOUT multiplying by leverage here.
++                        # Units represent the base asset amount purchased by the notional
++                        # (notional / price). Leverage should only be applied when
++                        # calculating PnL/exposure, not when deriving units, to avoid
++                        # applying leverage twice.
++                        notional = balance_for_sizing * val
++                        units = notional / entry_price_effective if entry_price_effective > 0 else 0.0
+@@
+-                    else:
+-                        notional = balance_for_sizing * float(position_size_policy.get("value", 1.0))
+-                        units = (notional * leverage) / entry_price_effective if entry_price_effective > 0 else 0.0
++                    else:
++                        # Generic "notional" branch — also compute units without multiplying
++                        # by leverage here to keep leverage application consistent.
++                        notional = balance_for_sizing * float(position_size_policy.get("value", 1.0))
++                        units = notional / entry_price_effective if entry_price_effective > 0 else 0.0
+*** End Patch

@@ -1,0 +1,6 @@
+2025-12-20 10:42:14 - [INFO] - 로거 초기화 완료: Orchestrator (strategy_logger.py:71)
+2025-12-20 10:42:14 - [DEBUG] - 로그 파일: logs\strategy\Orchestrator_20251220.log (strategy_logger.py:72)
+2025-12-20 10:42:14 - [DEBUG] - 거래 로그: logs\strategy\Orchestrator_trades_20251220.log (strategy_logger.py:73)
+2025-12-20 10:43:00 - [INFO] - 로거 초기화 완료: Orchestrator (strategy_logger.py:71)
+2025-12-20 10:43:00 - [DEBUG] - 로그 파일: logs\strategy\Orchestrator_20251220.log (strategy_logger.py:72)
+2025-12-20 10:43:00 - [DEBUG] - 거래 로그: logs\strategy\Orchestrator_trades_20251220.log (strategy_logger.py:73)

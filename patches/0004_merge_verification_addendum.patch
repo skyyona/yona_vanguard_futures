@@ -1,0 +1,31 @@
+*** Begin Patch
+*** Update File: c:\Users\User\new\patches\VERIFICATION_CHECKLIST.md
+@@
+-- After you approve, I will apply patches in order (Fix A -> re-run tests -> leverage sweep -> UI) and report full pre/post metrics and logs.
+-
+-```
++-- After you approve, I will apply patches in order (Fix A -> re-run tests -> leverage sweep -> UI) and report full pre/post metrics and logs.
++
++```
++
++6) Read-only runtime trace & request persistence (added by recent patch)
++   - Purpose: aid post-mortem and reproducibility by emitting a compact orchestrator runtime snapshot
++     and persisting the full incoming strategy request parameters in backtest artifacts.
++   - Runtime trace (non-invasive): `StrategyOrchestrator.step()` now logs a single-line, read-only
++     entry `orchestrator_trace` containing: `symbol`, `cfg.order_quantity`, `cfg.leverage`,
++     `last_signal.score`, `entry_signal` and `position_size`. This log is purely informational
++     and will not change runtime behavior.
++   - Artifact persistence: `StrategySimulator.run_simulation()` includes a deep-copied
++     `request_parameters` field in the returned results dictionary so saved backtest JSONs
++     will contain the full request payload used for that run.
++   - How to verify:
++     - Run a backtest via the API or scripts and inspect logs for lines containing
++       `orchestrator_trace` to see the compact snapshot.
++     - Inspect backtest result JSON (`backtest_results/*.json` or returned API payload)
++       and confirm presence of `request_parameters` with the expected keys/values.
++   - Notes:
++     - The trace avoids any sensitive fields and is logged at INFO level.
++     - If any non-serializable objects are present in parameters, they are stored as
++       a string fallback to avoid breaking result generation.
++
+*** End Patch

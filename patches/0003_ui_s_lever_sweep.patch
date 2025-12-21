@@ -1,0 +1,65 @@
+*** Begin Patch
+*** Update File: c:\Users\User\new\yona_vanguard_futures\gui\widgets\strategy_analysis_dialog.py
+@@
+         # S5: 공격적 레버리지 가상 시나리오를 별도의 표 형태로 표시 (접기 가능)
+         s5 = scenarios.get("S5") or {}
+         s5_inner = self._create_aggressive_s5_table(s5)
+         s5_section = self._create_collapsible_simulation_section("Simulation 5 result (공격적 레버리지 가상)", s5_inner, initial_open=False)
+         sims_layout.addWidget(s5_section)
++
++        # S_LEVER_SWEEP: optional leverage sweep results (single summary + candidate table)
++        s_lever = scenarios.get("S_LEVER_SWEEP") or scenarios.get("S6") or None
++        if s_lever:
++            try:
++                inner_ls = self._create_leverage_sweep_section(s_lever)
++            except Exception:
++                inner_ls = QLabel("레버리지 스윕 결과를 렌더링할 수 없습니다.")
++            ls_section = self._create_collapsible_simulation_section("Simulation 6 result (Leverage sweep)", inner_ls, initial_open=False)
++            sims_layout.addWidget(ls_section)
+@@
+     def _create_collapsible_simulation_section(self, title: str, inner_widget: QWidget, initial_open: bool = False):
+         box = QWidget()
+@@
+         return section
++
++    def _create_leverage_sweep_section(self, sweep_data: dict) -> QWidget:
++        """Render a compact summary and table for leverage sweep results.
++
++        Expected `sweep_data` shape (backend):
++        {
++          "label": "leverage_sweep",
++          "parameters": { ... best combo ... },
++          "performance": { ... chosen candidate ... },
++          "evaluated_candidates": [ {"leverage_x":5, "profit_percentage":..., "max_drawdown_pct":..., "accepted":True}, ... ],
++          "valid": True
++        }
++        """
++        w = QWidget()
++        layout = QVBoxLayout(w)
++        layout.setContentsMargins(6,6,6,6)
++        layout.setSpacing(6)
++
++        perf = sweep_data.get("performance", {}) or {}
++        rec = sweep_data.get("recommended_leverage_x") or (perf.get("recommended_leverage_x") if perf else None)
++        status = sweep_data.get("status", "")
++
++        header = QLabel(f"권장 레버리지: {str(rec) + 'X' if rec else 'N/A'}  (상태: {status})")
++        header.setStyleSheet("color: #FFD54F; font-weight: bold;")
++        layout.addWidget(header)
++
++        # Candidates table
++        evals = sweep_data.get("evaluated_candidates", []) or []
++        table = QTableWidget()
++        table.setColumnCount(5)
++        table.setHorizontalHeaderLabels(["Leverage", "Profit %", "Max DD %", "Accepted", "Final Balance"])
++        table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
++        table.setRowCount(len(evals))
++        for r, e in enumerate(evals):
++            table.setItem(r, 0, QTableWidgetItem(str(e.get("leverage_x", "-"))))
++            table.setItem(r, 1, QTableWidgetItem(f"{float(e.get('profit_percentage') or 0.0):.2f}%"))
++            table.setItem(r, 2, QTableWidgetItem(f"{float(e.get('max_drawdown_pct') or 0.0):.2f}%"))
++            table.setItem(r, 3, QTableWidgetItem(str(bool(e.get("accepted", False)))))
++            table.setItem(r, 4, QTableWidgetItem(str(e.get("final_balance", "-"))))
++        layout.addWidget(table)
++        return w
+*** End Patch

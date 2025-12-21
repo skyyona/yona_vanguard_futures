@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: c:\Users\User\new\yona_vanguard_futures\backtesting_backend\api\backtest_router.py
+@@
+ 	# S1: 기본 기간 전체
+ 	best_combo_s1, best_metrics_s1, best_score_s1 = _run_grid_search(df)
+@@
+-	# S1 기반 기본 파라미터/레버리지 추천
+-	max_dd_pct_s1 = float(best_metrics_s1.get("max_drawdown_pct", 0.0) or 0.0)
+-	liquidation_protection_pct = max(0.0, min(50.0, max_dd_pct_s1 * 1.5))
+-
+-	best_parameters_s1 = dict(best_combo_s1)
+-	best_parameters_s1.update({
+-		"liquidation_protection_pct": liquidation_protection_pct,
+-		"direction": "LONG",
+-	})
+-
+-	recommended_leverage_s1 = _compute_recommended_leverage(best_metrics_s1)
++	# S1 기반 기본 파라미터/레버리지 추천
++	max_dd_pct_s1 = float(best_metrics_s1.get("max_drawdown_pct", 0.0) or 0.0)
++	liquidation_protection_pct = max(0.0, min(50.0, max_dd_pct_s1 * 1.5))
++
++	best_parameters_s1 = dict(best_combo_s1)
++	best_parameters_s1.update({
++		"liquidation_protection_pct": liquidation_protection_pct,
++		"direction": "LONG",
++	})
++
++	# Heuristic fallback (existing): quick recommendation based on metrics
++	recommended_leverage_s1 = _compute_recommended_leverage(best_metrics_s1)
++
++	# --- Leverage sweep (controlled, applied only to best S1 combo) ---
++	def _sweep_leverages_over_best_combo(symbol, interval, df_local, initial_balance, base_params, best_combo, candidates=None, allowed_loss_frac=0.8):
++		"""Evaluate a small set of leverage candidates for the given best combo.
++		Returns a dict containing recommended_leverage_x, status, and evaluated_candidates.
++		This helper intentionally reuses core_run_backtest to keep behavior consistent.
++		"""
++		if candidates is None:
++			candidates = [5,10,15,20,25,30,35,40,45,50]
++		results = []
++		from backtesting_backend.core.strategy_core import run_backtest as core_run
++		for L in candidates:
++			params_local = dict(base_params)
++			params_local.update(best_combo)
++			# call core backtest using explicit leverage L
++			sim = core_run(symbol=symbol, interval=interval, df=df_local, initial_balance=initial_balance, leverage=L, params=params_local)
++			final_balance = sim.get("final_balance")
++			max_dd_pct = float(sim.get("max_drawdown_pct", 0.0) or 0.0)
++			aborted = bool(sim.get("aborted_early", False)) or bool(sim.get("insufficient_trades", False))
++			est_equity_loss_frac = (max_dd_pct / 100.0) * L
++			accepted = (not aborted) and (final_balance is not None) and (final_balance > 0) and (est_equity_loss_frac <= allowed_loss_frac)
++			results.append({
++				"leverage_x": L,
++				"final_balance": final_balance,
++				"profit": sim.get("profit"),
++				"profit_percentage": sim.get("profit_percentage"),
++				"max_drawdown_pct": max_dd_pct,
++				"total_trades": sim.get("total_trades"),
++				"aborted_early": aborted,
++				"estimated_equity_loss_pct_at_max_drawdown": est_equity_loss_frac * 100.0,
++				"accepted": accepted,
++			})
++		# choose best accepted candidate by profit (then by leverage)
++		accepted_candidates = [r for r in results if r["accepted"]]
++		if accepted_candidates:
++			accepted_candidates.sort(key=lambda x: (float(x.get("profit", -1) or -1), int(x.get("leverage_x", 0))), reverse=True)
++			chosen = accepted_candidates[0]
++			status = "ok"
++			est_loss_pct = chosen.get("estimated_equity_loss_pct_at_max_drawdown")
++		else:
++			chosen = None
++			status = "drawdown_too_high" if results else "insufficient_data"
++			est_loss_pct = None
++		return {
++			"recommended_leverage_x": None if chosen is None else int(chosen.get("leverage_x")),
++			"status": status,
++			"max_equity_loss_limit_pct": allowed_loss_frac * 100.0,
++			"estimated_equity_loss_pct_at_max_drawdown": est_loss_pct,
++			"evaluated_candidates": results,
++		}
++
++	# Run sweep only if S1 metrics appear sufficient (avoid exploding sims)
++	try:
++		if best_metrics_s1 and int(best_metrics_s1.get("total_trades", 0) or 0) >= 5 and not bool(best_metrics_s1.get("aborted_early", False)):
++			# base_params is the shared param template used earlier in the function
++			_leverage_sweep_result = _sweep_leverages_over_best_combo(symbol, interval, df, initial_balance, base_params, best_combo_s1)
++			# If sweep produced an actionable recommendation, prefer it over the heuristic
++			if _leverage_sweep_result and _leverage_sweep_result.get("status") == "ok":
++				recommended_leverage_s1 = _leverage_sweep_result
++		except Exception:
++			# keep heuristic recommendation on failure
++			pass
+*** End Patch
