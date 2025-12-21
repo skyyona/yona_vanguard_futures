@@ -1,0 +1,27 @@
+# Ignore temporary debug artifacts created during local runs
+tmp_*.json
+tmp_score_debug*
+tmp_risk_debug*
+
+# Bytecode / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyc
+
+# Pytest cache
+.pytest_cache/
+
+# Logs
+logs/*.log
+
+# Virtualenvs
+.venv/
+venv/
+venv*/
+.venv*/
+
+# Editor / OS
+.vscode/
+Thumbs.db
+*.swp
