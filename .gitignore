@@ -27,3 +27,6 @@ results_pre_promote_backup_*/
 *.env
 engine_backend/.env
 backtesting_backend/.env
+
+# Ignore local virtualenvs created by tools/IDE
+Vanguard/
