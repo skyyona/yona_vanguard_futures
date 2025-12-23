@@ -79,9 +79,9 @@ def main():
     interval = args.interval
     df_raw = load_csv(symbol, interval, args.start, args.end)
 
-    analyzer = StrategyAnalyzer()
+    # dump both results for inspection into outputs/legacy/equiv_results
     sim = StrategySimulator(analyzer=analyzer)
-
+    results_dir = os.path.join(legacy_dir(), 'equiv_results')
     # representative scalping params
     params = {
         'fast_ema_period': 3,
