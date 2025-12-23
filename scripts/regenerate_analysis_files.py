@@ -4,6 +4,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 from scripts.generate_analysis_payload import build_analysis
+from scripts.output_config import legacy_dir
 
 for sym in ('PIPPINUSDT','INUSDT'):
     out = build_analysis(sym, '5m')
@@ -32,6 +33,8 @@ for sym in ('PIPPINUSDT','INUSDT'):
         return v
 
     out_s = sanitize(out)
-    with open(fname,'w',encoding='utf-8') as f:
+    out_path = os.path.join(legacy_dir(), fname)
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    with open(out_path,'w',encoding='utf-8') as f:
         json.dump(out_s, f, ensure_ascii=False, indent=2)
-    print('Wrote', fname)
+    print('Wrote', out_path)

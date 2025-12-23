@@ -13,6 +13,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from backtesting_backend.core.strategy_simulator import StrategySimulator
+from scripts.output_config import legacy_dir
 
 
 def parse_candidate_row(row: dict) -> dict:
@@ -57,7 +58,7 @@ def main():
     p.add_argument('--symbol', required=True)
     p.add_argument('--interval', default='5m')
     p.add_argument('--samples', type=int, default=5)
-    p.add_argument('--outdir', default='results/traces')
+    p.add_argument('--outdir', default=None)
     p.add_argument('--slippage', type=float, default=0.001)
     p.add_argument('--fee', type=float, default=0.0005)
     p.add_argument('--noise-sigma', type=float, default=0.001)
@@ -73,8 +74,9 @@ def main():
         print('Market data CSV missing for symbol/interval:', symbol, args.interval)
         return
 
-    os.makedirs(args.outdir, exist_ok=True)
-    traces_dir = os.path.join(args.outdir, symbol.lower())
+    outdir = args.outdir if args.outdir else os.path.join(legacy_dir(), 'traces')
+    os.makedirs(outdir, exist_ok=True)
+    traces_dir = os.path.join(outdir, symbol.lower())
     os.makedirs(traces_dir, exist_ok=True)
 
     # read mc csv rows as candidates

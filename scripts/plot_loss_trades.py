@@ -15,6 +15,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from backtesting_backend.core.strategy_analyzer import StrategyAnalyzer
+from scripts.output_config import legacy_dir
 
 
 def read_all_trades(traces_dir: str):
@@ -111,7 +112,7 @@ def main():
     args = p.parse_args()
 
     symbol = args.symbol.upper()
-    traces_dir = os.path.join('results', 'traces', symbol.lower())
+    traces_dir = os.path.join(legacy_dir(), 'traces', symbol.lower())
     if not os.path.exists(traces_dir):
         print('Traces directory not found:', traces_dir)
         return

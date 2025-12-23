@@ -14,6 +14,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from backtesting_backend.core.strategy_simulator import StrategySimulator
+from scripts.output_config import legacy_dir
 
 
 def parse_params_from_wf_row(row: dict) -> dict:
@@ -58,7 +59,7 @@ def main():
     p.add_argument('--symbol', required=True)
     p.add_argument('--interval', default='5m')
     p.add_argument('--max-candidates', type=int, default=3)
-    p.add_argument('--out', default='results/param_sweep_quick.json')
+    p.add_argument('--out', default=None)
     args = p.parse_args()
 
     symbol = args.symbol.upper()
@@ -124,10 +125,12 @@ def main():
         best = g2.sort_values(by='profit_pct', ascending=False).head(3).to_dict(orient='records')
         out['summary'].append({'rank': r, 'best': best})
 
-    with open(args.out, 'w', encoding='utf-8') as fh:
+    out_path = args.out if args.out else os.path.join(legacy_dir(), 'param_sweep_quick.json')
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    with open(out_path, 'w', encoding='utf-8') as fh:
         json.dump(out, fh, indent=2)
 
-    print('Wrote sweep summary to', args.out)
+    print('Wrote sweep summary to', out_path)
 
 
 if __name__ == '__main__':
