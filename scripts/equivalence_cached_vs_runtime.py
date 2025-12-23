@@ -5,6 +5,7 @@ Usage:
 """
 from __future__ import annotations
 import os, sys, json, math
+from scripts.output_config import legacy_dir
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -112,9 +113,10 @@ def main():
         print('DIFFERENCES FOUND:')
         for d in diffs:
             print(' -', d)
-        # dump both results for inspection
+        # dump both results for inspection into outputs/legacy/results
         # sanitize outputs to avoid including user capital/leverage in shared files
-        os.makedirs('results', exist_ok=True)
+        results_dir = os.path.join(legacy_dir(), 'results')
+        os.makedirs(results_dir, exist_ok=True)
         def _sanitize(r):
             if not isinstance(r, dict):
                 return r
@@ -124,11 +126,13 @@ def main():
                     s.pop(k, None)
             return s
 
-        with open('results/equiv_runtime.json', 'w', encoding='utf-8') as fh:
+        runtime_path = os.path.join(results_dir, 'equiv_runtime.json')
+        cached_path = os.path.join(results_dir, 'equiv_cached.json')
+        with open(runtime_path, 'w', encoding='utf-8') as fh:
             json.dump(_sanitize(res_runtime), fh, default=str, indent=2)
-        with open('results/equiv_cached.json', 'w', encoding='utf-8') as fh:
+        with open(cached_path, 'w', encoding='utf-8') as fh:
             json.dump(_sanitize(res_cached), fh, default=str, indent=2)
-        print('Wrote results/equiv_runtime.json and results/equiv_cached.json')
+        print(f'Wrote {runtime_path} and {cached_path}')
         return 2
 
 if __name__ == '__main__':

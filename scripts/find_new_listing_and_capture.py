@@ -1,4 +1,5 @@
-import requests, time, json
+import requests, time, json, os
+from scripts.output_config import legacy_dir
 
 BASE = 'https://fapi.binance.com'
 exchange_info_url = BASE + '/fapi/v1/exchangeInfo'
@@ -53,7 +54,9 @@ if not found:
         print('Fallback pick', found, 'candles=', min_cnt)
     else:
         print('No valid candidate found. Exiting.')
-        with open('scripts/find_new_listing_report.json','w',encoding='utf-8') as f:
+        out_path = os.path.join(legacy_dir(), 'find_new_listing_report.json')
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        with open(out_path,'w',encoding='utf-8') as f:
             json.dump(out, f, ensure_ascii=False, indent=2)
         raise SystemExit(1)
 
@@ -69,7 +72,9 @@ try:
 except Exception as e:
     result = {'symbol': found, 'error': str(e)}
 
-with open('scripts/find_new_listing_report.json','w',encoding='utf-8') as f:
+out_path = os.path.join(legacy_dir(), 'find_new_listing_report.json')
+os.makedirs(os.path.dirname(out_path), exist_ok=True)
+with open(out_path,'w',encoding='utf-8') as f:
     json.dump({'out': out, 'result': result}, f, ensure_ascii=False, indent=2)
 
 print(json.dumps({'out_sample': out['candidates_checked'][:10], 'result': result}, ensure_ascii=False, indent=2))
