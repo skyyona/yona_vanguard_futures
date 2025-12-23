@@ -15,6 +15,7 @@ if SCRIPTS_DIR not in sys.path:
 import run_xpin_mtf
 
 from backtesting_backend.database.db_manager import BacktestDB
+from scripts.output_config import legacy_dir
 import backend.core.new_strategy.backtest_adapter as adapter_mod
 import backend.core.new_strategy.orchestrator as orch_mod
 
@@ -96,7 +97,7 @@ def run_sweep():
     adapter_mod.BacktestConfig = orig_BacktestConfig
     orch_mod.StrategyOrchestrator.step = orig_step
 
-    out_dir = os.path.join(os.getcwd(), 'backtest_results_mtf')
+    out_dir = os.path.join(legacy_dir(), 'backtest_results_mtf')
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f'param_sweep_{symbol}.json')
     with open(out_path, 'w', encoding='utf-8') as f:

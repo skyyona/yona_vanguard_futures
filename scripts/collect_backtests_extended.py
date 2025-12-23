@@ -6,7 +6,9 @@ from backtesting_backend.api_client.binance_client import BinanceClient
 from backtesting_backend.database.repositories.kline_repository import KlineRepository
 from backtesting_backend.core.strategy_core import run_backtest
 
-OUT_DIR = os.path.join(os.getcwd(), 'backtest_results_extended')
+from scripts.output_config import legacy_dir
+
+OUT_DIR = os.path.join(legacy_dir(), 'backtest_results_extended')
 os.makedirs(OUT_DIR, exist_ok=True)
 
 SYMBOLS = ['BTCUSDT','ETHUSDT','SOLUSDT','ADAUSDT','XRPUSDT','LTCUSDT']

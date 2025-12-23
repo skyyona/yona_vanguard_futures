@@ -18,6 +18,7 @@ import json
 import os
 import sys
 from typing import Any, Dict, List, Optional
+from scripts.output_config import legacy_dir
 
 
 def find_trades(obj: Any) -> Optional[List[Dict[str, Any]]]:
@@ -161,9 +162,11 @@ def main():
 
         res = analyze_trades(trades, initial_balance)
 
-        # write summary
+        # write summary into outputs/legacy/backtest_results_mtf (keep original read location)
         sym = args.symbol or os.path.basename(fpath).split('.')[0]
-        out_path = os.path.join(results_dir, f'analysis_{sym}.json')
+        out_dir = os.path.join(legacy_dir(), 'backtest_results_mtf')
+        os.makedirs(out_dir, exist_ok=True)
+        out_path = os.path.join(out_dir, f'analysis_{sym}.json')
         with open(out_path, 'w', encoding='utf-8') as ofh:
             json.dump(res, ofh, ensure_ascii=False, indent=2)
 
