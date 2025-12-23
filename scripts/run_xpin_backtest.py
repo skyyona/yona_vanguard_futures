@@ -7,12 +7,12 @@ import datetime as dt
 from backtesting_backend.database.db_manager import BacktestDB
 from backtesting_backend.database.repositories.kline_repository import KlineRepository
 from backtesting_backend.core.strategy_core import run_backtest
+from scripts.output_config import backtest_dir
 
 SYMBOL = 'XPINUSDT'
 INTERVAL = '1m'
 DAYS = 7
-OUT_DIR = os.path.join(os.getcwd(), 'backtest_results')
-os.makedirs(OUT_DIR, exist_ok=True)
+OUT_DIR = backtest_dir()
 
 async def main():
     now_ms = int(time.time() * 1000)
