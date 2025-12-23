@@ -18,8 +18,8 @@ jobs:
       - name: Install test deps
         run: python -m pip install --upgrade pip pytest
 
-      - name: Run parity pytest
-        run: python -m pytest -q tests/test_parity_outputs.py
+      - name: Run full test suite
+        run: python -m pytest -q
 
       - name: Run parity outputs check (PowerShell)
         shell: pwsh
