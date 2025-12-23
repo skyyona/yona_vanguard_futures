@@ -17,12 +17,13 @@ jobs:
 
       - name: Install test deps
         run: |
-          python -m pip install --upgrade pip pytest
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install pytest pandas numpy
           if [ -f yona_vanguard_futures/requirements-test.txt ]; then
-            python -m pip install -r yona_vanguard_futures/requirements-test.txt || true
+            python -m pip install -r yona_vanguard_futures/requirements-test.txt
           fi
           if [ -f requirements-test.txt ]; then
-            python -m pip install -r requirements-test.txt || true
+            python -m pip install -r requirements-test.txt
           fi
 
       - name: Run full test suite and capture logs
