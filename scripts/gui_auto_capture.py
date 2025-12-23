@@ -18,6 +18,7 @@ import urllib.parse
 import urllib.request
 
 from PySide6.QtWidgets import QApplication
+from scripts.output_config import legacy_dir
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, ROOT)
@@ -85,7 +86,7 @@ def fetch_analysis(symbol: str, timeout=8):
 
 
 def ensure_out_dir():
-    out_dir = os.path.join(os.path.dirname(__file__), 'screenshots')
+    out_dir = os.path.join(legacy_dir(), 'screenshots')
     os.makedirs(out_dir, exist_ok=True)
     return out_dir
 

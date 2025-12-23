@@ -1,9 +1,10 @@
 import json
 import os
+from scripts.output_config import legacy_dir
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-IN = os.path.join(ROOT, 'scripts', 'tmp_latest_analysis.json')
-OUT = os.path.join(ROOT, 'scripts', 'tmp_mapped_ui_payload.json')
+IN = os.path.join(legacy_dir(), 'tmp_latest_analysis.json')
+OUT = os.path.join(legacy_dir(), 'tmp_mapped_ui_payload.json')
 
 with open(IN, 'r', encoding='utf-8') as f:
     row = json.load(f)

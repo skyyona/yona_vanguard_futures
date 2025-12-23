@@ -25,7 +25,9 @@ TARGET_SYMBOLS = [
     'DOGEUSDT'
 ]
 
-OUT_PATH = os.path.join(os.path.dirname(__file__), 'all_strategy_analysis_results.json')
+from scripts.output_config import legacy_dir
+
+OUT_PATH = os.path.join(legacy_dir(), 'all_strategy_analysis_results.json')
 
 
 def fetch(symbol, period='1d', interval='1m', timeout=30):

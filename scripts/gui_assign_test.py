@@ -23,7 +23,8 @@ def fetch_analysis(symbol='SQDUSDT'):
     except Exception as e:
         # fallback: load last captured analysis (offline test)
         print('[TEST] Backend fetch failed, falling back to local capture:', e)
-        local_path = os.path.join(os.path.dirname(__file__), 'find_new_listing_report.json')
+        from scripts.output_config import legacy_dir
+        local_path = os.path.join(legacy_dir(), 'find_new_listing_report.json')
         if os.path.exists(local_path):
             with open(local_path, 'r', encoding='utf-8') as f:
                 payload = json.load(f)
@@ -141,13 +142,13 @@ def main():
     alpha_exec = payload.get('data', {}).get('engine_results', {}).get('alpha', {}).get('executable_parameters')
     if alpha_exec:
         # For this direct-apply test, simulate that user confirmed leverage application
-            engine_widget.update_strategy_from_analysis(
-                payload.get('data', {}).get('symbol','SQDUSDT'),
-                payload.get('data', {}).get('max_target_profit',{}).get('alpha',0),
-                payload.get('data', {}).get('risk_management',{}),
-                alpha_exec,
-                {'leverage_user_confirmed': True}
-            )
+        engine_widget.update_strategy_from_analysis(
+            payload.get('data', {}).get('symbol','SQDUSDT'),
+            payload.get('data', {}).get('max_target_profit',{}).get('alpha',0),
+            payload.get('data', {}).get('risk_management',{}),
+            alpha_exec,
+            {'leverage_user_confirmed': True}
+        )
         print('[TEST] After apply - leverage slider value:', engine_widget.leverage_slider.value(), engine_widget.leverage_value_label.text())
         print('[TEST] After apply - funds slider value:', engine_widget.funds_slider.value(), engine_widget.funds_value_label.text())
 
