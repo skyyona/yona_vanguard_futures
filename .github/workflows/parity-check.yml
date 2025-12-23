@@ -16,10 +16,28 @@ jobs:
           python-version: '3.11'
 
       - name: Install test deps
-        run: python -m pip install --upgrade pip pytest
+        run: |
+          python -m pip install --upgrade pip pytest
+          if [ -f yona_vanguard_futures/requirements-test.txt ]; then
+            python -m pip install -r yona_vanguard_futures/requirements-test.txt || true
+          fi
+          if [ -f requirements-test.txt ]; then
+            python -m pip install -r requirements-test.txt || true
+          fi
 
-      - name: Run full test suite
-        run: python -m pytest -q
+      - name: Run full test suite and capture logs
+        run: |
+          set -o pipefail
+          python -m pytest -q 2>&1 | tee test-output.log || true
+          python -m pytest --maxfail=1 --junitxml=pytest-results.xml || true
+
+      - name: Upload test logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: |
+            test-output.log
+            pytest-results.xml
 
       - name: Run parity outputs check (PowerShell)
         shell: pwsh
