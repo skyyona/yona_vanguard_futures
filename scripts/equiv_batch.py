@@ -9,6 +9,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 import pandas as pd
+from scripts.output_config import legacy_dir
 from backtesting_backend.core.strategy_analyzer import StrategyAnalyzer
 from backtesting_backend.core.strategy_simulator import StrategySimulator
 
@@ -82,8 +83,9 @@ def main():
         {'fast_ema_period':3,'slow_ema_period':5,'stop_loss_pct':0.02,'take_profit_pct':0.0,'position_size':0.02,'volume_spike_factor':2.0,'volume_avg_period':20},
     ]
 
-    os.makedirs('results', exist_ok=True)
-    summary_path = os.path.join('results','equiv_summary.csv')
+    results_dir = os.path.join(legacy_dir(), 'equiv_results')
+    os.makedirs(results_dir, exist_ok=True)
+    summary_path = os.path.join(results_dir, 'equiv_summary.csv')
     with open(summary_path, 'w', newline='', encoding='utf-8') as sf:
         writer = csv.DictWriter(sf, fieldnames=['symbol','case_id','equivalent','notes'])
         writer.writeheader()
@@ -104,9 +106,9 @@ def main():
                 writer.writerow({'symbol':sym,'case_id':case_id,'equivalent':eq,'notes':notes})
 
                 # write sanitized per-case JSONs
-                with open(os.path.join('results', f"equiv_{case_id}_runtime.json"), 'w', encoding='utf-8') as fh:
+                with open(os.path.join(results_dir, f"equiv_{case_id}_runtime.json"), 'w', encoding='utf-8') as fh:
                     json.dump(sanitize(res_runtime), fh, default=str, indent=2)
-                with open(os.path.join('results', f"equiv_{case_id}_cached.json"), 'w', encoding='utf-8') as fh:
+                with open(os.path.join(results_dir, f"equiv_{case_id}_cached.json"), 'w', encoding='utf-8') as fh:
                     json.dump(sanitize(res_cached), fh, default=str, indent=2)
 
     print('Wrote summary to', summary_path)
