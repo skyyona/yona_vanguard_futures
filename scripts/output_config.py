@@ -19,5 +19,9 @@ def parity_dir() -> str:
     d = os.path.join(OUTPUT_ROOT, 'parity')
     return ensure(d)
 
+def legacy_dir() -> str:
+    d = os.path.join(OUTPUT_ROOT, 'legacy')
+    return ensure(d)
+
 def outputs_root() -> str:
     return ensure(OUTPUT_ROOT)
