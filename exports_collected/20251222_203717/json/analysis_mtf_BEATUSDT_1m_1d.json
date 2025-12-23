@@ -1,0 +1,27 @@
+{
+  "summary": {
+    "total_trades": 1,
+    "wins": 1,
+    "losses": 0,
+    "win_rate_pct": 100.0,
+    "avg_win": 31.51121009,
+    "avg_loss": null,
+    "gross_win": 31.51121009,
+    "gross_loss": 0.0,
+    "total_fees": 0.0,
+    "net_pnl": 31.51121009,
+    "rows_with_pnl": 1
+  },
+  "trades": [
+    {
+      "entry_time": "2025-12-22 18:56:27.400924",
+      "exit_time": "2025-12-22 08:46:00+00:00",
+      "entry_price": 4.0954095,
+      "exit_price": 4.2282,
+      "qty": 244.2002442002442,
+      "pnl": 31.511210092307852,
+      "fees": 0.0,
+      "exit_reason": "BACKTEST_END"
+    }
+  ]
+}

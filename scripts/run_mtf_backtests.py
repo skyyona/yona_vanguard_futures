@@ -5,9 +5,9 @@ from backtesting_backend.database.db_manager import BacktestDB
 from backtesting_backend.api_client.binance_client import BinanceClient
 from backtesting_backend.database.repositories.kline_repository import KlineRepository
 from backtesting_backend.core.strategy_core import run_backtest
+from scripts.output_config import backtest_mtf_dir
 
-OUT_DIR = os.path.join(os.getcwd(), 'backtest_results_mtf')
-os.makedirs(OUT_DIR, exist_ok=True)
+OUT_DIR = backtest_mtf_dir()
 
 SYMBOLS = ['BTCUSDT','JELLYJELLYUSDT']
 INTERVAL = '1m'

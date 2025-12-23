@@ -7,7 +7,7 @@ Read-only: creates no modifications to production code; writes report to workspa
 import os
 import sys
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import pandas as pd
 import logging
 from dataclasses import asdict
@@ -21,6 +21,25 @@ if os.path.isdir(YVF) and YVF not in sys.path:
     sys.path.insert(0, YVF)
 elif WORKSPACE_ROOT not in sys.path:
     sys.path.insert(0, WORKSPACE_ROOT)
+
+# outputs config
+try:
+    from scripts.output_config import parity_dir
+except Exception:
+    # provide a safe fallback that targets outputs/parity under the workspace root
+    def parity_dir():
+        return os.path.join(WORKSPACE_ROOT, 'outputs', 'parity')
+
+try:
+    # ensure parity dir and debug subdir exist
+    pd_path = parity_dir()
+    if pd_path:
+        DEBUG_DIR = os.path.join(pd_path, 'debug')
+        os.makedirs(DEBUG_DIR, exist_ok=True)
+    else:
+        DEBUG_DIR = None
+except Exception:
+    DEBUG_DIR = None
 
 # Legacy core runner
 from backtesting_backend.core.strategy_core import run_backtest as core_run_backtest
@@ -56,7 +75,7 @@ root_logger.addHandler(log_handler)
 
 
 def make_synthetic_df(rows=30, start_price=100.0, spike_at=10):
-    ts0 = datetime.utcnow().replace(microsecond=0)
+    ts0 = datetime.now(timezone.utc).replace(microsecond=0)
     rows_list = []
     price = start_price
     for i in range(rows):
@@ -155,7 +174,7 @@ def run_new_adapter(df, params):
     # Use the real MarketDataCache from data_fetcher so the orchestrator
     # sees the exact same API it expects (has_sufficient_data, get_latest_candles, ...)
     try:
-        from backend.core.new_strategy.data_fetcher import MarketDataCache
+        from backend.core.new_strategy.singletons import get_shared_cache
         try:
             if not hasattr(orch, 'fetcher') or orch.fetcher is None:
                 class _F:
@@ -163,7 +182,12 @@ def run_new_adapter(df, params):
                 orch.fetcher = _F()
         except Exception:
             pass
-        orch.fetcher.cache = MarketDataCache()
+        # Use the shared singleton MarketDataCache
+        orch.fetcher.cache = get_shared_cache()
+        try:
+            logging.getLogger(__name__).info("[parity_test] Assigned shared MarketDataCache id=%s", id(getattr(orch.fetcher, 'cache', None)))
+        except Exception:
+            pass
         # Pre-fill cache with at least the required number of candles so
         # orchestrator.step() will not raise InsufficientDataError on startup.
         try:
@@ -470,6 +494,8 @@ def run_new_adapter(df, params):
                     }
                 }
                 pre_name = f"tmp_score_debug_call_pre_{pre_dbg['ts']}_{orig_fn_meta.get('id')}_{pre_dbg['orch_signal_id']}.json"
+                if DEBUG_DIR:
+                    pre_name = os.path.join(DEBUG_DIR, pre_name)
                 with open(pre_name, 'w', encoding='utf-8') as _pf:
                     _pf.write(json.dumps(pre_dbg, ensure_ascii=False) + '\n')
             except Exception:
@@ -486,6 +512,8 @@ def run_new_adapter(df, params):
                     orig_call_args = {'args': [], 'kwargs': {'current_1m': current_1m, 'last_close': last_close, 'prev_1m': prev_1m, 'prev_3m': prev_3m, 'confirm_3m': confirm_3m}}
                     orig_args_dbg = {'ts': int(time.time() * 1000), 'orig_fn_meta': orig_fn_meta, 'orch_signal_id': id(getattr(orch, 'signal', None)), 'call': orig_call_args}
                     orig_args_name = f"tmp_score_debug_call_origargs_{orig_args_dbg['ts']}_{orig_fn_meta.get('id')}_{orig_args_dbg['orch_signal_id']}.json"
+                    if DEBUG_DIR:
+                        orig_args_name = os.path.join(DEBUG_DIR, orig_args_name)
                     with open(orig_args_name, 'w', encoding='utf-8') as _of:
                         _of.write(json.dumps(orig_args_dbg, default=str, ensure_ascii=False) + '\n')
                 except Exception:
@@ -503,6 +531,8 @@ def run_new_adapter(df, params):
                     import time
                     post_dbg = {'ts': int(time.time() * 1000), 'ret_repr': repr(ret), 'ret_type': type(ret).__name__, 'orig_fn_meta': orig_fn_meta, 'orch_signal_id': id(getattr(orch, 'signal', None))}
                     post_name = f"tmp_score_debug_call_post_{post_dbg['ts']}_{orig_fn_meta.get('id')}_{post_dbg['orch_signal_id']}.json"
+                    if DEBUG_DIR:
+                        post_name = os.path.join(DEBUG_DIR, post_name)
                     with open(post_name, 'w', encoding='utf-8') as _pf:
                         _pf.write(json.dumps(post_dbg, ensure_ascii=False) + '\n')
                 except Exception:
@@ -539,6 +569,8 @@ def run_new_adapter(df, params):
                                     }
                                 }
                                 class_args_name = f"tmp_score_debug_call_classargs_{class_call_dbg['ts']}_{class_call_dbg['class_fn_meta']['id']}_{class_call_dbg['orch_signal_id']}.json"
+                                if DEBUG_DIR:
+                                    class_args_name = os.path.join(DEBUG_DIR, class_args_name)
                                 with open(class_args_name, 'w', encoding='utf-8') as _cf:
                                     _cf.write(json.dumps(class_call_dbg, ensure_ascii=False) + '\n')
                             except Exception:
@@ -671,7 +703,10 @@ def run_new_adapter(df, params):
                             'orig_fn_meta': orig_fn_meta,
                             'class_fn_meta': class_meta,
                         }
-                        with open('tmp_score_debug.jsonl', 'a', encoding='utf-8') as _dbgf:
+                        tmp_name = 'tmp_score_debug.jsonl'
+                        if DEBUG_DIR:
+                            tmp_name = os.path.join(DEBUG_DIR, tmp_name)
+                        with open(tmp_name, 'a', encoding='utf-8') as _dbgf:
                             _dbgf.write(json.dumps(dbg, ensure_ascii=False) + '\n')
                 except Exception:
                     pass
@@ -713,6 +748,8 @@ def run_new_adapter(df, params):
                 except Exception:
                     sig_meta = repr(getattr(orch, 'signal', None))
                 fname = f"tmp_risk_debug_{int(time.time()*1000)}_{sig_meta['id'] if isinstance(sig_meta, dict) else 'noid'}.json"
+                if DEBUG_DIR:
+                    fname = os.path.join(DEBUG_DIR, fname)
                 with open(fname, 'w', encoding='utf-8') as _rf:
                     json.dump({"ts": int(time.time()*1000), "orch_signal": sig_meta, "args": [str(a), str(k)], "result": out}, _rf, ensure_ascii=False, indent=2)
             except Exception:
@@ -742,6 +779,8 @@ def run_new_adapter(df, params):
                     try:
                         # write per-call energy check debug file
                         fname = f"tmp_risk_energy_check_{int(time.time()*1000)}_{id(getattr(orch, 'signal', None))}.json"
+                        if DEBUG_DIR:
+                            fname = os.path.join(DEBUG_DIR, fname)
                         with open(fname, 'w', encoding='utf-8') as _ef:
                             json.dump({"ts": int(time.time()*1000), "last_signal_score": last_score, "threshold": thresh, "result": bool(res)}, _ef, ensure_ascii=False, indent=2)
                     except Exception:
@@ -883,14 +922,24 @@ def summarize_and_diff(legacy_res, new_res):
         "new_trades": len(new_trades),
     }
 
-    report_path = "parity_report.json"
-    with open(report_path, "w", encoding="utf-8") as f:
+    # determine canonical report path under outputs/parity if available
+    if parity_dir:
+        rpt_path = os.path.join(parity_dir(), 'parity_report.json')
+    else:
+        rpt_path = 'parity_report.json'
+    try:
+        rpt_dir = os.path.dirname(rpt_path)
+        if rpt_dir:
+            os.makedirs(rpt_dir, exist_ok=True)
+    except Exception:
+        pass
+    with open(rpt_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False, default=str)
 
-    print("Parity report written to", report_path)
+    print("Parity report written to", rpt_path)
     print("Summary:")
     print(json.dumps(summary, indent=2))
-    return report_path
+    return rpt_path
 
 
 def compare_legacy_vs_new_snapshot(legacy_res, new_res, df):
@@ -1018,16 +1067,25 @@ def compare_legacy_vs_new_snapshot(legacy_res, new_res, df):
         except Exception as e:
             focused.setdefault('errors', []).append(str(e))
 
-        # attach into parity_report.json
+        # attach into parity_report.json (use outputs/parity/ if available)
         try:
-            rpt_path = 'parity_report.json'
+            if parity_dir:
+                rpt_path = os.path.join(parity_dir(), 'parity_report.json')
+            else:
+                rpt_path = 'parity_report.json'
             with open(rpt_path, 'r', encoding='utf-8') as f:
                 rep = json.load(f)
         except Exception:
             rep = {'legacy': legacy_res, 'new': new_res}
 
         rep.setdefault('instrumentation', {})['focused_comparison'] = focused
-        with open('parity_report.json', 'w', encoding='utf-8') as f:
+        try:
+            rpt_dir = os.path.dirname(rpt_path)
+            if rpt_dir:
+                os.makedirs(rpt_dir, exist_ok=True)
+        except Exception:
+            pass
+        with open(rpt_path, 'w', encoding='utf-8') as f:
             json.dump(rep, f, indent=2, ensure_ascii=False, default=str)
 
         return focused
@@ -1042,11 +1100,18 @@ def compare_all_signals_in_report(df_rows=300, start_price=1000.0, spike_at=120)
     Results are appended under `instrumentation.window_comparison`.
     """
     try:
-        rpt_path = 'parity_report.json'
+        if parity_dir:
+            rpt_path = os.path.join(parity_dir(), 'parity_report.json')
+        else:
+            rpt_path = 'parity_report.json'
         with open(rpt_path, 'r', encoding='utf-8') as f:
             rep = json.load(f)
     except Exception as e:
-        return {'error': 'cannot open parity_report.json', 'exc': str(e)}
+        try:
+            bad = rpt_path
+        except Exception:
+            bad = 'parity_report.json'
+        return {'error': f'cannot open {bad}', 'exc': str(e)}
 
     new_res = rep.get('new', {})
     detailed = new_res.get('instrumentation', {}).get('orchestrator_steps_detailed', []) if isinstance(new_res, dict) else []
@@ -1135,7 +1200,7 @@ def compare_all_signals_in_report(df_rows=300, start_price=1000.0, spike_at=120)
                     ts = item.get('timestamp') or (item.get('result') or {}).get('timestamp')
                 if ts is not None:
                     import datetime
-                    dt = datetime.datetime.utcfromtimestamp(ts / 1000.0)
+                    dt = datetime.datetime.fromtimestamp(ts / 1000.0, datetime.timezone.utc)
                     # find nearest timestamp in df
                     diffs = [(abs((r['timestamp'] - dt).total_seconds()), i) for i, r in df.iterrows()]
                     diffs.sort()
@@ -1194,13 +1259,42 @@ def compare_all_signals_in_report(df_rows=300, start_price=1000.0, spike_at=120)
 
     # attach to report and write
     rep.setdefault('new', {}).setdefault('instrumentation', {})['window_comparison'] = results
-    with open('parity_report.json', 'w', encoding='utf-8') as f:
+    if parity_dir:
+        out_path = os.path.join(parity_dir(), 'parity_report.json')
+    else:
+        out_path = 'parity_report.json'
+    try:
+        out_dir = os.path.dirname(out_path)
+        if out_dir:
+            os.makedirs(out_dir, exist_ok=True)
+    except Exception:
+        pass
+    with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(rep, f, indent=2, ensure_ascii=False, default=str)
 
     return {'count': len(results)}
 
 
 def main():
+    # ensure parity output dir is writable before heavy work
+    try:
+        pdir = parity_dir()
+        if pdir:
+            os.makedirs(pdir, exist_ok=True)
+            test_path = os.path.join(pdir, '.parity_writable_test')
+            with open(test_path, 'w', encoding='utf-8') as _f:
+                _f.write('ok')
+            try:
+                os.remove(test_path)
+            except Exception:
+                pass
+        else:
+            print('ERROR: parity_dir() returned empty; aborting')
+            return
+    except Exception as e:
+        print('ERROR: parity output dir not writable:', e)
+        return
+
     df = make_synthetic_df(rows=300, start_price=1000.0, spike_at=120)
     params = {
         "position_size": 0.02,
@@ -1226,7 +1320,13 @@ def main():
     try:
         focused = compare_legacy_vs_new_snapshot(legacy, new, df)
         if focused is not None:
-            print('Focused comparison saved to parity_report.json under instrumentation.focused_comparison')
+            try:
+                if parity_dir:
+                    print('Focused comparison saved to', os.path.join(parity_dir(), 'parity_report.json'), 'under instrumentation.focused_comparison')
+                else:
+                    print('Focused comparison saved to parity_report.json under instrumentation.focused_comparison')
+            except Exception:
+                print('Focused comparison saved to parity_report.json under instrumentation.focused_comparison')
     except Exception as e:
         print('Focused comparison failed:', e)
     try:

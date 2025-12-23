@@ -1,0 +1,177 @@
+[
+  {
+    "rank": 1,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_1\\loss_trade_1.png",
+    "net_pnl": -2.2314841497445026,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 1,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_1\\loss_trade_2.png",
+    "net_pnl": -2.2270369760883497,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 1,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_1\\loss_trade_3.png",
+    "net_pnl": -2.2261820613023167,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 1,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_1\\loss_trade_4.png",
+    "net_pnl": -2.2083967569223457,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 1,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_1\\loss_trade_5.png",
+    "net_pnl": -2.1753979787199724,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 2,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_2\\loss_trade_1.png",
+    "net_pnl": -2.251184039654013,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 2,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_2\\loss_trade_2.png",
+    "net_pnl": -2.234662386125001,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 2,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_2\\loss_trade_3.png",
+    "net_pnl": -2.2098955542241088,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 2,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_2\\loss_trade_4.png",
+    "net_pnl": -2.206271649532745,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 2,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_2\\loss_trade_5.png",
+    "net_pnl": -2.198143106292959,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 5,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_5\\loss_trade_1.png",
+    "net_pnl": -2.249716456660566,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 5,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_5\\loss_trade_2.png",
+    "net_pnl": -2.2486169498773827,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 5,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_5\\loss_trade_3.png",
+    "net_pnl": -2.187205712345597,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 5,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_5\\loss_trade_4.png",
+    "net_pnl": -2.180720052747324,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 5,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_5\\loss_trade_5.png",
+    "net_pnl": -2.1595892997940256,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 6,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_6\\loss_trade_1.png",
+    "net_pnl": -1.125267698560882,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 6,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_6\\loss_trade_2.png",
+    "net_pnl": -1.1089203647991823,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 6,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_6\\loss_trade_3.png",
+    "net_pnl": -1.1002270310412288,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 6,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_6\\loss_trade_4.png",
+    "net_pnl": -1.0953328555417636,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 6,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_6\\loss_trade_5.png",
+    "net_pnl": -1.0945831599070093,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 7,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_7\\loss_trade_1.png",
+    "net_pnl": -1.117520882424047,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 7,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_7\\loss_trade_2.png",
+    "net_pnl": -1.1071844773883457,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 7,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_7\\loss_trade_3.png",
+    "net_pnl": -1.1036014544930508,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 7,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_7\\loss_trade_4.png",
+    "net_pnl": -1.0995946449327376,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  },
+  {
+    "rank": 7,
+    "file": "results\\traces\\pippinusdt\\plots\\rank_7\\loss_trade_5.png",
+    "net_pnl": -1.093084726594776,
+    "entry": "2025-11-21 12:30:00",
+    "exit": "2025-11-21 12:35:00"
+  }
+]

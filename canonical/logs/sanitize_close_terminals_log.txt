@@ -1,0 +1,3 @@
+﻿Close-run started: 2025-12-01T04:31:36.1426547+09:00
+No matching processes found.
+Close-run completed: 2025-12-01T04:31:36.5485804+09:00

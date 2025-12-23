@@ -1,0 +1,96 @@
+{
+  "symbol": "INUSDT",
+  "best_engine": "Alpha",
+  "volatility": 0.5162232892659695,
+  "metrics": {
+    "profit": -4.894226198822253,
+    "profit_pct": -0.4894226198822253,
+    "total_trades": 32,
+    "win_rate": 12.5,
+    "max_drawdown_pct": 0.5712274233235007
+  },
+  "risk_management": {
+    "stop_loss": 0.02,
+    "trailing_stop": 0.0,
+    "force_leverage": 1
+  },
+  "executable_parameters": {
+    "symbol": null,
+    "interval": null,
+    "leverage": 1,
+    "position_size": 0.02,
+    "stop_loss_pct": 0.02,
+    "take_profit_pct": 0.0,
+    "trailing_stop_pct": 0.0,
+    "fee_pct": 0.001,
+    "slippage_pct": 0.001,
+    "no_compounding": true,
+    "fast_ema_period": 5,
+    "slow_ema_period": 21
+  },
+  "engine_results": {
+    "alpha": {
+      "executable_parameters": {
+        "symbol": null,
+        "interval": null,
+        "leverage": 1,
+        "position_size": 0.02,
+        "stop_loss_pct": 0.02,
+        "take_profit_pct": 0.0,
+        "trailing_stop_pct": 0.0,
+        "fee_pct": 0.001,
+        "slippage_pct": 0.001,
+        "no_compounding": true,
+        "fast_ema_period": 5,
+        "slow_ema_period": 21
+      },
+      "confidence": 1.0,
+      "notes": [
+        "no clear volume spike - conservative sizing"
+      ]
+    },
+    "beta": {
+      "executable_parameters": {
+        "symbol": null,
+        "interval": null,
+        "leverage": 1,
+        "position_size": 0.02,
+        "stop_loss_pct": 0.015,
+        "take_profit_pct": 0.0,
+        "trailing_stop_pct": 0.0,
+        "fee_pct": 0.001,
+        "slippage_pct": 0.001,
+        "no_compounding": true,
+        "fast_ema_period": 3,
+        "slow_ema_period": 8
+      },
+      "confidence": 1.0,
+      "notes": [
+        "short-period EMA cross setup for fast-reacting entry"
+      ]
+    },
+    "gamma": {
+      "executable_parameters": {
+        "symbol": null,
+        "interval": null,
+        "leverage": 1,
+        "position_size": 0.02,
+        "stop_loss_pct": 0.02,
+        "take_profit_pct": 0.0,
+        "trailing_stop_pct": 0.0,
+        "fee_pct": 0.001,
+        "slippage_pct": 0.001,
+        "no_compounding": true,
+        "fast_ema_period": 9,
+        "slow_ema_period": 21
+      },
+      "confidence": 1.0,
+      "notes": [
+        "recent shallow pullback followed by small rebound"
+      ]
+    }
+  },
+  "is_new_listing": false,
+  "data_missing": false,
+  "confidence": 1.0
+}

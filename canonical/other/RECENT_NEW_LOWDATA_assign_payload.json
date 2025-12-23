@@ -1,0 +1,23 @@
+{
+  "engine": "Alpha",
+  "strategy_data": {
+    "analysis_data": {
+      "available_candles": 12,
+      "best_engine": null,
+      "confidence": 0.25,
+      "data_missing": true,
+      "engine_results": {},
+      "is_new_listing": true,
+      "min_required_candles_for_analysis": 60,
+      "risk_management": {
+        "leverage": 1,
+        "no_compounding": true,
+        "position_size_policy": "conservative_preset",
+        "stop_loss_pct": 0.005
+      }
+    },
+    "engine_name": "Alpha",
+    "executable_parameters": {},
+    "symbol": "RECENT_NEW_LOWDATA"
+  }
+}

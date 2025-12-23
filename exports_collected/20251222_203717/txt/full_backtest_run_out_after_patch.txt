@@ -1,0 +1,1 @@
+﻿Full synthetic backtest complete. Results written to: C:\Users\User\new\yona_vanguard_futures\scripts\..\results\full_backtest_results.csv

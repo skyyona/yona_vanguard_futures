@@ -1,0 +1,5 @@
+﻿Fallback run summary - 20251201T203919Z
+Workdir: .\vss_tmp\20251201T203919Z
+Kill log: .\results\kill_log_20251201T203919Z.txt
+Robocopy out: .\vss_tmp\20251201T203919Z\robocopy_out.txt
+Sanitize out: .\vss_tmp\20251201T203919Z\sanitize_out.txt

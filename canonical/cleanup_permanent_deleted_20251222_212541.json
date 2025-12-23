@@ -1,0 +1,13 @@
+{
+  "ts": "20251222_212541",
+  "moved_log": "cleanup_moved_custom_20251222_121721.json",
+  "verify_log": "cleanup_verify_20251222_212314.json",
+  "backup_present": true,
+  "deleted_count": 0,
+  "deleted": [],
+  "not_found": [
+    "C:\\Users\\User\\new\\canonical\\cleanup_archive_custom_20251222_121721\\logs\\requirements-runtime.txt",
+    "C:\\Users\\User\\new\\canonical\\cleanup_archive_custom_20251222_121721\\other\\qt6quick3druntimerender_metatypes.json"
+  ],
+  "errors": []
+}

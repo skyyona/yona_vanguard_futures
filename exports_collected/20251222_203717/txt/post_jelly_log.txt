@@ -1,0 +1,400 @@
+﻿2025-12-19 08:54:51,288 INFO [backtest] heartbeat: pid=6908 alive
+2025-12-19 08:55:01,302 INFO [backtest] heartbeat: pid=6908 alive
+2025-12-19 08:56:52,591 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 08:56:52,592 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 08:56:52,592 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 08:56:52,972 INFO [backtest] Backtesting Backend started
+2025-12-19 08:56:52,973 INFO [backtest] Process info: pid=21400 ppid=10992
+2025-12-19 08:56:52,973 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 08:57:02,987 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 08:57:12,964 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 08:57:17,214 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766101560001 endTime=1766102237206 limit=1000
+2025-12-19 08:57:17,350 INFO [backtest] BinanceClient.get_klines: fetched 11 items (page), last_open_time=1766102220000
+2025-12-19 08:57:17,358 INFO [backtest] Inserted 11 klines for ZRCUSDT 1m
+2025-12-19 08:58:43,762 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 08:58:43,764 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766102220001 endTime=1766102237206 limit=1000
+2025-12-19 08:59:30,884 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 08:59:40,901 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 08:59:50,903 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:00:00,909 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:00:10,911 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:00:20,912 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:00:30,912 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:00:40,933 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:00:50,933 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:01:00,936 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:01:10,941 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:01:20,959 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:01:30,976 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:01:40,977 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:01:50,970 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:02:00,980 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:02:10,995 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:02:21,010 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:02:31,030 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:02:41,038 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:02:51,053 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:03:01,052 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:03:11,080 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:03:21,075 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:03:31,089 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:03:41,083 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:03:51,087 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:04:01,107 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:04:11,110 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:04:21,099 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:04:31,102 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:04:41,106 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:04:51,107 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:05:01,100 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:05:11,105 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:05:21,105 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:05:31,122 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:05:41,121 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:05:51,122 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:06:01,116 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:06:11,117 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:06:21,129 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:06:31,136 INFO [backtest] heartbeat: pid=21400 alive
+2025-12-19 09:19:52,120 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 09:19:52,121 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:19:52,121 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:19:52,506 INFO [backtest] Backtesting Backend started
+2025-12-19 09:19:52,507 INFO [backtest] Process info: pid=10732 ppid=18836
+2025-12-19 09:19:52,507 INFO [backtest] heartbeat: pid=10732 alive
+2025-12-19 09:24:21,474 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:24:21,474 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:24:21,474 ERROR [backtest] Failed to load historical klines: DB not initialized. Call BacktestDB.get_instance().init() first.
+Traceback (most recent call last):
+  File "C:\Users\User\new\yona_vanguard_futures\backtesting_backend\core\data_loader.py", line 23, in load_historical_klines
+    latest = await self.kline_repo.get_latest_kline_time(symbol, interval)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\backtesting_backend\database\repositories\kline_repository.py", line 50, in get_latest_kline_time
+    async with self._session_factory() as session:
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\backtesting_backend\database\db_manager.py", line 61, in get_session
+    raise RuntimeError("DB not initialized. Call BacktestDB.get_instance().init() first.")
+RuntimeError: DB not initialized. Call BacktestDB.get_instance().init() first.
+2025-12-19 09:24:58,922 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 09:24:58,923 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:24:58,923 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:24:59,302 INFO [backtest] Backtesting Backend started
+2025-12-19 09:24:59,303 INFO [backtest] Process info: pid=22372 ppid=3800
+2025-12-19 09:24:59,303 INFO [backtest] heartbeat: pid=22372 alive
+2025-12-19 09:25:06,043 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766102220001 endTime=1766103906035 limit=1000
+2025-12-19 09:25:06,118 INFO [backtest] BinanceClient.get_klines: fetched 28 items (page), last_open_time=1766103900000
+2025-12-19 09:25:06,126 INFO [backtest] Inserted 28 klines for ZRCUSDT 1m
+2025-12-19 09:26:33,218 INFO [backtest] heartbeat: pid=22372 alive
+2025-12-19 09:26:33,223 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766103900001 endTime=1766103906035 limit=1000
+2025-12-19 09:26:33,290 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766103900001 endTime=1766103993219 limit=1000
+2025-12-19 09:26:56,023 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 09:26:56,024 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:26:56,024 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:26:56,398 INFO [backtest] Backtesting Backend started
+2025-12-19 09:26:56,398 INFO [backtest] Process info: pid=16108 ppid=8404
+2025-12-19 09:26:56,398 INFO [backtest] heartbeat: pid=16108 alive
+2025-12-19 09:26:56,399 INFO [backtest] Shutting down Backtesting Backend...
+2025-12-19 09:26:56,404 INFO [backtest] heartbeat cancelled
+2025-12-19 09:26:56,405 INFO [backtest] Shutdown complete
+2025-12-19 09:27:16,645 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 09:27:16,646 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:27:16,647 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 09:27:17,009 INFO [backtest] Backtesting Backend started
+2025-12-19 09:27:17,009 INFO [backtest] Process info: pid=19424 ppid=3856
+2025-12-19 09:27:17,009 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:27:27,007 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:27:29,599 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766103900001 endTime=1766104049592 limit=1000
+2025-12-19 09:27:29,734 INFO [backtest] BinanceClient.get_klines: fetched 2 items (page), last_open_time=1766104020000
+2025-12-19 09:27:29,741 INFO [backtest] Inserted 2 klines for ZRCUSDT 1m
+2025-12-19 09:28:56,234 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:28:56,239 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104020001 endTime=1766104049592 limit=1000
+2025-12-19 09:28:56,303 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104020001 endTime=1766104136235 limit=1000
+2025-12-19 09:29:43,582 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:29:43,583 INFO [backtest] BinanceClient.get_klines: fetched 1 items (page), last_open_time=1766104080000
+2025-12-19 09:29:43,591 INFO [backtest] Inserted 1 klines for ZRCUSDT 1m
+2025-12-19 09:29:43,595 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104080001 endTime=1766104136235 limit=1000
+2025-12-19 09:31:09,125 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:31:09,127 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104080001 endTime=1766104136236 limit=1000
+2025-12-19 09:32:34,556 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:32:34,557 ERROR [backtest] Failed to load historical klines: 
+Traceback (most recent call last):
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\User\new\yona_vanguard_futures\backtesting_backend\core\data_loader.py", line 33, in load_historical_klines
+    klines = await self.client.get_klines(symbol, interval, start_time=fetch_start, end_time=end_time)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\backtesting_backend\api_client\binance_client.py", line 95, in get_klines
+    data = await self._send_request("GET", path, params=params, signed=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\backtesting_backend\api_client\binance_client.py", line 66, in _send_request
+    resp = await self._client.request(method, url, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\User\new\yona_vanguard_futures\.venv_backtest\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-12-19 09:32:34,581 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104080001 endTime=1766104136237 limit=1000
+2025-12-19 09:32:34,648 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104080001 endTime=1766104136237 limit=1000
+2025-12-19 09:33:59,709 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:33:59,712 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104080001 endTime=1766104136237 limit=1000
+2025-12-19 09:35:26,199 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:35:26,201 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104080001 endTime=1766104136237 limit=1000
+2025-12-19 09:36:52,391 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:36:52,393 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104080001 endTime=1766104183585 limit=1000
+2025-12-19 09:36:52,516 INFO [backtest] BinanceClient.get_klines: fetched 1 items (page), last_open_time=1766104140000
+2025-12-19 09:38:18,806 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:38:18,820 INFO [backtest] Inserted 1 klines for ZRCUSDT 1m
+2025-12-19 09:38:18,827 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104140001 endTime=1766104183586 limit=1000
+2025-12-19 09:39:46,407 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:39:46,408 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104140001 endTime=1766104183586 limit=1000
+2025-12-19 09:41:13,803 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:41:13,805 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104140001 endTime=1766104183586 limit=1000
+2025-12-19 09:42:41,353 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:42:41,355 INFO [backtest] Data already present for ZRCUSDT 1m 1766017736235-1766104136235
+2025-12-19 09:42:41,359 INFO [backtest] Data already present for ZRCUSDT 1m 1766017736235-1766104136235
+2025-12-19 09:42:41,363 INFO [backtest] Data already present for ZRCUSDT 1m 1766017736237-1766104136237
+2025-12-19 09:42:41,367 INFO [backtest] Data already present for ZRCUSDT 1m 1766017736237-1766104136237
+2025-12-19 09:42:41,372 INFO [backtest] Data already present for ZRCUSDT 1m 1766017736237-1766104136237
+2025-12-19 09:42:41,376 INFO [backtest] Data already present for ZRCUSDT 1m 1766017736237-1766104136237
+2025-12-19 09:42:41,382 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104140001 endTime=1766104183585 limit=1000
+2025-12-19 09:42:41,475 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104140001 endTime=1766104183586 limit=1000
+2025-12-19 09:42:41,522 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104140001 endTime=1766104183586 limit=1000
+2025-12-19 09:43:31,366 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:44:19,537 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:49:54,409 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:51:20,914 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:51:20,917 INFO [backtest] BinanceClient.get_klines request: symbol=ZRCUSDT interval=1m startTime=1766104140001 endTime=1766104183586 limit=1000
+2025-12-19 09:52:08,177 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:52:18,195 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:52:28,212 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 09:52:38,215 INFO [backtest] heartbeat: pid=19424 alive
+2025-12-19 10:01:58,297 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 10:01:58,298 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 10:01:58,298 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 10:01:58,681 INFO [backtest] Backtesting Backend started
+2025-12-19 10:01:58,681 INFO [backtest] Process info: pid=17984 ppid=11976
+2025-12-19 10:01:58,681 INFO [backtest] heartbeat: pid=17984 alive
+2025-12-19 10:02:08,700 INFO [backtest] heartbeat: pid=17984 alive
+2025-12-19 10:02:18,707 INFO [backtest] heartbeat: pid=17984 alive
+2025-12-19 10:02:28,719 INFO [backtest] heartbeat: pid=17984 alive
+2025-12-19 10:02:38,715 INFO [backtest] heartbeat: pid=17984 alive
+2025-12-19 10:02:41,463 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766101740001 endTime=1766106161455 limit=1000
+2025-12-19 10:02:41,607 INFO [backtest] BinanceClient.get_klines: fetched 73 items (page), last_open_time=1766106120000
+2025-12-19 10:02:41,616 INFO [backtest] Inserted 73 klines for JELLYJELLYUSDT 1m
+2025-12-19 10:04:07,949 INFO [backtest] heartbeat: pid=17984 alive
+2025-12-19 10:04:07,951 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766106120001 endTime=1766106161455 limit=1000
+2025-12-19 10:04:54,939 INFO [backtest] heartbeat: pid=17984 alive
+2025-12-19 10:05:04,964 INFO [backtest] heartbeat: pid=17984 alive
+2025-12-19 10:26:17,059 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 10:26:17,060 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 10:26:17,060 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 10:26:17,442 INFO [backtest] Backtesting Backend started
+2025-12-19 10:26:17,442 INFO [backtest] Process info: pid=8164 ppid=15452
+2025-12-19 10:26:17,443 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:26:27,462 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:26:37,386 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766106120001 endTime=1766107597379 limit=1000
+2025-12-19 10:26:37,484 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:26:37,492 INFO [backtest] BinanceClient.get_klines: fetched 24 items (page), last_open_time=1766107560000
+2025-12-19 10:26:37,501 INFO [backtest] Inserted 24 klines for JELLYJELLYUSDT 1m
+2025-12-19 10:28:03,071 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:28:03,073 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766107560001 endTime=1766107597379 limit=1000
+2025-12-19 10:28:49,920 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:28:59,933 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:29:09,925 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:29:19,950 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:29:29,967 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:29:39,962 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:29:49,970 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:29:59,970 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:30:09,985 INFO [backtest] heartbeat: pid=8164 alive
+2025-12-19 10:54:31,253 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 10:54:31,254 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 10:54:31,254 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 10:54:31,635 INFO [backtest] Backtesting Backend started
+2025-12-19 10:54:31,636 INFO [backtest] Process info: pid=2732 ppid=19572
+2025-12-19 10:54:31,636 INFO [backtest] heartbeat: pid=2732 alive
+2025-12-19 10:54:41,654 INFO [backtest] heartbeat: pid=2732 alive
+2025-12-19 10:54:51,656 INFO [backtest] heartbeat: pid=2732 alive
+2025-12-19 10:54:55,433 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766107560001 endTime=1766109295425 limit=1000
+2025-12-19 10:54:55,508 INFO [backtest] BinanceClient.get_klines: fetched 28 items (page), last_open_time=1766109240000
+2025-12-19 10:54:55,516 INFO [backtest] Inserted 28 klines for JELLYJELLYUSDT 1m
+2025-12-19 10:56:21,798 INFO [backtest] heartbeat: pid=2732 alive
+2025-12-19 10:56:21,800 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766109240001 endTime=1766109295425 limit=1000
+2025-12-19 10:57:09,391 INFO [backtest] heartbeat: pid=2732 alive
+2025-12-19 10:57:19,403 INFO [backtest] heartbeat: pid=2732 alive
+2025-12-19 15:00:35,490 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 15:00:35,492 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 15:00:35,492 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 15:00:35,935 INFO [backtest] Backtesting Backend started
+2025-12-19 15:00:35,935 INFO [backtest] Process info: pid=17580 ppid=1924
+2025-12-19 15:00:35,935 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:00:45,950 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:00:55,969 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:01:05,969 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:01:15,965 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:01:25,975 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:01:33,172 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766109240001 endTime=1766124093164 limit=1000
+2025-12-19 15:01:33,259 INFO [backtest] BinanceClient.get_klines: fetched 247 items (page), last_open_time=1766124060000
+2025-12-19 15:01:33,270 INFO [backtest] Inserted 247 klines for JELLYJELLYUSDT 1m
+2025-12-19 15:02:59,751 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:02:59,754 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766124060001 endTime=1766124093164 limit=1000
+2025-12-19 15:03:47,024 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:03:57,027 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:04:07,024 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:04:17,027 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:04:27,036 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:04:37,055 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:04:47,037 INFO [backtest] heartbeat: pid=17580 alive
+2025-12-19 15:14:36,810 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 15:14:36,811 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 15:14:36,811 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 15:14:37,209 INFO [backtest] Backtesting Backend started
+2025-12-19 15:14:37,210 INFO [backtest] Process info: pid=10828 ppid=9004
+2025-12-19 15:14:37,210 INFO [backtest] heartbeat: pid=10828 alive
+2025-12-19 15:14:47,216 INFO [backtest] heartbeat: pid=10828 alive
+2025-12-19 15:14:57,216 INFO [backtest] heartbeat: pid=10828 alive
+2025-12-19 15:15:07,218 INFO [backtest] heartbeat: pid=10828 alive
+2025-12-19 15:15:07,883 INFO [backtest] BinanceClient.get_klines request: symbol=RAVEUSDT interval=1m startTime=1766091300001 endTime=1766124907876 limit=1000
+2025-12-19 15:15:07,965 INFO [backtest] BinanceClient.get_klines: fetched 560 items (page), last_open_time=1766124900000
+2025-12-19 15:15:07,981 INFO [backtest] Inserted 560 klines for RAVEUSDT 1m
+2025-12-19 15:15:17,218 INFO [backtest] heartbeat: pid=10828 alive
+2025-12-19 15:15:27,231 INFO [backtest] heartbeat: pid=10828 alive
+2025-12-19 15:53:32,800 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 15:53:32,801 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 15:53:32,801 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 15:53:33,165 INFO [backtest] Backtesting Backend started
+2025-12-19 15:53:33,165 INFO [backtest] Process info: pid=9604 ppid=15156
+2025-12-19 15:53:33,165 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:53:43,178 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:53:53,178 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:54:02,470 INFO [backtest] BinanceClient.get_klines request: symbol=ALCHUSDT interval=1m startTime=1765522442463 endTime=1766127242463 limit=1000
+2025-12-19 15:54:02,567 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1765582440000
+2025-12-19 15:54:02,628 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1765642440000
+2025-12-19 15:54:02,687 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1765702440000
+2025-12-19 15:54:02,747 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1765762440000
+2025-12-19 15:54:02,807 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1765822440000
+2025-12-19 15:54:02,866 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1765882440000
+2025-12-19 15:54:02,921 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1765942440000
+2025-12-19 15:54:02,977 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1766002440000
+2025-12-19 15:54:03,033 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1766062440000
+2025-12-19 15:54:03,090 INFO [backtest] BinanceClient.get_klines: fetched 1000 items (page), last_open_time=1766122440000
+2025-12-19 15:54:03,134 INFO [backtest] BinanceClient.get_klines: fetched 79 items (page), last_open_time=1766127180000
+2025-12-19 15:54:03,250 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:54:03,287 INFO [backtest] Inserted 10079 klines for ALCHUSDT 1m
+2025-12-19 15:55:27,692 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:55:27,694 INFO [backtest] BinanceClient.get_klines request: symbol=ALCHUSDT interval=1m startTime=1766127180001 endTime=1766127242463 limit=1000
+2025-12-19 15:55:27,768 INFO [backtest] BinanceClient.get_klines: fetched 1 items (page), last_open_time=1766127240000
+2025-12-19 15:55:27,775 INFO [backtest] Inserted 1 klines for ALCHUSDT 1m
+2025-12-19 15:56:14,066 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:56:24,086 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:56:30,936 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766124060001 endTime=1766127390933 limit=1000
+2025-12-19 15:56:31,009 INFO [backtest] BinanceClient.get_klines: fetched 55 items (page), last_open_time=1766127360000
+2025-12-19 15:56:31,015 INFO [backtest] Inserted 55 klines for JELLYJELLYUSDT 1m
+2025-12-19 15:57:55,215 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:57:55,217 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766127360001 endTime=1766127390933 limit=1000
+2025-12-19 15:58:41,864 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:58:51,867 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:59:01,881 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:59:11,895 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:59:21,871 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:59:31,878 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:59:41,898 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 15:59:51,912 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 16:00:01,911 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 16:00:11,932 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 16:00:21,925 INFO [backtest] heartbeat: pid=9604 alive
+2025-12-19 16:25:14,267 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 16:25:14,268 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 16:25:14,268 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 16:25:14,626 INFO [backtest] Backtesting Backend started
+2025-12-19 16:25:14,626 INFO [backtest] Process info: pid=17260 ppid=21628
+2025-12-19 16:25:14,626 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:25:24,627 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:25:34,629 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:25:44,625 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:25:54,647 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:25:57,467 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766127360001 endTime=1766129157459 limit=1000
+2025-12-19 16:25:57,542 INFO [backtest] BinanceClient.get_klines: fetched 29 items (page), last_open_time=1766129100000
+2025-12-19 16:25:57,550 INFO [backtest] Inserted 29 klines for JELLYJELLYUSDT 1m
+2025-12-19 16:27:23,324 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:27:23,326 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766129100001 endTime=1766129157459 limit=1000
+2025-12-19 16:28:10,704 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:28:20,717 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:28:30,741 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:28:40,756 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:28:50,769 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:29:00,789 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:29:10,798 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:29:20,799 INFO [backtest] heartbeat: pid=17260 alive
+2025-12-19 16:37:13,618 INFO [backtest] Starting Backtesting Backend...
+2025-12-19 16:37:13,619 INFO [backtest] Backtest DB path resolved: C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 16:37:13,619 INFO [backtest] Backtest DB URL: sqlite+aiosqlite:///C:\Users\User\new\yona_vanguard_futures\yona_backtest.db
+2025-12-19 16:37:14,006 INFO [backtest] Backtesting Backend started
+2025-12-19 16:37:14,006 INFO [backtest] Process info: pid=12408 ppid=13760
+2025-12-19 16:37:14,006 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:37:24,007 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:37:34,021 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:37:44,034 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:37:54,051 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:38:04,048 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:38:14,053 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:38:24,064 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:38:34,078 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:38:44,100 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:38:44,945 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766129100001 endTime=1766129924936 limit=1000
+2025-12-19 16:38:45,024 INFO [backtest] BinanceClient.get_klines: fetched 13 items (page), last_open_time=1766129880000
+2025-12-19 16:38:45,032 INFO [backtest] Inserted 13 klines for JELLYJELLYUSDT 1m
+2025-12-19 16:40:10,654 INFO [backtest] heartbeat: pid=12408 alive
+2025-12-19 16:40:10,657 INFO [backtest] BinanceClient.get_klines request: symbol=JELLYJELLYUSDT interval=1m startTime=1766129880001 endTime=1766129924936 limit=1000
+2025-12-19 16:40:57,583 INFO [backtest] heartbeat: pid=12408 alive

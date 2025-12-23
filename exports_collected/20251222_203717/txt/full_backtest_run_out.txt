@@ -1,0 +1,12 @@
+﻿python : C:\Users\User\AppData\Roaming\Python\Python310\site-packages\pydantic\_internal\_config.py:373: U
+serWarning: Valid config keys have changed in V2:
+At line:1 char:22
++ $env:PYTHONPATH='.'; python scripts\full_backtest_run.py 2>&1 | Out-F ...
++                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\User\A... changed in V2::String) [], RemoteExceptio 
+   n
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+Full synthetic backtest complete. Results written to: C:\Users\User\new\yona_vanguard_futures\scripts\..\results\full_backtest_results.csv

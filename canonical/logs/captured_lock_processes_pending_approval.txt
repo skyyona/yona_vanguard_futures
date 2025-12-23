@@ -1,0 +1,50 @@
+Capture summary (generated 2025-12-01T20:14:47Z)
+
+Action taken:
+- Patched `scripts/sanitize_results.py` to rate-limit and consolidate handle captures (per-file 1h cooldown, daily failure cap, consolidated daily capture files).
+- Added two VSS helpers and executed the WMI-based VSS run:
+	- `scripts/run_sanitizer_vss.ps1` (diskshadow-based) — attempted but blocked in non-elevated environment; diskshadow not accessible until elevated.
+	- `scripts/run_sanitizer_vss_wmi.ps1` (WMI Win32_ShadowCopy fallback) — executed successfully in an elevated PowerShell session.
+
+What I scanned:
+- All `results/handle_capture_*.log` files (265 matches) and other capture logs under `results/`.
+
+Findings (summary):
+- Number of handle_capture logs scanned: 265
+- PID-like entries found: 1 unique process across all logs
+- Most `handle_capture_*.log` entries contained errors/timeouts such as:
+	- "Unable to extract x64 image. Run Handle from a writeable directory." (many early runs)
+	- "timed out" / "Failed running handle.exe" (later runs where sanitizer copied `handle.exe` into `results/`)
+- Conclusion: sanitizer-time captures did not produce usable PID lists in the majority of runs (transient locks or handle failures).
+
+Discovered processes (unique):
+- powershell.exe (pid: 4508)
+	- Observed line: `powershell.exe     pid: 4508   type: File           924: C:\Users\User\new\yona_vanguard_futures\results\handle_scan_all.txt`
+	- Source file: `results/handle_scan_all.txt` (appears to be from a manual handle poll)
+
+WMI VSS run (recent):
+- Workdir: `.\vss_tmp\20251201T201447Z`
+	- Robocopy log: `.\vss_tmp\20251201T201447Z\robocopy_out.txt`
+	- Sanitizer log: `.\vss_tmp\20251201T201447Z\sanitize_out.txt`
+- The script created a shadow, copied `results` from the snapshot to the workdir, executed the sanitizer against the copy, and removed the shadow.
+
+Recommendations / Next steps:
+1) Preferred (non-invasive): Accept the VSS-sanitized copy as authoritative.
+	 - Inspect `.\vss_tmp\20251201T201447Z\sanitize_out.txt` to confirm sanitized output and summary.
+	 - If acceptable, promote the sanitized copies or replace originals after confirming backups.
+
+2) If you require in-place sanitization of live files and are willing to stop processes:
+	 - We need at least one trustworthy PID captured at the failure moment. Current captures did not reliably capture PIDs.
+	 - Options to produce a PID:
+		 a) Re-run sanitizer with a longer handle timeout (e.g., 120s) and/or more attempts.
+		 b) Run a focused live `handle.exe` poller concurrently with sanitizer to catch transient locks (noisy).
+		 c) Use `robocopy /B` in admin mode or VSS (already done) and then, if necessary, terminate processes discovered during an active handle poll.
+
+3) If you authorize process termination now: only `powershell.exe (4508)` was observed in existing captures. Reply `approve 4508` to allow a graceful-then-force termination attempt, after which I will re-run the in-place sanitizer (backups will be used first). I will log all actions.
+
+4) Alternative: I can run a non-elevated fallback copy+sanitize now (may skip locked files). Reply `run fallback`.
+
+Action requested from you:
+- Reply with one of: `approve 4508`, `use vss copy`, `run fallback`, or `live-capture` (to attempt a focused live capture).
+
+No process will be terminated until you explicitly approve.

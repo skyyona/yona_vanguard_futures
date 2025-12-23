@@ -25,3 +25,11 @@ venv*/
 .vscode/
 Thumbs.db
 *.swp
+
+# Generated outputs and large artifacts
+backtest_results*/
+backtest_results_extended/
+backtest_results_mtf/
+outputs/
+*.jsonl
+*.ndjson

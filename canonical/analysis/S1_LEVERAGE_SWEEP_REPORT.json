@@ -1,0 +1,51 @@
+{
+  "generated_at": "2025-12-20T00:00:00Z",
+  "symbols": {
+    "BTCUSDT": {
+      "s1": {
+        "best_profit": -0.49318128477727896,
+        "best_params": {"take_profit_pct": 0.004, "stop_loss_pct": 0.003, "trailing_stop_pct": 0.0}
+      },
+      "sweep": {
+        "recommended_leverage_x": 5,
+        "status": "ok",
+        "best_params": {"take_profit_pct": 0.004, "stop_loss_pct": 0.003, "trailing_stop_pct": 0.0},
+        "evaluated_candidates": [
+          {"leverage_x":5, "profit_percentage": -0.11865998424439113, "final_balance": 998.8134001575561, "max_drawdown_pct": 0.18889316532111894, "total_trades":8, "accepted": true},
+          {"leverage_x":10, "profit_percentage": -0.2053373039527287, "final_balance": 997.9466269604727, "max_drawdown_pct": 0.3657448105106234, "total_trades":8, "accepted": true},
+          {"leverage_x":15, "profit_percentage": -0.2920146236610435, "final_balance": 997.0798537633896, "max_drawdown_pct": 0.542525820382946, "total_trades":8, "accepted": true},
+          {"leverage_x":20, "profit_percentage": -0.37869194336938106, "final_balance": 996.2130805663062, "max_drawdown_pct": 0.7192362372477628, "total_trades":8, "accepted": true},
+          {"leverage_x":25, "profit_percentage": -0.4653692630777073, "final_balance": 995.3463073692229, "max_drawdown_pct": 0.8958761033808864, "total_trades":8, "accepted": true},
+          {"leverage_x":30, "profit_percentage": -0.5520465827860221, "final_balance": 994.4795341721398, "max_drawdown_pct": 1.0724454610244136, "total_trades":8, "accepted": true},
+          {"leverage_x":35, "profit_percentage": -0.6387239024943483, "final_balance": 993.6127609750565, "max_drawdown_pct": 1.248944352386747, "total_trades":8, "accepted": true},
+          {"leverage_x":40, "profit_percentage": -0.7254012222026859, "final_balance": 992.7459877779731, "max_drawdown_pct": 1.4253728196425843, "total_trades":8, "accepted": true},
+          {"leverage_x":45, "profit_percentage": -0.8120785419110007, "final_balance": 991.87921458089, "max_drawdown_pct": 1.6017309049329396, "total_trades":8, "accepted": true},
+          {"leverage_x":50, "profit_percentage": -0.8987558616193155, "final_balance": 991.0124413838068, "max_drawdown_pct": 1.7780186503652682, "total_trades":8, "accepted": false}
+        ]
+      }
+    },
+    "JELLYJELLYUSDT": {
+      "s1": {
+        "best_profit": -1.3250091807420858,
+        "best_params": {"take_profit_pct": 0.004, "stop_loss_pct": 0.003, "trailing_stop_pct": 0.0}
+      },
+      "sweep": {
+        "recommended_leverage_x": 5,
+        "status": "ok",
+        "best_params": {"take_profit_pct": 0.004, "stop_loss_pct": 0.003, "trailing_stop_pct": 0.0},
+        "evaluated_candidates": [
+          {"leverage_x":5, "profit_percentage": -0.3907628523054086, "final_balance": 996.0923714769459, "max_drawdown_pct": 0.5143301298376514, "total_trades":17, "accepted": true},
+          {"leverage_x":10, "profit_percentage": -0.713590270094403, "final_balance": 992.864097299056, "max_drawdown_pct": 1.0027559468367144, "total_trades":17, "accepted": true},
+          {"leverage_x":15, "profit_percentage": -1.0364176878833973, "final_balance": 989.635823121166, "max_drawdown_pct": 1.491181763835789, "total_trades":17, "accepted": true},
+          {"leverage_x":20, "profit_percentage": -1.3592451056723802, "final_balance": 986.4075489432762, "max_drawdown_pct": 1.9796075808348406, "total_trades":17, "accepted": true},
+          {"leverage_x":25, "profit_percentage": -1.6820725234613747, "final_balance": 983.1792747653863, "max_drawdown_pct": 2.4680333978339264, "total_trades":17, "accepted": true},
+          {"leverage_x":30, "profit_percentage": -2.0048999412503465, "final_balance": 979.9510005874965, "max_drawdown_pct": 2.9564592148329893, "total_trades":17, "accepted": false},
+          {"leverage_x":35, "profit_percentage": -2.3277273590393293, "final_balance": 976.7227264096067, "max_drawdown_pct": 3.4448850318320408, "total_trades":17, "accepted": false},
+          {"leverage_x":40, "profit_percentage": -2.6505547768283235, "final_balance": 973.4944522317168, "max_drawdown_pct": 3.9333108488311153, "total_trades":17, "accepted": false},
+          {"leverage_x":45, "profit_percentage": -2.973382194617318, "final_balance": 970.2661780538268, "max_drawdown_pct": 4.421736665830178, "total_trades":17, "accepted": false},
+          {"leverage_x":50, "profit_percentage": -3.2962096124062894, "final_balance": 967.0379038759371, "max_drawdown_pct": 4.91016248282923, "total_trades":17, "accepted": false}
+        ]
+      }
+    }
+  }
+}

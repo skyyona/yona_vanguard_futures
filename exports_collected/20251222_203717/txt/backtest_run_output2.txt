@@ -1,0 +1,139 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20251217055110
+Username: DESKTOP-QU3OTU8\User
+RunAs User: DESKTOP-QU3OTU8\User
+Configuration Name: 
+Machine: DESKTOP-QU3OTU8 (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\User\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 17004
+PSVersion: 5.1.19041.6456
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.6456
+BuildVersion: 10.0.19041.6456
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\User\new\backtest_run_output2.txt
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>Write-Output '==PORT CHECK=='
+==PORT CHECK==
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>Try { $cn = Test-NetConnection -ComputerName 127.0.0.1 -Port 8001 -WarningAction SilentlyContinue; Write-Output ("TcpTestSucceeded={0}" -f $cn.TcpTestSucceeded) } Catch { Write-Output "Port check failed: $_" }
+TcpTestSucceeded=False
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>Write-Output '==OPENAPI CHECK=='
+==OPENAPI CHECK==
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>try { $open = Invoke-RestMethod -Uri 'http://127.0.0.1:8001/openapi.json' -Method Get -TimeoutSec 5; Write-Output 'OPENAPI_OK' } catch { Write-Output 'OPENAPI_ERROR: ' + $_.Exception.Message }
+>> TerminatingError(Invoke-RestMethod): "원격 서버에 연결할 수 없습니다."
+OPENAPI_ERROR:
++
+원격 서버에 연결할 수 없습니다.
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS># Prepare request body
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>$now = [int](Get-Date -UFormat %s) * 1000
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>$start = $now - 3600000
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>$bodyObj = @{
+  strategy_name = 'alpha'; symbol = 'BTCUSDT'; interval = '1m'; start_time = $start; end_time = $now; initial_balance = 1000.0; leverage = 1; parameters = @{}
+}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>$body = $bodyObj | ConvertTo-Json -Depth 10
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>$body | Out-File -Encoding utf8 tmp_backtest_req.json
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>Write-Output '==REQUEST BODY=='
+==REQUEST BODY==
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>Get-Content tmp_backtest_req.json | Write-Output
+{
+    "start_time":  1765947076000,
+    "end_time":  1765950676000,
+    "leverage":  1,
+    "symbol":  "BTCUSDT",
+    "strategy_name":  "alpha",
+    "initial_balance":  1000,
+    "parameters":  {
+
+                   },
+    "interval":  "1m"
+}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>Write-Output '==POST run_backtest=='
+==POST run_backtest==
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>try {
+  $resp = Invoke-RestMethod -Uri 'http://127.0.0.1:8001/api/v1/backtest/run_backtest' -Method Post -Body $body -ContentType 'application/json' -TimeoutSec 120
+  Write-Output 'POST_OK'
+  $resp | ConvertTo-Json -Depth 10 | Write-Output
+} catch {
+  Write-Output 'POST_ERROR:'
+  Write-Output $_.Exception.Message
+}
+>> TerminatingError(Invoke-RestMethod): "Unable to connect to the remote server"
+POST_ERROR:
+Unable to connect to the remote server
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>$run_id = $null
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>if ($resp -and $resp.run_id) { $run_id = $resp.run_id }
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>Write-Output ("run_id: {0}" -f $run_id)
+run_id:
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>if ($run_id) {
+  for ($i=0; $i -lt 120; $i++) {
+    Start-Sleep -Seconds 5
+    try {
+      $s = Invoke-RestMethod -Uri ("http://127.0.0.1:8001/api/v1/backtest/backtest_status/{0}" -f $run_id) -Method Get -TimeoutSec 10
+      Write-Output ("POLL {0}: {1}" -f $i, ($s.status))
+      if ($s.status -ne 'running') { break }
+    } catch {
+      Write-Output ("POLL_ERROR {0}: {1}" -f $i, $_.Exception.Message)
+    }
+  }
+  Write-Output '==FETCH RESULT=='
+  try { $res = Invoke-RestMethod -Uri ("http://127.0.0.1:8001/api/v1/backtest/backtest_result/{0}" -f $run_id) -Method Get -TimeoutSec 10; ConvertTo-Json $res -Depth 10 | Write-Output } catch { Write-Output 'RESULT_FETCH_ERROR: ' + $_.Exception.Message }
+
+  # DB check
+  Write-Output '==DB ROW CHECK=='
+  $pyCheck = @'
+import sqlite3,sys
+run_id=sys.argv[1]
+db=r"c:\Users\User\new\yona_backtest.db"
+conn=sqlite3.connect(db)
+c=conn.cursor()
+try:
+    c.execute('SELECT run_id, initial_balance, final_balance FROM backtest_results WHERE run_id=?', (run_id,))
+    r=c.fetchone()
+    print('DB_ROW:', r)
+except Exception as e:
+    print('DB_ERROR:', e)
+finally:
+    conn.close()
+'@
+  $tmp = Join-Path $env:TEMP ("check_db_{0}.py" -f ([guid]::NewGuid().ToString()))
+  $pyCheck | Out-File -Encoding utf8 -FilePath $tmp
+  try { & .\.venv_backtest\Scripts\python.exe $tmp $run_id | Write-Output } catch { Write-Output 'Python DB check failed with venv_backtest'; try { & .\.venv_backtest_py311\Scripts\python.exe $tmp $run_id | Write-Output } catch { Write-Output 'Python DB check failed with py311 venv'; try { & .\.venv\Scripts\python.exe $tmp $run_id | Write-Output } catch { Write-Output 'Python DB check final attempt failed' } } }
+  Remove-Item $tmp -ErrorAction SilentlyContinue
+} else {
+  Write-Output 'No run_id; skipping poll/DB check'
+}
+No run_id; skipping poll/DB check
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cUser\x5cnewPS C:\Users\User\new> ]633;B
+PS>Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20251217055118
+**********************

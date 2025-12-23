@@ -1,0 +1,28 @@
+﻿
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : 2025년 12월 1일 월요일 오후 8:39:19
+   Source : C:\Users\User\new\yona_vanguard_futures\results\
+     Dest : C:\Users\User\new\yona_vanguard_futures\results_backups\pre_kill_backup_20251201T203919Z\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /COPYALL /PURGE /MIR /R:2 /W:5 
+
+------------------------------------------------------------------------------
+
+ERROR : You do not have the Manage Auditing user right.
+*****  You need this to copy auditing information (/COPY:U or /COPYALL).
+
+       Simple Usage :: ROBOCOPY source destination /MIR
+
+             source :: Source Directory (drive:\path or \\server\share\path).
+        destination :: Destination Dir  (drive:\path or \\server\share\path).
+               /MIR :: Mirror a complete directory tree.
+
+    For more usage information run ROBOCOPY /?
+
+                                                          
+****  /MIR can DELETE files as well as copy them !

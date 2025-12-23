@@ -1,0 +1,920 @@
+[
+  {
+    "fee": 0.001,
+    "slippage": 0.0001,
+    "position_size": 0.02,
+    "result": {
+      "total_pnl": 30.29169556043972,
+      "total_pnl_pct": 3.0291695560439718,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 30.29169556043972,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:31:15.988166",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0954095,
+          "exit_price": 4.2282,
+          "pnl": 30.29169556043972,
+          "pnl_pct": 3.028866669377034,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1004.8740178021977,
+          "balance": 1000.0,
+          "position_pnl": 4.874017802197772
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.001,
+    "slippage": 0.0001,
+    "position_size": 0.1,
+    "result": {
+      "total_pnl": 30.29169556043972,
+      "total_pnl_pct": 3.0291695560439718,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 30.29169556043972,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:31:25.252622",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0954095,
+          "exit_price": 4.2282,
+          "pnl": 30.29169556043972,
+          "pnl_pct": 3.028866669377034,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1004.8740178021977,
+          "balance": 1000.0,
+          "position_pnl": 4.874017802197772
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.001,
+    "slippage": 0.0001,
+    "position_size": 0.5,
+    "result": {
+      "total_pnl": 30.29169556043972,
+      "total_pnl_pct": 3.0291695560439718,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 30.29169556043972,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:31:36.031039",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0954095,
+          "exit_price": 4.2282,
+          "pnl": 30.29169556043972,
+          "pnl_pct": 3.028866669377034,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1004.8740178021977,
+          "balance": 1000.0,
+          "position_pnl": 4.874017802197772
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.001,
+    "slippage": 0.0005,
+    "position_size": 0.02,
+    "result": {
+      "total_pnl": 29.478697582417745,
+      "total_pnl_pct": 2.9478697582417746,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 29.478697582417745,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:31:45.487988",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0970474999999995,
+          "exit_price": 4.2282,
+          "pnl": 29.478697582417745,
+          "pnl_pct": 2.946396559961794,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1004.071187912088,
+          "balance": 1000.0,
+          "position_pnl": 4.071187912088058
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.001,
+    "slippage": 0.0005,
+    "position_size": 0.1,
+    "result": {
+      "total_pnl": 29.478697582417745,
+      "total_pnl_pct": 2.9478697582417746,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 29.478697582417745,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:31:54.882543",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0970474999999995,
+          "exit_price": 4.2282,
+          "pnl": 29.478697582417745,
+          "pnl_pct": 2.946396559961794,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1004.071187912088,
+          "balance": 1000.0,
+          "position_pnl": 4.071187912088058
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.001,
+    "slippage": 0.0005,
+    "position_size": 0.5,
+    "result": {
+      "total_pnl": 29.478697582417745,
+      "total_pnl_pct": 2.9478697582417746,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 29.478697582417745,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:32:04.227284",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0970474999999995,
+          "exit_price": 4.2282,
+          "pnl": 29.478697582417745,
+          "pnl_pct": 2.946396559961794,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1004.071187912088,
+          "balance": 1000.0,
+          "position_pnl": 4.071187912088058
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.001,
+    "slippage": 0.001,
+    "position_size": 0.02,
+    "result": {
+      "total_pnl": 28.46245010989033,
+      "total_pnl_pct": 2.846245010989033,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 28.46245010989033,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:32:13.638121",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.099094999999999,
+          "exit_price": 4.2282,
+          "pnl": 28.46245010989033,
+          "pnl_pct": 2.8434016093796535,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1003.0676505494506,
+          "balance": 1000.0,
+          "position_pnl": 3.0676505494506436
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.001,
+    "slippage": 0.001,
+    "position_size": 0.1,
+    "result": {
+      "total_pnl": 28.46245010989033,
+      "total_pnl_pct": 2.846245010989033,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 28.46245010989033,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:32:22.910420",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.099094999999999,
+          "exit_price": 4.2282,
+          "pnl": 28.46245010989033,
+          "pnl_pct": 2.8434016093796535,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1003.0676505494506,
+          "balance": 1000.0,
+          "position_pnl": 3.0676505494506436
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.001,
+    "slippage": 0.001,
+    "position_size": 0.5,
+    "result": {
+      "total_pnl": 28.46245010989033,
+      "total_pnl_pct": 2.846245010989033,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 28.46245010989033,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:32:33.250766",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.099094999999999,
+          "exit_price": 4.2282,
+          "pnl": 28.46245010989033,
+          "pnl_pct": 2.8434016093796535,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1003.0676505494506,
+          "balance": 1000.0,
+          "position_pnl": 3.0676505494506436
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.002,
+    "slippage": 0.0001,
+    "position_size": 0.02,
+    "result": {
+      "total_pnl": 28.259171340659503,
+      "total_pnl_pct": 2.8259171340659504,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 28.259171340659503,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:32:42.662267",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0954095,
+          "exit_price": 4.2282,
+          "pnl": 28.259171340659503,
+          "pnl_pct": 2.8256345706088895,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1002.8669367032967,
+          "balance": 1000.0,
+          "position_pnl": 2.8669367032966724
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.002,
+    "slippage": 0.0001,
+    "position_size": 0.1,
+    "result": {
+      "total_pnl": 28.259171340659503,
+      "total_pnl_pct": 2.8259171340659504,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 28.259171340659503,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:32:52.173276",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0954095,
+          "exit_price": 4.2282,
+          "pnl": 28.259171340659503,
+          "pnl_pct": 2.8256345706088895,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1002.8669367032967,
+          "balance": 1000.0,
+          "position_pnl": 2.8669367032966724
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.002,
+    "slippage": 0.0001,
+    "position_size": 0.5,
+    "result": {
+      "total_pnl": 28.259171340659503,
+      "total_pnl_pct": 2.8259171340659504,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 28.259171340659503,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:33:01.549861",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0954095,
+          "exit_price": 4.2282,
+          "pnl": 28.259171340659503,
+          "pnl_pct": 2.8256345706088895,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1002.8669367032967,
+          "balance": 1000.0,
+          "position_pnl": 2.8669367032966724
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.002,
+    "slippage": 0.0005,
+    "position_size": 0.02,
+    "result": {
+      "total_pnl": 27.446186373626535,
+      "total_pnl_pct": 2.7446186373626533,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 27.446186373626535,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:33:10.984934",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0970474999999995,
+          "exit_price": 4.2282,
+          "pnl": 27.446186373626535,
+          "pnl_pct": 2.743247013855726,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1002.0641096459098,
+          "balance": 1000.0,
+          "position_pnl": 2.0641096459097916
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.002,
+    "slippage": 0.0005,
+    "position_size": 0.1,
+    "result": {
+      "total_pnl": 27.446186373626535,
+      "total_pnl_pct": 2.7446186373626533,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 27.446186373626535,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:33:20.389434",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0970474999999995,
+          "exit_price": 4.2282,
+          "pnl": 27.446186373626535,
+          "pnl_pct": 2.743247013855726,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1002.0641096459098,
+          "balance": 1000.0,
+          "position_pnl": 2.0641096459097916
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.002,
+    "slippage": 0.0005,
+    "position_size": 0.5,
+    "result": {
+      "total_pnl": 27.446186373626535,
+      "total_pnl_pct": 2.7446186373626533,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 27.446186373626535,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:33:31.076847",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.0970474999999995,
+          "exit_price": 4.2282,
+          "pnl": 27.446186373626535,
+          "pnl_pct": 2.743247013855726,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1002.0641096459098,
+          "balance": 1000.0,
+          "position_pnl": 2.0641096459097916
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.002,
+    "slippage": 0.001,
+    "position_size": 0.02,
+    "result": {
+      "total_pnl": 26.429955164835388,
+      "total_pnl_pct": 2.6429955164835386,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 26.429955164835388,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:33:40.505446",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.099094999999999,
+          "exit_price": 4.2282,
+          "pnl": 26.429955164835388,
+          "pnl_pct": 2.640355161322217,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1001.0605758241759,
+          "balance": 1000.0,
+          "position_pnl": 1.0605758241759182
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.002,
+    "slippage": 0.001,
+    "position_size": 0.1,
+    "result": {
+      "total_pnl": 26.429955164835388,
+      "total_pnl_pct": 2.6429955164835386,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 26.429955164835388,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:33:49.923703",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.099094999999999,
+          "exit_price": 4.2282,
+          "pnl": 26.429955164835388,
+          "pnl_pct": 2.640355161322217,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1001.0605758241759,
+          "balance": 1000.0,
+          "position_pnl": 1.0605758241759182
+        }
+      ]
+    }
+  },
+  {
+    "fee": 0.002,
+    "slippage": 0.001,
+    "position_size": 0.5,
+    "result": {
+      "total_pnl": 26.429955164835388,
+      "total_pnl_pct": 2.6429955164835386,
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "winning_trades": 1,
+      "losing_trades": 0,
+      "avg_win": 26.429955164835388,
+      "avg_loss": 0,
+      "profit_factor": null,
+      "max_drawdown": 0,
+      "sharpe_ratio": 0,
+      "trades": [
+        {
+          "entry_time": "2025-12-22 19:33:59.442216",
+          "exit_time": "2025-12-22 08:46:00+00:00",
+          "direction": "LONG",
+          "quantity": 244.2002442002442,
+          "entry_price": 4.099094999999999,
+          "exit_price": 4.2282,
+          "pnl": 26.429955164835388,
+          "pnl_pct": 2.640355161322217,
+          "exit_reason": "BACKTEST_END"
+        }
+      ],
+      "equity_curve": [
+        {
+          "timestamp": "2025-12-22 04:46:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 06:26:00+00:00",
+          "equity": 1000.0,
+          "balance": 1000.0,
+          "position_pnl": 0
+        },
+        {
+          "timestamp": "2025-12-22 08:06:00+00:00",
+          "equity": 1001.0605758241759,
+          "balance": 1000.0,
+          "position_pnl": 1.0605758241759182
+        }
+      ]
+    }
+  }
+]

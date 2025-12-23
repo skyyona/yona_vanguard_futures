@@ -1,0 +1,2945 @@
+﻿
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : 2025년 12월 1일 월요일 오후 9:13:40
+   Source : C:\Users\User\new\yona_vanguard_futures\results\
+     Dest : C:\Users\User\new\yona_vanguard_futures\results_pre_promote_backup_20251201T204257Z\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /DCOPY:DA /COPY:DAT /R:2 /W:5 
+
+------------------------------------------------------------------------------
+
+	                 438	C:\Users\User\new\yona_vanguard_futures\results\
+	    New File  		    2800	aggregate_by_params.csv
+100%  
+	    New File  		    1012	analysis_summary.txt
+100%  
+	    New File  		     940	btcusdt_pilot_results.csv
+100%  
+	    New File  		     897	btcusdt_pilot_results_sanitized.csv
+100%  
+	    New File  		      43	captured_lock_processes_20251201T134837.txt
+100%  
+	    New File  		    3395	captured_lock_processes_pending_approval.txt
+100%  
+	    New File  		  227606	equiv_BTCUSDT_case1_cached.json
+ 57%  
+100%  
+	    New File  		  227606	equiv_BTCUSDT_case1_runtime.json
+ 57%  
+100%  
+	    New File  		  227506	equiv_BTCUSDT_case2_cached.json
+ 57%  
+100%  
+	    New File  		  227506	equiv_BTCUSDT_case2_runtime.json
+ 57%  
+100%  
+	    New File  		  227092	equiv_BTCUSDT_case3_cached.json
+ 57%  
+100%  
+	    New File  		  227092	equiv_BTCUSDT_case3_runtime.json
+ 57%  
+100%  
+	    New File  		  151275	equiv_BTCUSDT_case4_cached.json
+ 86%  
+100%  
+	    New File  		  151275	equiv_BTCUSDT_case4_runtime.json
+ 86%  
+100%  
+	    New File  		  226756	equiv_BTCUSDT_case5_cached.json
+ 57%  
+100%  
+	    New File  		  226756	equiv_BTCUSDT_case5_runtime.json
+ 57%  
+100%  
+	    New File  		  206555	equiv_INUSDT_case1_cached.json
+ 63%  
+100%  
+	    New File  		  206555	equiv_INUSDT_case1_runtime.json
+ 63%  
+100%  
+	    New File  		  206612	equiv_INUSDT_case2_cached.json
+ 63%  
+100%  
+	    New File  		  206612	equiv_INUSDT_case2_runtime.json
+ 63%  
+100%  
+	    New File  		  206381	equiv_INUSDT_case3_cached.json
+ 63%  
+100%  
+	    New File  		  206381	equiv_INUSDT_case3_runtime.json
+ 63%  
+100%  
+	    New File  		  128633	equiv_INUSDT_case4_cached.json
+100%  
+	    New File  		  128633	equiv_INUSDT_case4_runtime.json
+100%  
+	    New File  		  206266	equiv_INUSDT_case5_cached.json
+ 63%  
+100%  
+	    New File  		  206266	equiv_INUSDT_case5_runtime.json
+ 63%  
+100%  
+	    New File  		  217432	equiv_PIPPINUSDT_case1_cached.json
+ 60%  
+100%  
+	    New File  		  217432	equiv_PIPPINUSDT_case1_runtime.json
+ 60%  
+100%  
+	    New File  		  217361	equiv_PIPPINUSDT_case2_cached.json
+ 60%  
+100%  
+	    New File  		  217361	equiv_PIPPINUSDT_case2_runtime.json
+ 60%  
+100%  
+	    New File  		  217171	equiv_PIPPINUSDT_case3_cached.json
+ 60%  
+100%  
+	    New File  		  217171	equiv_PIPPINUSDT_case3_runtime.json
+ 60%  
+100%  
+	    New File  		  139434	equiv_PIPPINUSDT_case4_cached.json
+ 94%  
+100%  
+	    New File  		  139434	equiv_PIPPINUSDT_case4_runtime.json
+ 94%  
+100%  
+	    New File  		  217169	equiv_PIPPINUSDT_case5_cached.json
+ 60%  
+100%  
+	    New File  		  217169	equiv_PIPPINUSDT_case5_runtime.json
+ 60%  
+100%  
+	    New File  		     488	equiv_summary.csv
+100%  
+	    New File  		     250	fallback_summary_20251201T203919Z.txt
+100%  
+	    New File  		   12419	full_backtest_results.csv
+100%  
+	    New File  		  761240	handle.exe
+ 34%  
+ 68%  
+100%  
+	    New File  		      58	handle_btcusdt.txt
+100%  
+	    New File  		     565	handle_capture_20251201T070013Z.log
+100%  
+	    New File  		   14470	handle_capture_20251201T070023Z.log
+100%  
+	    New File  		   38580	handle_capture_20251201T070024Z.log
+100%  
+	    New File  		   39101	handle_capture_20251201T070025Z.log
+100%  
+	    New File  		   39616	handle_capture_20251201T070026Z.log
+100%  
+	    New File  		   39281	handle_capture_20251201T070027Z.log
+100%  
+	    New File  		   39461	handle_capture_20251201T070028Z.log
+100%  
+	    New File  		   34023	handle_capture_20251201T070029Z.log
+100%  
+	    New File  		     565	handle_capture_20251201T070222Z.log
+100%  
+	    New File  		    6439	handle_capture_20251201T070232Z.log
+100%  
+	    New File  		   38550	handle_capture_20251201T070233Z.log
+100%  
+	    New File  		   39646	handle_capture_20251201T070234Z.log
+100%  
+	    New File  		   39113	handle_capture_20251201T070235Z.log
+100%  
+	    New File  		   39191	handle_capture_20251201T070236Z.log
+100%  
+	    New File  		   39991	handle_capture_20251201T070237Z.log
+100%  
+	    New File  		   39452	handle_capture_20251201T070238Z.log
+100%  
+	    New File  		    2150	handle_capture_20251201T070239Z.log
+100%  
+	    New File  		     556	handle_capture_20251201T073517Z.log
+100%  
+	    New File  		    5894	handle_capture_20251201T073532Z.log
+100%  
+	    New File  		   38556	handle_capture_20251201T073533Z.log
+100%  
+	    New File  		   38580	handle_capture_20251201T073534Z.log
+100%  
+	    New File  		   38580	handle_capture_20251201T073535Z.log
+100%  
+	    New File  		   38640	handle_capture_20251201T073536Z.log
+100%  
+	    New File  		   38916	handle_capture_20251201T073537Z.log
+100%  
+	    New File  		   38916	handle_capture_20251201T073538Z.log
+100%  
+	    New File  		    6450	handle_capture_20251201T073539Z.log
+100%  
+	    New File  		     549	handle_capture_20251201T073657Z.log
+100%  
+	    New File  		   10733	handle_capture_20251201T073727Z.log
+100%  
+	    New File  		   36400	handle_capture_20251201T073728Z.log
+100%  
+	    New File  		   38035	handle_capture_20251201T073729Z.log
+100%  
+	    New File  		   39119	handle_capture_20251201T073730Z.log
+100%  
+	    New File  		   38652	handle_capture_20251201T073731Z.log
+100%  
+	    New File  		   38916	handle_capture_20251201T073732Z.log
+100%  
+	    New File  		   38377	handle_capture_20251201T073733Z.log
+100%  
+	    New File  		    4300	handle_capture_20251201T073734Z.log
+100%  
+	    New File  		     386	handle_capture_20251201T074111Z.log
+100%  
+	    New File  		     383	handle_capture_20251201T074153Z.log
+100%  
+	    New File  		     386	handle_capture_20251201T074236Z.log
+100%  
+	    New File  		     398	handle_capture_20251201T074319Z.log
+100%  
+	    New File  		     500	handle_capture_20251201T074401Z.log
+100%  
+	    New File  		     452	handle_capture_20251201T074444Z.log
+100%  
+	    New File  		     395	handle_capture_20251201T074527Z.log
+100%  
+	    New File  		     425	handle_capture_20251201T074609Z.log
+100%  
+	    New File  		     449	handle_capture_20251201T074652Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T074735Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T074817Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T074900Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T074943Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T075025Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T075108Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T075151Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T075233Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T075316Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T075358Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T075441Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T075524Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T075606Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T075649Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T075732Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T075814Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T075857Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T075940Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080022Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080105Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T080148Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080230Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080313Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080355Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T080438Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080521Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080603Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080646Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T080729Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080811Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080854Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T080936Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T081019Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T081102Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T081144Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T081227Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T081310Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T081352Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T081435Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T081518Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T081600Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T081643Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T081726Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T081808Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T081851Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T081934Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T082016Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T082059Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T082142Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T082224Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T082307Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T082349Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T082432Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T082515Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T082557Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T082638Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T082721Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T082803Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T082846Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T082928Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T083011Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083053Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083136Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083219Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T083301Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083344Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083426Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083509Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T083552Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083634Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083717Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083800Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T083842Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T083925Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T084008Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T084050Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T084133Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T084216Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T084258Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T084341Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T084423Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T084506Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T084549Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T084631Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T084714Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T084756Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T084839Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T084922Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T085004Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085047Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085130Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085212Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T085255Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085338Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085420Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085503Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T085546Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085628Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085711Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085753Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T085836Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T085919Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090001Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090044Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T090127Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090209Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090252Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090334Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T090417Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090500Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090542Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090625Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T090708Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090750Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090833Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T090916Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T090958Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T091041Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T091123Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T091206Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T091249Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T091331Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T091414Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T091457Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T091539Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T091622Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T091705Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T091747Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T091830Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T091912Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T091955Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092038Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T092120Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092203Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092245Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092328Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T092411Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092453Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092536Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092616Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T092659Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092742Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092824Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T092907Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T092949Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093032Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093115Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093157Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T093240Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093323Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093405Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093448Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T093530Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093613Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093655Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093738Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T093821Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093903Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T093946Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T094029Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T094111Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T094154Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T094236Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T094319Z.log
+100%  
+	    New File  		     502	handle_capture_20251201T094402Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T094444Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T094527Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T094610Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T094652Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T094735Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T094818Z.log
+100%  
+	    New File  		     490	handle_capture_20251201T094900Z.log
+100%  
+	    New File  		     496	handle_capture_20251201T094943Z.log
+100%  
+	    New File  		     462	handle_capture_20251201T095026Z.log
+100%  
+	    New File  		     535	handle_capture_20251201T100510Z.log
+100%  
+	    New File  		   16421	handle_capture_20251201T100550Z.log
+100%  
+	    New File  		   18285	handle_capture_20251201T100551Z.log
+100%  
+	    New File  		   14199	handle_capture_20251201T100552Z.log
+100%  
+	    New File  		    4731	handle_capture_20251201T100632Z.log
+100%  
+	    New File  		   18315	handle_capture_20251201T100633Z.log
+100%  
+	    New File  		   18303	handle_capture_20251201T100634Z.log
+100%  
+	    New File  		    7419	handle_capture_20251201T100635Z.log
+100%  
+	    New File  		   11499	handle_capture_20251201T100715Z.log
+100%  
+	    New File  		   17634	handle_capture_20251201T100716Z.log
+100%  
+	    New File  		   18309	handle_capture_20251201T100717Z.log
+100%  
+	    New File  		     645	handle_capture_20251201T100718Z.log
+100%  
+	    New File  		   18267	handle_capture_20251201T100758Z.log
+100%  
+	    New File  		   18315	handle_capture_20251201T100759Z.log
+100%  
+	    New File  		   12138	handle_capture_20251201T100800Z.log
+100%  
+	    New File  		    6171	handle_capture_20251201T100840Z.log
+100%  
+	    New File  		   18435	handle_capture_20251201T100841Z.log
+100%  
+	    New File  		   18420	handle_capture_20251201T100842Z.log
+100%  
+	    New File  		    6078	handle_capture_20251201T100843Z.log
+100%  
+	    New File  		   12303	handle_capture_20251201T100923Z.log
+100%  
+	    New File  		   19098	handle_capture_20251201T100924Z.log
+100%  
+	    New File  		   17061	handle_capture_20251201T100925Z.log
+100%  
+	    New File  		     535	handle_capture_20251201T101433Z.log
+100%  
+	    New File  		   11009	handle_capture_20251201T101513Z.log
+100%  
+	    New File  		   17586	handle_capture_20251201T101514Z.log
+100%  
+	    New File  		   18315	handle_capture_20251201T101515Z.log
+100%  
+	    New File  		     639	handle_capture_20251201T101516Z.log
+100%  
+	    New File  		   18315	handle_capture_20251201T101556Z.log
+100%  
+	    New File  		   18267	handle_capture_20251201T101557Z.log
+100%  
+	    New File  		   13542	handle_capture_20251201T101558Z.log
+100%  
+	    New File  		    4731	handle_capture_20251201T101638Z.log
+100%  
+	    New File  		   18315	handle_capture_20251201T101639Z.log
+100%  
+	    New File  		   18267	handle_capture_20251201T101640Z.log
+100%  
+	    New File  		    5412	handle_capture_20251201T101641Z.log
+100%  
+	    New File  		   12867	handle_capture_20251201T101721Z.log
+100%  
+	    New File  		   18309	handle_capture_20251201T101722Z.log
+100%  
+	    New File  		   18231	handle_capture_20251201T101723Z.log
+100%  
+	    New File  		     675	handle_capture_20251201T101803Z.log
+100%  
+	    New File  		   18438	handle_capture_20251201T101804Z.log
+100%  
+	    New File  		   16380	handle_capture_20251201T101805Z.log
+100%  
+	    New File  		   12927	handle_capture_20251201T101806Z.log
+100%  
+	    New File  		    6159	handle_capture_20251201T101846Z.log
+100%  
+	    New File  		   18435	handle_capture_20251201T101847Z.log
+100%  
+	    New File  		   18432	handle_capture_20251201T101848Z.log
+100%  
+	    New File  		    7437	handle_capture_20251201T101849Z.log
+100%  
+	    New File  		   10944	handle_capture_20251201T101929Z.log
+100%  
+	    New File  		    5436	handle_capture_20251201T101930Z.log
+100%  
+	    New File  		      26	handle_capture_20251201T133547.csv
+100%  
+	    New File  		      26	handle_capture_20251201T134837.csv
+100%  
+	    New File  		      26	handle_capture_20251201T140413.csv
+100%  
+	    New File  		      26	handle_capture_20251201T143821.csv
+100%  
+	    New File  		      26	handle_capture_20251201T150808.csv
+100%  
+	    New File  		    4726	handle_capture_failures_20251201.log
+100%  
+	    New File  		   55808	handle_capture_index.json
+100%  
+	    New File  		      69	handle_download_result.txt
+100%  
+	    New File  		     286	handle_live_20251201T163217Z.txt
+100%  
+	    New File  		      58	handle_pippin_1118.txt
+100%  
+	    New File  		     254	handle_scan_all.txt
+100%  
+	    New File  		     222	heatmap_spike_vs_avgperiod_p001.csv
+100%  
+	    New File  		     905	inusdt_pilot_results.csv
+100%  
+	    New File  		     862	inusdt_pilot_results_sanitized.csv
+100%  
+	    New File  		      61	kill_log_20251201T203919Z.txt
+100%  
+	    New File  		  122313	lock_check.txt
+100%  
+	    New File  		     907	lskusdt_pilot_results.csv
+100%  
+	    New File  		     864	lskusdt_pilot_results_sanitized.csv
+100%  
+	    New File  		     717	mc_bg_stderr.log
+100%  
+	    New File  		       0	mc_bg_stdout.log
+	    New File  		     478	mc_ci_stderr.log
+100%  
+	    New File  		       0	mc_ci_stdout.log
+	    New File  		    9645	orchestrator_results.csv
+100%  
+	    New File  		     992	param_robustness.csv
+100%  
+	    New File  		   36249	pippinusdt_aggregate_grid.csv
+100%  
+	    New File  		   34273	pippinusdt_aggregate_grid_sanitized.csv
+100%  
+	    New File  		   13965	pippinusdt_breakout_analysis.csv
+100%  
+	    New File  		    2319	pippinusdt_grid_search.csv
+100%  
+	    New File  		   33463	pippinusdt_masked_next_open_grid_expanded_20251118_20251124.csv
+100%  
+	    New File  		   24181	pippinusdt_masked_next_open_grid_expanded_20251118_20251124_sanitized.csv
+100%  
+	    New File  		     750	pippinusdt_mc_bg_stderr.log
+100%  
+	    New File  		       0	pippinusdt_mc_bg_stdout.log
+	    New File  		     625	pippinusdt_mc_robustness.csv
+100%  
+	    New File  		    1195	pippinusdt_mc_robustness_stderr.log
+100%  
+	    New File  		     109	pippinusdt_mc_robustness_stdout.log
+100%  
+	    New File  		    7588	pippinusdt_measure_grid.csv
+100%  
+	    New File  		    5852	pippinusdt_measure_grid_cached.csv
+100%  
+	    New File  		   18330	pippinusdt_measure_grid_earlystop_0p9.csv
+100%  
+	    New File  		    6485	pippinusdt_measure_grid_earlystop_0p99.csv
+100%  
+	    New File  		    6426	pippinusdt_measure_grid_fresh_0p99_run1.csv
+100%  
+	    New File  		    8217	pippinusdt_next_open_grid_20251118_20251124.csv
+100%  
+	    New File  		    7613	pippinusdt_next_open_grid_20251118_20251124_sanitized.csv
+100%  
+	    New File  		     565	pippinusdt_no_breakout_overshoot_summary.json
+100%  
+	    New File  		     940	pippinusdt_pilot_results.csv
+100%  
+	    New File  		     897	pippinusdt_pilot_results_sanitized.csv
+100%  
+	    New File  		   17876	pippinusdt_unmasked_aggregate_grid.csv
+100%  
+	    New File  		   16684	pippinusdt_unmasked_aggregate_grid_sanitized.csv
+100%  
+	    New File  		   15114	pippinusdt_unmasked_grid_20251118_20251124.csv
+100%  
+	    New File  		   10204	pippinusdt_unmasked_grid_20251118_20251124_sanitized.csv
+100%  
+	    New File  		     819	pippinusdt_vol_mult_sweep.csv
+100%  
+	    New File  		    1907	pippinusdt_vol_mult_sweep.json
+100%  
+	    New File  		     819	pippinusdt_vol_mult_sweep_sanitized.csv
+100%  
+	    New File  		    1069	pippinusdt_wf_verify.csv
+100%  
+	    New File  		     143	sanitize_close_terminals_log.txt
+100%  
+	    New File  		       0	sanitize_inplace_run_err.txt
+	    New File  		  288043	sanitize_inplace_run_out.txt
+ 45%  
+ 91%  
+100%  
+	    New File  		     122	sanitize_kill_log.txt
+100%  
+	    New File  		       0	sanitize_retry_attempt_1_err.txt
+	    New File  		  400606	sanitize_retry_attempt_1_out.txt
+ 32%  
+ 65%  
+ 98%  
+100%  
+	    New File  		       0	sanitize_retry_attempt_2_err.txt
+	    New File  		  400606	sanitize_retry_attempt_2_out.txt
+ 32%  
+ 65%  
+ 98%  
+100%  
+	    New File  		       0	sanitize_retry_attempt_3_err.txt
+	    New File  		  400606	sanitize_retry_attempt_3_out.txt
+ 32%  
+ 65%  
+ 98%  
+100%  
+	    New File  		       0	sanitize_retry_attempt_4_err.txt
+	    New File  		  400606	sanitize_retry_attempt_4_out.txt
+ 32%  
+ 65%  
+ 98%  
+100%  
+	    New File  		       0	sanitize_retry_attempt_5_err.txt
+	    New File  		  400606	sanitize_retry_attempt_5_out.txt
+ 32%  
+ 65%  
+ 98%  
+100%  
+	    New File  		       0	sanitize_retry_attempt_6_err.txt
+	    New File  		  400606	sanitize_retry_attempt_6_out.txt
+ 32%  
+ 65%  
+ 98%  
+100%  
+	    New File  		       0	sanitize_retry_attempt_7_err.txt
+	    New File  		  400606	sanitize_retry_attempt_7_out.txt
+ 32%  
+ 65%  
+ 98%  
+100%  
+	    New File  		       0	sanitize_retry_attempt_8_err.txt
+	    New File  		  400606	sanitize_retry_attempt_8_out.txt
+ 32%  
+ 65%  
+ 98%  
+100%  
+	    New File  		   16732	sanitize_retry_log.txt
+100%  
+	    New File  		     328	sanitize_retry_log_20251201T043251.txt
+100%  
+	    New File  		  267831	sanitize_retry_log_20251201T044358.txt
+ 48%  
+ 97%  
+100%  
+	    New File  		   1.2 m	sanitize_retry_log_20251201T044925.txt
+ 19%  
+ 39%  
+ 58%  
+ 78%  
+ 97%  
+100%  
+	    New File  		   1.2 m	sanitize_retry_log_20251201T045053.txt
+ 19%  
+ 39%  
+ 58%  
+ 78%  
+ 97%  
+100%  
+	    New File  		   2.0 m	sanitize_retry_log_20251201T050143.txt
+ 24%  
+ 48%  
+ 73%  
+ 97%  
+100%  
+	    New File  		   2.0 m	sanitize_retry_log_20251201T050643.txt
+ 24%  
+ 48%  
+ 73%  
+ 97%  
+100%  
+	    New File  		   38017	sanitize_retry_summary.txt
+100%  
+	    New File  		      78	sanitize_retry_summary_20251201T043251.txt
+100%  
+	    New File  		   38017	sanitize_retry_summary_20251201T044358.txt
+100%  
+	    New File  		   38017	sanitize_retry_summary_20251201T044925.txt
+100%  
+	    New File  		   38017	sanitize_retry_summary_20251201T045053.txt
+100%  
+	    New File  		   38017	sanitize_retry_summary_20251201T050143.txt
+100%  
+	    New File  		   38017	sanitize_retry_summary_20251201T050643.txt
+100%  
+	    New File  		    2746	sanitize_retry_wrapper_run.txt
+100%  
+	    New File  		     156	sanitize_script_parse_check.txt
+100%  
+	    New File  		     156	sanitize_script_parse_check_after_patch.txt
+100%  
+	    New File  		   68214	sanitize_summary_20251130T152323Z.csv
+100%  
+	    New File  		   63634	sanitize_summary_20251130T152340Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T152352Z.csv
+100%  
+	    New File  		   68127	sanitize_summary_20251130T190201Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T191959Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T192602Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T194359Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T194925Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T194930Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T194941Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T194956Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T195017Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T195053Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T195059Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T195109Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T195125Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T195145Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200143Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200152Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200208Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200232Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200305Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200345Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200434Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200530Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200644Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200652Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200708Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200733Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200805Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200846Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T200934Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251130T201030Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251201T064343Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251201T070013Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251201T070222Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251201T073517Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251201T073657Z.csv
+100%  
+	    New File  		      16	sanitize_summary_20251201T101433Z.csv
+100%  
+	    New File  		      39	test_mc_bg_stderr.log
+100%  
+	    New File  		     162	test_mc_bg_stdout.log
+100%  
+	    New File  		    1435	top_param_combos.csv
+100%  
+	  New Dir        575	C:\Users\User\new\yona_vanguard_futures\results\pippinusdt_masked_next_open\
+	    New File  		   63284	2025-11-18_df_with_signals.csv
+100%  
+	    New File  		     193	2025-11-18_summary.csv
+100%  
+	    New File  		       0	2025-11-18_trades.csv
+	    New File  		     216	2025-11-18_v1.5_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v1.5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v1.5_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v1.5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v1.5_c0_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v1.5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v1.5_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v1.5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-18_v1.5_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v1.5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v1.5_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v1.5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v1.5_c1_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v1.5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v1.5_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v1.5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-18_v2_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v2_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v2_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v2_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v2_c0_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v2_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v2_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v2_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-18_v2_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v2_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v2_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v2_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v2_c1_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v2_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v2_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v2_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-18_v3_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v3_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v3_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v3_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v3_c0_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v3_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v3_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v3_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-18_v3_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v3_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v3_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v3_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v3_c1_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v3_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v3_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v3_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-18_v4_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v4_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v4_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v4_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v4_c0_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v4_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v4_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v4_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-18_v4_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v4_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v4_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v4_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v4_c1_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v4_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v4_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v4_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-18_v5_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v5_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v5_c0_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v5_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-18_v5_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-18_v5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v5_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-18_v5_c1_a2_summary.csv
+100%  
+	    New File  		     194	2025-11-18_v5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-18_v5_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-18_v5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		   63468	2025-11-19_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-19_trades.csv
+	    New File  		     215	2025-11-19_v1.5_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v1.5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v1.5_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v1.5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v1.5_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v1.5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v1.5_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v1.5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v1.5_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v1.5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v1.5_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v1.5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v1.5_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v1.5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v1.5_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v1.5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v2_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v2_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v2_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v2_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v2_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v2_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v2_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v2_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v2_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v2_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v2_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v2_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v2_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v2_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v2_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v2_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v3_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v3_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v3_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v3_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v3_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v3_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v3_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v3_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v3_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v3_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v3_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v3_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v3_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v3_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v3_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v3_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v4_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v4_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v4_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v4_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v4_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v4_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v4_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v4_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v4_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v4_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v4_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v4_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v4_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v4_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v4_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v4_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v5_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v5_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v5_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v5_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v5_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v5_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-19_v5_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-19_v5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-19_v5_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-19_v5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		   63574	2025-11-20_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-20_trades.csv
+	    New File  		     216	2025-11-20_v1.5_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v1.5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v1.5_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v1.5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v1.5_c0_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v1.5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v1.5_c0_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v1.5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v1.5_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v1.5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v1.5_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v1.5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v1.5_c1_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v1.5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v1.5_c1_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v1.5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v2_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v2_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v2_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v2_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v2_c0_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v2_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v2_c0_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v2_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v2_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v2_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v2_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v2_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v2_c1_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v2_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v2_c1_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v2_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v3_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v3_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v3_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v3_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v3_c0_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v3_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v3_c0_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v3_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v3_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v3_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v3_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v3_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v3_c1_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v3_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v3_c1_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v3_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v4_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v4_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v4_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v4_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v4_c0_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v4_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v4_c0_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v4_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v4_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v4_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v4_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v4_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v4_c1_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v4_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v4_c1_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v4_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v5_c0_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v5_c0_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v5_c0_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v5_c0_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v5_c1_a1.5_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     217	2025-11-20_v5_c1_a1_summary.csv
+100%  
+	    New File  		     194	2025-11-20_v5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v5_c1_a2_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     216	2025-11-20_v5_c1_a3_summary.csv
+100%  
+	    New File  		     193	2025-11-20_v5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		   63733	2025-11-21_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-21_trades.csv
+	    New File  		     215	2025-11-21_v1.5_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v1.5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v1.5_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v1.5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v1.5_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v1.5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v1.5_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v1.5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v1.5_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v1.5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v1.5_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v1.5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v1.5_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v1.5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v1.5_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v1.5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v2_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v2_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v2_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v2_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v2_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v2_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v2_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v2_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v2_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v2_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v2_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v2_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v2_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v2_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v2_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v2_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v3_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v3_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v3_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v3_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v3_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v3_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v3_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v3_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v3_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v3_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v3_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v3_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v3_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v3_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v3_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v3_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v4_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v4_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v4_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v4_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v4_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v4_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v4_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v4_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v4_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v4_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v4_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v4_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v4_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v4_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v4_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v4_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v5_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v5_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v5_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v5_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v5_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v5_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v5_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-21_v5_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-21_v5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		   64086	2025-11-22_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-22_trades.csv
+	    New File  		     215	2025-11-22_v1.5_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v1.5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v1.5_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v1.5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v1.5_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v1.5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v1.5_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v1.5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v1.5_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v1.5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v1.5_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v1.5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v1.5_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v1.5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v1.5_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v1.5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v2_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v2_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v2_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v2_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v2_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v2_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v2_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v2_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v2_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v2_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v2_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v2_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v2_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v2_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v2_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v2_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v3_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v3_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v3_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v3_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v3_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v3_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v3_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v3_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v3_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v3_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v3_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v3_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v3_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v3_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v3_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v3_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v4_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v4_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v4_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v4_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v4_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v4_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v4_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v4_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v4_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v4_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v4_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v4_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v4_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v4_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v4_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v4_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v5_c0_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v5_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v5_c0_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v5_c0_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v5_c1_a1.5_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v5_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v5_c1_a2_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-22_v5_c1_a3_summary.csv
+100%  
+	    New File  		     192	2025-11-22_v5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		   64920	2025-11-23_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-23_trades.csv
+	    New File  		     213	2025-11-23_v1.5_c0_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v1.5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v1.5_c0_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v1.5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v1.5_c0_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v1.5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v1.5_c0_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v1.5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v1.5_c1_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v1.5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v1.5_c1_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v1.5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v1.5_c1_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v1.5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v1.5_c1_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v1.5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v2_c0_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v2_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v2_c0_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v2_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v2_c0_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v2_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v2_c0_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v2_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v2_c1_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v2_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v2_c1_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v2_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v2_c1_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v2_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v2_c1_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v2_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v3_c0_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v3_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v3_c0_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v3_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v3_c0_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v3_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v3_c0_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v3_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v3_c1_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v3_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v3_c1_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v3_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v3_c1_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v3_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v3_c1_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v3_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v4_c0_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v4_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v4_c0_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v4_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v4_c0_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v4_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v4_c0_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v4_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v4_c1_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v4_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v4_c1_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v4_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v4_c1_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v4_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v4_c1_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v4_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v5_c0_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v5_c0_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v5_c0_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v5_c0_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v5_c1_a1.5_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v5_c1_a1_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v5_c1_a2_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     213	2025-11-23_v5_c1_a3_summary.csv
+100%  
+	    New File  		     190	2025-11-23_v5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		   64952	2025-11-24_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-24_trades.csv
+	    New File  		     214	2025-11-24_v1.5_c0_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v1.5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v1.5_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v1.5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v1.5_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v1.5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v1.5_c0_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v1.5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v1.5_c1_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v1.5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v1.5_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v1.5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v1.5_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v1.5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v1.5_c1_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v1.5_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v2_c0_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v2_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v2_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v2_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v2_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v2_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v2_c0_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v2_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v2_c1_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v2_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v2_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v2_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v2_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v2_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v2_c1_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v2_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v3_c0_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v3_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v3_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v3_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v3_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v3_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v3_c0_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v3_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v3_c1_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v3_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v3_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v3_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v3_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v3_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v3_c1_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v3_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v4_c0_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v4_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v4_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v4_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v4_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v4_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v4_c0_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v4_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v4_c1_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v4_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v4_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v4_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v4_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v4_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v4_c1_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v4_c1_a3_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v5_c0_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v5_c0_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v5_c0_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v5_c0_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v5_c0_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v5_c0_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v5_c0_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v5_c0_a3_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v5_c1_a1.5_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v5_c1_a1.5_summary_sanitized.csv
+100%  
+	    New File  		     215	2025-11-24_v5_c1_a1_summary.csv
+100%  
+	    New File  		     192	2025-11-24_v5_c1_a1_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v5_c1_a2_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v5_c1_a2_summary_sanitized.csv
+100%  
+	    New File  		     214	2025-11-24_v5_c1_a3_summary.csv
+100%  
+	    New File  		     191	2025-11-24_v5_c1_a3_summary_sanitized.csv
+100%  
+	  New Dir          1	C:\Users\User\new\yona_vanguard_futures\results\pippinusdt_next_open_no_breakout\
+	    New File  		     478	2025-11-21_summary.json
+100%  
+	  New Dir        351	C:\Users\User\new\yona_vanguard_futures\results\pippinusdt_next_open_sim\
+	    New File  		   63278	2025-11-18_df_with_signals.csv
+100%  
+	    New File  		     177	2025-11-18_summary.csv
+100%  
+	    New File  		     267	2025-11-18_trades.csv
+100%  
+	    New File  		     137	2025-11-18_v0.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v0.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v0.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v0.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v0.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v0.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v0.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v0.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v0.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v0.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v0.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v0.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-18_v1.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     177	2025-11-18_v1.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-18_v1.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     177	2025-11-18_v1.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-18_v1.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     177	2025-11-18_v1.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-18_v1.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     177	2025-11-18_v1.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v1.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v1.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v1.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v1.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v1_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v1_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v1_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v1_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v1_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v1_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v1_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v1_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v1_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v1_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-18_v1_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-18_v1_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-18_v2_c0_sl0.005_summary.csv
+100%  
+	    New File  		     177	2025-11-18_v2_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     198	2025-11-18_v2_c0_sl0.01_summary.csv
+100%  
+	    New File  		     175	2025-11-18_v2_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-18_v2_c1_sl0.005_summary.csv
+100%  
+	    New File  		     177	2025-11-18_v2_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     198	2025-11-18_v2_c1_sl0.01_summary.csv
+100%  
+	    New File  		     175	2025-11-18_v2_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-18_v2_c2_sl0.005_summary.csv
+100%  
+	    New File  		     177	2025-11-18_v2_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     198	2025-11-18_v2_c2_sl0.01_summary.csv
+100%  
+	    New File  		     175	2025-11-18_v2_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		   63468	2025-11-19_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-19_trades.csv
+	    New File  		     137	2025-11-19_v0.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v0.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v0.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v0.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v0.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v0.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v0.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v0.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v0.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v0.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v0.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v0.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v1_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v1_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v2_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v2_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v2_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v2_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v2_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v2_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v2_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v2_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v2_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v2_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-19_v2_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-19_v2_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		   63574	2025-11-20_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-20_trades.csv
+	    New File  		     137	2025-11-20_v0.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v0.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v0.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v0.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v0.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v0.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v0.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v0.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v0.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v0.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v0.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v0.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     201	2025-11-20_v1.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     178	2025-11-20_v1.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-20_v1.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     177	2025-11-20_v1.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     201	2025-11-20_v1.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     178	2025-11-20_v1.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-20_v1.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     177	2025-11-20_v1.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v1.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v1.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v1.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v1.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     201	2025-11-20_v1_c0_sl0.005_summary.csv
+100%  
+	    New File  		     178	2025-11-20_v1_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-20_v1_c0_sl0.01_summary.csv
+100%  
+	    New File  		     177	2025-11-20_v1_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     201	2025-11-20_v1_c1_sl0.005_summary.csv
+100%  
+	    New File  		     178	2025-11-20_v1_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-20_v1_c1_sl0.01_summary.csv
+100%  
+	    New File  		     177	2025-11-20_v1_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v1_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v1_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v1_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v1_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-20_v2_c0_sl0.005_summary.csv
+100%  
+	    New File  		     177	2025-11-20_v2_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-20_v2_c0_sl0.01_summary.csv
+100%  
+	    New File  		     173	2025-11-20_v2_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-20_v2_c1_sl0.005_summary.csv
+100%  
+	    New File  		     177	2025-11-20_v2_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-20_v2_c1_sl0.01_summary.csv
+100%  
+	    New File  		     173	2025-11-20_v2_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v2_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v2_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-20_v2_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-20_v2_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		   63733	2025-11-21_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-21_trades.csv
+	    New File  		     137	2025-11-21_v0.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v0.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v0.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v0.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v0.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v0.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v0.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v0.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v0.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v0.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v0.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v0.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v1_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v1_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v2_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v2_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v2_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v2_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v2_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v2_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v2_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v2_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v2_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v2_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-21_v2_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-21_v2_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		   64086	2025-11-22_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-22_trades.csv
+	    New File  		     137	2025-11-22_v0.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v0.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v0.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v0.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v0.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v0.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v0.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v0.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v0.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v0.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v0.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v0.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v1_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v1_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     203	2025-11-22_v2_c0_sl0.005_summary.csv
+100%  
+	    New File  		     180	2025-11-22_v2_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-22_v2_c0_sl0.01_summary.csv
+100%  
+	    New File  		     177	2025-11-22_v2_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     203	2025-11-22_v2_c1_sl0.005_summary.csv
+100%  
+	    New File  		     180	2025-11-22_v2_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     200	2025-11-22_v2_c1_sl0.01_summary.csv
+100%  
+	    New File  		     177	2025-11-22_v2_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v2_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v2_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-22_v2_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-22_v2_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		   64920	2025-11-23_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-23_trades.csv
+	    New File  		     137	2025-11-23_v0.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v0.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v0.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v0.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v0.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v0.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v0.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v0.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v0.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v0.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v0.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v0.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-23_v1.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     173	2025-11-23_v1.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-23_v1.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     173	2025-11-23_v1.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-23_v1.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     173	2025-11-23_v1.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-23_v1.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     173	2025-11-23_v1.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v1.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v1.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v1.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v1.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v1_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v1_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v1_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v1_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v1_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v1_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v1_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v1_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v1_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v1_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v1_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v1_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-23_v2_c0_sl0.005_summary.csv
+100%  
+	    New File  		     173	2025-11-23_v2_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-23_v2_c0_sl0.01_summary.csv
+100%  
+	    New File  		     173	2025-11-23_v2_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-23_v2_c1_sl0.005_summary.csv
+100%  
+	    New File  		     173	2025-11-23_v2_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     196	2025-11-23_v2_c1_sl0.01_summary.csv
+100%  
+	    New File  		     173	2025-11-23_v2_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v2_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v2_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-23_v2_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-23_v2_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		   64952	2025-11-24_df_with_signals.csv
+100%  
+	    New File  		       0	2025-11-24_trades.csv
+	    New File  		     137	2025-11-24_v0.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v0.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v0.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v0.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v0.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v0.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v0.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v0.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v0.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v0.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v0.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v0.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1.5_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1.5_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1.5_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1.5_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1.5_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1.5_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1.5_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1.5_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1.5_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1.5_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1.5_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1.5_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v1_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v1_c2_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v2_c0_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v2_c0_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v2_c0_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v2_c0_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v2_c1_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v2_c1_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v2_c1_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v2_c1_sl0.01_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v2_c2_sl0.005_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v2_c2_sl0.005_summary_sanitized.csv
+100%  
+	    New File  		     137	2025-11-24_v2_c2_sl0.01_summary.csv
+100%  
+	    New File  		     114	2025-11-24_v2_c2_sl0.01_summary_sanitized.csv
+100%  
+	  New Dir          1	C:\Users\User\new\yona_vanguard_futures\results\traces\
+	    New File  		   10900	pippinusdt_trace_consolidated.json
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\
+	    New File  		    1910	rank_1_summary.json
+100%  
+	    New File  		    2094	rank_2_summary.json
+100%  
+	    New File  		    1872	rank_5_summary.json
+100%  
+	    New File  		    2122	rank_6_summary.json
+100%  
+	    New File  		    2080	rank_7_summary.json
+100%  
+	  New Dir          3	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\plots\
+	    New File  		   33509	event_2025-11-21_12-00_13-00_close.png
+100%  
+	    New File  		    6946	event_2025-11-21_12-00_13-00_vol.png
+100%  
+	    New File  		    5318	pippinusdt_loss_trade_report.json
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\plots\rank_1\
+	    New File  		   81292	loss_trade_1.png
+100%  
+	    New File  		   81884	loss_trade_2.png
+100%  
+	    New File  		   81515	loss_trade_3.png
+100%  
+	    New File  		   81754	loss_trade_4.png
+100%  
+	    New File  		   81099	loss_trade_5.png
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\plots\rank_2\
+	    New File  		   81478	loss_trade_1.png
+100%  
+	    New File  		   81651	loss_trade_2.png
+100%  
+	    New File  		   81521	loss_trade_3.png
+100%  
+	    New File  		   81375	loss_trade_4.png
+100%  
+	    New File  		   81158	loss_trade_5.png
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\plots\rank_5\
+	    New File  		   80878	loss_trade_1.png
+100%  
+	    New File  		   81685	loss_trade_2.png
+100%  
+	    New File  		   81328	loss_trade_3.png
+100%  
+	    New File  		   81219	loss_trade_4.png
+100%  
+	    New File  		   81339	loss_trade_5.png
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\plots\rank_6\
+	    New File  		   80996	loss_trade_1.png
+100%  
+	    New File  		   81858	loss_trade_2.png
+100%  
+	    New File  		   81377	loss_trade_3.png
+100%  
+	    New File  		   81444	loss_trade_4.png
+100%  
+	    New File  		   81573	loss_trade_5.png
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\plots\rank_7\
+	    New File  		   81182	loss_trade_1.png
+100%  
+	    New File  		   81459	loss_trade_2.png
+100%  
+	    New File  		   81357	loss_trade_3.png
+100%  
+	    New File  		   81330	loss_trade_4.png
+100%  
+	    New File  		   81432	loss_trade_5.png
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\rank_1\
+	    New File  		   14411	run_1_trades.csv
+100%  
+	    New File  		   13782	run_2_trades.csv
+100%  
+	    New File  		   13360	run_3_trades.csv
+100%  
+	    New File  		   13984	run_4_trades.csv
+100%  
+	    New File  		   14624	run_5_trades.csv
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\rank_2\
+	    New File  		   14345	run_1_trades.csv
+100%  
+	    New File  		   15365	run_2_trades.csv
+100%  
+	    New File  		   14134	run_3_trades.csv
+100%  
+	    New File  		   12255	run_4_trades.csv
+100%  
+	    New File  		   13513	run_5_trades.csv
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\rank_5\
+	    New File  		   10475	run_1_trades.csv
+100%  
+	    New File  		    8812	run_2_trades.csv
+100%  
+	    New File  		   10097	run_3_trades.csv
+100%  
+	    New File  		    8402	run_4_trades.csv
+100%  
+	    New File  		    9244	run_5_trades.csv
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\rank_6\
+	    New File  		   14843	run_1_trades.csv
+100%  
+	    New File  		   13799	run_2_trades.csv
+100%  
+	    New File  		   14016	run_3_trades.csv
+100%  
+	    New File  		   13772	run_4_trades.csv
+100%  
+	    New File  		   14431	run_5_trades.csv
+100%  
+	  New Dir          5	C:\Users\User\new\yona_vanguard_futures\results\traces\pippinusdt\rank_7\
+	    New File  		   14654	run_1_trades.csv
+100%  
+	    New File  		   15074	run_2_trades.csv
+100%  
+	    New File  		   15050	run_3_trades.csv
+100%  
+	    New File  		   15479	run_4_trades.csv
+100%  
+	    New File  		   14448	run_5_trades.csv
+100%  
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :        17        16         1         0         0         0
+   Files :      1424      1424         0         0         0         0
+   Bytes :   22.54 m   22.54 m         0         0         0         0
+   Times :   0:00:01   0:00:01                       0:00:00   0:00:00
+
+
+   Speed :            20716568 Bytes/sec.
+   Speed :            1185.411 MegaBytes/min.
+   Ended : 2025년 12월 1일 월요일 오후 9:13:41
+

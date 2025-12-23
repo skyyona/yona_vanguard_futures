@@ -1,0 +1,48 @@
+[
+  {
+    "symbol": "BTCUSDT",
+    "mtf_loose": {
+      "initial_balance": 1000.0,
+      "final_balance": 1000.0,
+      "profit": 0.0,
+      "profit_percentage": 0.0,
+      "total_trades": 0,
+      "win_rate": 0.0,
+      "max_drawdown_pct": 0.0,
+      "trades": [],
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "min_trades_required": 0
+    }
+  },
+  {
+    "symbol": "JELLYJELLYUSDT",
+    "mtf_loose": {
+      "initial_balance": 1000.0,
+      "final_balance": 999.99885,
+      "profit": -0.001150000000052387,
+      "profit_percentage": -0.00011500000000523869,
+      "total_trades": 1,
+      "win_rate": 0.0,
+      "max_drawdown_pct": 0.00023699971086452553,
+      "trades": [
+        {
+          "entry_price": 0.12557,
+          "exit_price": 0.12442,
+          "entry_price_effective": 0.12557,
+          "exit_price_effective": 0.12442,
+          "entry_fee": 0.0,
+          "exit_fee": 0.0,
+          "gross_pnl": -0.0011499999999999844,
+          "net_pnl": -0.0011499999999999844,
+          "exit_reason": "SL",
+          "entry_index": "2025-12-18 23:11:00+00:00",
+          "exit_index": "2025-12-18 23:15:00+00:00"
+        }
+      ],
+      "aborted_early": false,
+      "insufficient_trades": false,
+      "min_trades_required": 0
+    }
+  }
+]
