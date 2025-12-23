@@ -1,5 +1,5 @@
 Param(
-    [string]$Root = "C:\Users\User\new",
+    [string]$Root = (Join-Path -Path $PSScriptRoot -ChildPath "..\outputs"),
     [int]$Days = 7,
     [switch]$Delete
 )
@@ -7,17 +7,23 @@ Param(
 $excludePatterns = @('\\.venv','\\venv','\\env','\\.git','node_modules','site-packages','__pycache__','vss_tmp')
 $cutoff = (Get-Date).AddDays(-$Days)
 
-$files = Get-ChildItem -Path $Root -Filter '*.json' -Recurse -File -ErrorAction SilentlyContinue |
-    Where-Object {
-        ($_.LastWriteTime -lt $cutoff) -and (-not ($excludePatterns | Where-Object { $_ -and ($_.FullName -match $_) }))
+$filesRaw = Get-ChildItem -Path $Root -Filter '*.json' -Recurse -File -ErrorAction SilentlyContinue
+$files = $filesRaw | Where-Object {
+    $_.LastWriteTime -lt $cutoff
+} | Where-Object {
+    $keep = $true
+    foreach ($pat in $excludePatterns) {
+        if ($pat -and ($_.FullName -match $pat)) { $keep = $false; break }
     }
+    $keep
+}
 
 if (-not $files) {
     Write-Output "No JSON files older than $Days days found under $Root."
     exit 0
 }
 
-Write-Output "Found $($files.Count) JSON files older than $Days days under $Root:`n"
+Write-Output ("Found {0} JSON files older than {1} days under {2}`n" -f $files.Count, $Days, $Root)
 $files | Select-Object FullName, LastWriteTime | Format-Table -AutoSize
 
 $logDir = Join-Path -Path $Root -ChildPath "outputs\cleanup_logs"
